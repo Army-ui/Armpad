@@ -3,38 +3,48 @@
 #  Python 3.12 (Vercel runtime)
 # ═══════════════════════════════════════════════════════
 
-# ── Core ────────────────────────────────────────────────
-Django>=5.0,<5.2
-asgiref>=3.7
-sqlparse>=0.4
+# ── Framework principal ─────────────────────────────────
+Django==5.0.6
+djangorestframework==3.15.2
 
-# ── Base de données (Supabase / PostgreSQL) ─────────────
-psycopg[binary]>=3.1
+# ── Base de données PostgreSQL ──────────────────────────
+psycopg[binary]
 
-# ── Variables d'environnement ───────────────────────────
-python-decouple>=3.8
-
-# ── Images & fichiers ───────────────────────────────────
-Pillow>=10.2
-boto3>=1.34
-django-storages>=1.14
-
-# ── REST API ────────────────────────────────────────────
-djangorestframework>=3.15
-djangorestframework-simplejwt>=5.3
-django-filter>=24.1
-drf-spectacular>=0.27
+# ── Authentification JWT ────────────────────────────────
+djangorestframework-simplejwt==5.3.1
 
 # ── CORS ────────────────────────────────────────────────
-django-cors-headers>=4.3
+django-cors-headers==4.4.0
 
-# ── Redis (cache / sessions) ────────────────────────────
-redis>=5.0
-django-redis>=5.4
+# ── Variables d'environnement (.env) ────────────────────
+python-decouple==3.8
 
-# ── Stripe (paiements premium) ──────────────────────────
-stripe>=8.0
+# ── Images & stockage médias (Supabase Storage / S3) ────
+Pillow==11.2.1
+django-storages==1.14.4
+boto3==1.34.144
 
-# ── Serveur de production ───────────────────────────────
-gunicorn>=21.2
-whitenoise>=6.6
+# ── Paiement Premium ────────────────────────────────────
+stripe==10.5.0
+
+# ── API Documentation ───────────────────────────────────
+drf-spectacular==0.27.2
+
+# ── Filtrage & recherche ────────────────────────────────
+django-filter==24.2
+
+# ── Cache & performances ────────────────────────────────
+redis==5.0.7
+django-redis==5.4.0
+
+# ── Sécurité ────────────────────────────────────────────
+django-axes==6.5.0
+
+# ── Déploiement ─────────────────────────────────────────
+gunicorn==22.0.0
+whitenoise==6.7.0
+
+# ── Développement uniquement (à retirer en prod si tu veux) ──
+django-rosetta==0.10.0
+Faker==25.9.2
+django-extensions==3.2.3
