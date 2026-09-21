@@ -1,14 +1,21 @@
 # -*- coding: utf-8 -*-
+import os
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+# ═══════════════════════════════════════════════════════════
+# FORCE IPv4 — Uniquement en local (Windows)
+# Sur Vercel : FORCE_IPV4=False
+# ═══════════════════════════════════════════════════════════
+if config('FORCE_IPV4', default=False, cast=bool):
+    import socket
+    _orig_getaddrinfo = socket.getaddrinfo
+    def _ipv4_only(host, port, family=0, type=0, proto=0, flags=0):
+        return _orig_getaddrinfo(host, port, socket.AF_INET, type, proto, flags)
+    socket.getaddrinfo = _ipv4_only
 
-# ═══════════════════════════════════════════════════════════
-# ⚠️ HACK IPv4 RETIRÉ — Incompatible avec Vercel serverless
-#    (le hack socket.getaddrinfo fonctionne seulement en local)
-# ═══════════════════════════════════════════════════════════
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ── Sécurité ────────────────────────────────────────────────
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-key')
@@ -31,6 +38,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'drf_spectacular',
+    'storages',                    # ← AJOUT : Supabase Storage (S3)
     'users',
     'works',
     'subscriptions',
@@ -40,7 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ← AJOUT
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # ← AJOUT
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -77,7 +85,7 @@ TEMPLATES = [
 ]
 
 # ═══════════════════════════════════════════════════════════
-#  BASE DE DONNÉES PostgreSQL (Supabase Session Pooler)
+#  BASE DE DONNÉES — Supabase (Session Pooler)
 # ═══════════════════════════════════════════════════════════
 DB_HOST = config('DB_HOST', default='localhost')
 
@@ -147,17 +155,16 @@ SIMPLE_JWT = {
 }
 
 # ═══════════════════════════════════════════════════════════
-#  CORS — adapté pour Vercel
+#  CORS
 # ═══════════════════════════════════════════════════════════
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
     default='http://localhost:3000,http://localhost:8000,http://127.0.0.1:8000'
 ).split(',')
-
 CORS_ALLOW_CREDENTIALS = True
 
 # ═══════════════════════════════════════════════════════════
-#  CACHE Redis — Upstash compatible
+#  CACHE Redis (Upstash sur Vercel, local en dev)
 # ═══════════════════════════════════════════════════════════
 REDIS_URL = config('REDIS_URL', default='')
 
@@ -173,7 +180,6 @@ if REDIS_URL and REDIS_URL.startswith('redis'):
         }
     }
 else:
-    # Fallback local (LocMemCache) si Redis indisponible
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
@@ -186,16 +192,15 @@ STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY', default='')
 STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET', default='')
 
 # ═══════════════════════════════════════════════════════════
-#  FICHIERS STATIQUES — WhiteNoise (Vercel ready)
+#  FICHIERS STATIQUES — WhiteNoise
 # ═══════════════════════════════════════════════════════════
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# ═══ WhiteNoise pour compression + cache ═══
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",  # sera remplacé par Supabase Storage
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
@@ -210,7 +215,7 @@ SUPABASE_SERVICE_KEY = config('SUPABASE_SERVICE_KEY', default='')
 SUPABASE_BUCKET = config('SUPABASE_BUCKET', default='armpad-media')
 
 if SUPABASE_URL and SUPABASE_SERVICE_KEY:
-    # Utilise Supabase Storage en production
+    # ── Supabase Storage (S3 compatible) ──
     STORAGES["default"] = {
         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
         "OPTIONS": {
@@ -225,7 +230,7 @@ if SUPABASE_URL and SUPABASE_SERVICE_KEY:
     }
     MEDIA_URL = f'{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/'
 else:
-    # Local dev : stockage sur disque
+    # ── Fallback local (dev) ──
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
 
