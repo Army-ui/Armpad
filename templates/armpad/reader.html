@@ -1,0 +1,516 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{{ chapter.title }} - {{ work.title }}{% endblock %}
+
+{% block content %}
+<div id="reader-root"
+     data-chapter-id="{{ chapter.pk }}"
+     data-work-id="{{ work.pk }}"
+     data-saved-scroll="{{ saved_scroll|default:0 }}"
+     data-is-in-library="{% if is_in_library %}1{% else %}0{% endif %}"
+     data-is-authenticated="{% if user.is_authenticated %}1{% else %}0{% endif %}"
+     data-next-chapter="{% if next_chapter %}{% url 'web:reader' work.id next_chapter.order %}{% endif %}">
+
+    <!-- BARRE HAUTE -->
+    <div class="reader-top-bar" id="reader-top-bar">
+        <button class="reader-back" id="reader-back" title="{% trans 'Retour' %}">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <div class="reader-title-info">
+            <h2>{{ chapter.title }}</h2>
+            <small>{{ work.title }} Â· {% trans "Ch." %} {{ chapter.order }}</small>
+        </div>
+        <button class="chapters-btn" id="chapters-btn" title="{% trans 'Chapitres' %}">
+            <i class="fa-solid fa-list"></i>
+        </button>
+    </div>
+
+    <!-- LISTE CHAPITRES -->
+    <div class="reader-chapters-dropdown" id="chapters-dropdown">
+        {% for ch in work.chapters.all %}
+            {% if not ch.is_draft or ch.work.author == user %}
+                <a href="{% url 'web:reader' work.id ch.order %}" class="reader-chapter-item {% if ch.pk == chapter.pk %}current{% endif %}">
+                    <span>{% trans "Ch." %} {{ ch.order }} â€” {{ ch.title }}</span>
+                    {% if ch.pk == chapter.pk %}<i class="fa-solid fa-check"></i>{% endif %}
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- CONTENU -->
+    <div class="reader-container" id="reader-content-wrap">
+        <h1 class="reader-title" style="margin-top:16px;">{{ chapter.title }}</h1>
+        <p class="reader-meta">{{ work.title }} Â· {% trans "Chapitre" %} {{ chapter.order }}</p>
+
+        {% if chapter.content %}
+            <div class="reader-content" id="reader-content">{{ chapter.content|linebreaks }}</div>
+        {% endif %}
+
+        {% for img in chapter.images.all %}
+            <figure style="margin:0 0 16px;text-align:center;">
+                <img src="{{ img.image.url }}" alt="{{ img.caption }}" style="width:100%;border-radius:8px;display:block;">
+                {% if img.caption %}<figcaption class="text-muted" style="font-size:13px;margin-top:8px;">{{ img.caption }}</figcaption>{% endif %}
+            </figure>
+        {% endfor %}
+
+        {% if not chapter.content and not chapter.images.all %}
+            <p class="text-muted" style="text-align:center;padding:60px;">{% trans "Ce chapitre est vide." %}</p>
+        {% endif %}
+
+        {% if next_chapter %}
+            <div class="next-chapter-loader" id="next-chapter-loader">
+                <div class="loader-icon"><i class="fa-solid fa-circle-notch"></i></div>
+                <p class="text-muted" style="font-size:13px;">{% trans "Faites dÃ©filer pour le chapitre suivant" %}</p>
+            </div>
+        {% else %}
+            <div style="text-align:center;padding:60px 20px 120px;">
+                <p class="text-muted">{% trans "Vous avez atteint la fin de cette Å“uvre." %}</p>
+                <a href="{% url 'web:work_detail' work.id %}" class="btn btn-primary" style="margin-top:16px;">
+                    <i class="fa-solid fa-arrow-left"></i> {% trans "Retour Ã  l'Å“uvre" %}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- BARRE BASSE -->
+    <div class="reader-bottom-bar" id="reader-bottom-bar">
+        <div class="reading-progress-bar" id="reading-progress-bar" style="position:relative;bottom:auto;">
+            <div class="reading-progress-fill" id="reading-progress-fill"></div>
+            <span class="reading-progress-label" id="reading-progress-label">0%</span>
+        </div>
+
+        <div class="reader-actions">
+            <button class="reader-action-btn {% if user_liked_chapter %}liked{% endif %}" id="reader-like-btn" data-url="{% url 'web:toggle_chapter_like' chapter.pk %}">
+                <i class="fa-{% if user_liked_chapter %}solid{% else %}regular{% endif %} fa-heart"></i>
+                <span>{% trans "J'aime" %}</span>
+            </button>
+            <button class="reader-action-btn" id="reader-comments-btn">
+                <i class="fa-regular fa-comment"></i>
+                <span>{% trans "Commenter" %}</span>
+            </button>
+            <button class="reader-action-btn" id="reader-theme-btn">
+                <i class="fa-solid fa-moon"></i>
+                <span>{% trans "ThÃ¨me" %}</span>
+            </button>
+            <button class="reader-action-btn" id="reader-font-btn">
+                <i class="fa-solid fa-font"></i>
+                <span>{% trans "Police" %}</span>
+            </button>
+            <button class="reader-action-btn" id="reader-share-btn">
+                <i class="fa-solid fa-share-nodes"></i>
+                <span>{% trans "Partager" %}</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- POPUP POLICE -->
+    <div class="font-size-popup" id="font-size-popup">
+        <label>{% trans "Taille du texte" %} : <span id="font-size-value">18</span>px</label>
+        <input type="range" id="font-size-range" min="14" max="28" value="18" step="1">
+    </div>
+
+    <!-- MODALE COMMENTAIRES -->
+    <div class="reader-comments-modal" id="comments-modal">
+        <div class="comments-modal-content">
+            <div class="comments-modal-header">
+                <button class="comments-back-btn" id="comments-back-btn" title="{% trans 'Retour au chapitre' %}">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <h3>{% trans "Commentaires" %} ({{ chapter_comments.count }})</h3>
+                <button class="comments-close-btn" id="comments-close-btn" title="{% trans 'Fermer' %}">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="comments-modal-body">
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'web:add_comment' work.pk %}" style="margin-bottom:20px;">
+                        {% csrf_token %}
+                        <input type="hidden" name="chapter_id" value="{{ chapter.pk }}">
+                        <input type="hidden" name="next" value="{{ request.path }}?open_comments=1">
+                        <textarea name="content" class="form-control" rows="3" placeholder="{% trans 'Laissez un commentaire...' %}" required></textarea>
+                        <button type="submit" class="btn btn-primary" style="margin-top:8px;">
+                            <i class="fa-solid fa-paper-plane"></i> {% trans "Publier" %}
+                        </button>
+                    </form>
+                {% else %}
+                    <p class="text-muted" style="margin-bottom:20px;">
+                        <a href="{% url 'users_web:login' %}">{% trans "Connectez-vous" %}</a> {% trans "pour commenter." %}
+                    </p>
+                {% endif %}
+
+                {% for comment in chapter_comments %}
+                    <div class="comment-item" style="display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--border);">
+                        {% if comment.user.avatar and comment.user.avatar.name %}
+                            <img src="{{ comment.user.avatar.url }}" alt="" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+                        {% else %}
+                            <div class="comment-avatar">{{ comment.user.username|first|upper }}</div>
+                        {% endif %}
+                        <div style="flex:1;">
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                <strong style="font-size:13px;">{{ comment.user.username }}</strong>
+                                <small class="text-muted">{{ comment.created_at|timesince }}</small>
+                            </div>
+                            <p style="font-size:14px;color:var(--text-secondary);margin-top:4px;line-height:1.6;">{{ comment.content }}</p>
+                            {% if user.is_authenticated %}
+                                <button class="comment-like-btn" data-url="{% url 'web:toggle_comment_like' comment.pk %}" style="margin-top:6px;">
+                                    <i class="fa-regular fa-heart"></i>
+                                    <span class="comment-like-count">{{ comment.likes_count }}</span>
+                                </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="text-muted" style="text-align:center;padding:32px;">{% trans "Aucun commentaire. Soyez le premier !" %}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALE AJOUT Ã€ LA BIBLIOTHÃˆQUE -->
+    <div class="reader-exit-modal" id="exit-modal">
+        <div class="modal-content">
+            <h3>{% trans "Ajouter Ã  votre bibliothÃ¨que ?" %}</h3>
+            <p>{% trans "Vous lisez cette Å“uvre mais elle n'est pas dans votre bibliothÃ¨que. Voulez-vous l'ajouter pour la retrouver plus facilement ?" %}</p>
+            <div class="modal-actions">
+                <button class="btn-yes" id="exit-add-lib">{% trans "Oui, ajouter" %}</button>
+                <button class="btn-no" id="exit-no-lib">{% trans "Non, quitter" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    const root = document.getElementById('reader-root');
+    if (!root) return;
+
+    console.log('âœ… Reader JS loaded');
+
+    const workId = root.dataset.workId;
+    const chapterId = root.dataset.chapterId;
+    const savedScroll = parseInt(root.dataset.savedScroll || '0', 10);
+    const isInLibrary = root.dataset.isInLibrary === '1';
+    const isAuth = root.dataset.isAuthenticated === '1';
+    const nextChapterUrl = root.dataset.nextChapter || '';
+
+    const topBar = document.getElementById('reader-top-bar');
+    const bottomBar = document.getElementById('reader-bottom-bar');
+    document.body.classList.add('reader-immersive');
+
+    let controlsVisible = false;
+    let scrollTimeout = null;
+
+    function getCookie(name) {
+        let v = null;
+        document.cookie.split(';').forEach(c => { c = c.trim(); if (c.startsWith(name + '=')) v = decodeURIComponent(c.substring(name.length + 1)); });
+        return v;
+    }
+
+    if (savedScroll > 0) {
+        window.addEventListener('load', () => {
+            setTimeout(() => window.scrollTo({ top: savedScroll, behavior: 'auto' }), 100);
+        });
+    }
+
+    function showControls() {
+        controlsVisible = true;
+        topBar.classList.remove('hidden');
+        bottomBar.classList.remove('hidden');
+        document.body.classList.add('reader-controls-visible');
+    }
+    function hideControls() {
+        controlsVisible = false;
+        topBar.classList.add('hidden');
+        bottomBar.classList.add('hidden');
+        document.body.classList.remove('reader-controls-visible');
+    }
+    function toggleControls() { controlsVisible ? hideControls() : showControls(); }
+
+    document.getElementById('reader-content-wrap').addEventListener('click', function(e) {
+        if (e.target.closest('a') || e.target.closest('button')) return;
+        toggleControls();
+    });
+
+    window.addEventListener('scroll', function() {
+        if (controlsVisible) {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(hideControls, 1000);
+        }
+    });
+
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // COMMENTAIRES
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    const commentsModal = document.getElementById('comments-modal');
+    const commentsBtn = document.getElementById('reader-comments-btn');
+
+    console.log('Modal element:', commentsModal);
+    console.log('Comments button:', commentsBtn);
+
+    function openCommentsModal() {
+        if (!commentsModal) return;
+        commentsModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        console.log('ðŸ“– Comments modal opened');
+    }
+
+    function closeCommentsModal() {
+        if (!commentsModal) return;
+        commentsModal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    if (commentsBtn) {
+        commentsBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('ðŸ–±ï¸ Comments button clicked');
+            openCommentsModal();
+        });
+    } else {
+        console.error('âŒ reader-comments-btn not found');
+    }
+
+    const closeCommentsBtn = document.getElementById('comments-close-btn');
+    const backCommentsBtn = document.getElementById('comments-back-btn');
+
+    if (closeCommentsBtn) closeCommentsBtn.addEventListener('click', closeCommentsModal);
+    if (backCommentsBtn) backCommentsBtn.addEventListener('click', closeCommentsModal);
+
+    if (commentsModal) {
+        commentsModal.addEventListener('click', function(e) {
+            if (e.target === commentsModal) closeCommentsModal();
+        });
+    }
+
+    // Ouvrir auto si ?open_comments=1
+    if (window.location.search.includes('open_comments=1')) {
+        setTimeout(openCommentsModal, 300);
+    }
+
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // BOUTON RETOUR
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    const backBtn = document.getElementById('reader-back');
+    if (backBtn) {
+        backBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (isInLibrary || !isAuth) {
+                window.location.href = '{% url "web:work_detail" work.id %}';
+                return;
+            }
+            document.getElementById('exit-modal').classList.add('open');
+        });
+    }
+
+    const exitAddBtn = document.getElementById('exit-add-lib');
+    if (exitAddBtn) {
+        exitAddBtn.addEventListener('click', function() {
+            fetch('/api/library/' + workId + '/toggle/', {
+                method: 'POST',
+                headers: {'X-CSRFToken': getCookie('csrftoken')}
+            }).finally(() => { window.location.href = '{% url "web:work_detail" work.id %}'; });
+        });
+    }
+
+    const exitNoBtn = document.getElementById('exit-no-lib');
+    if (exitNoBtn) {
+        exitNoBtn.addEventListener('click', function() {
+            window.location.href = '{% url "web:work_detail" work.id %}';
+        });
+    }
+
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // MENU CHAPITRES
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    const chaptersBtn = document.getElementById('chapters-btn');
+    if (chaptersBtn) {
+        chaptersBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.getElementById('chapters-dropdown').classList.toggle('open');
+        });
+    }
+
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // LIKE
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    const likeBtn = document.getElementById('reader-like-btn');
+    if (likeBtn) {
+        likeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            fetch(likeBtn.dataset.url, {
+                method: 'POST',
+                headers: {'X-CSRFToken': getCookie('csrftoken')}
+            })
+            .then(r => r.json())
+            .then(data => {
+                const icon = likeBtn.querySelector('i');
+                if (data.user_liked) {
+                    icon.className = 'fa-solid fa-heart';
+                    likeBtn.classList.add('liked');
+                } else {
+                    icon.className = 'fa-regular fa-heart';
+                    likeBtn.classList.remove('liked');
+                }
+            });
+        });
+    }
+
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // THÃˆME
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    const themeBtn = document.getElementById('reader-theme-btn');
+    if (themeBtn) {
+        themeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const html = document.documentElement;
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            themeBtn.querySelector('i').className = next === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        });
+    }
+
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // POLICE
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    const fontBtn = document.getElementById('reader-font-btn');
+    if (fontBtn) {
+        fontBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.getElementById('font-size-popup').classList.toggle('open');
+        });
+    }
+
+    const fontRange = document.getElementById('font-size-range');
+    const fontSizeValue = document.getElementById('font-size-value');
+    const savedFontSize = localStorage.getItem('reader_font_size') || '18';
+    fontRange.value = savedFontSize;
+    fontSizeValue.textContent = savedFontSize;
+    const contentEl = document.getElementById('reader-content');
+    if (contentEl) contentEl.style.fontSize = savedFontSize + 'px';
+
+    fontRange.addEventListener('input', function(e) {
+        const size = e.target.value;
+        fontSizeValue.textContent = size;
+        if (contentEl) contentEl.style.fontSize = size + 'px';
+        localStorage.setItem('reader_font_size', size);
+    });
+
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // PARTAGER
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    const shareBtn = document.getElementById('reader-share-btn');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const url = window.location.href;
+            if (navigator.share) {
+                navigator.share({ title: '{{ chapter.title|escapejs }}', url: url });
+            } else {
+                navigator.clipboard.writeText(url).then(() => alert('{% trans "Lien copiÃ© !" %}'));
+            }
+        });
+    }
+
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // BARRE DE PROGRESSION
+    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    const bar = document.getElementById('reading-progress-bar');
+    const fill = document.getElementById('reading-progress-fill');
+    const label = document.getElementById('reading-progress-label');
+    let isDragging = false;
+    let lastSent = -1;
+    let nextChapterLoaded = false;
+
+    function getMaxScroll() { return document.documentElement.scrollHeight - window.innerHeight; }
+
+    function updateBarFromScroll() {
+        if (isDragging) return;
+        const max = getMaxScroll();
+        const percent = max > 0 ? (window.scrollY / max) * 100 : 0;
+        const c = Math.min(100, Math.max(0, percent));
+        fill.style.width = c + '%';
+        if (label) label.textContent = Math.round(c) + '%';
+        bar.style.setProperty('--pos', c + '%');
+    }
+
+    function sendProgress(percent) {
+        if (!workId || !chapterId) return;
+        if (Math.abs(percent - lastSent) < 3 && percent !== 100) return;
+        lastSent = percent;
+        fetch('/api/reading-progress/', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken')},
+            body: JSON.stringify({
+                work_id: workId,
+                chapter_id: chapterId,
+                percent: Math.round(percent),
+                scroll_position: Math.round(window.scrollY)
+            })
+        }).catch(() => {});
+    }
+
+    window.addEventListener('scroll', function() {
+        updateBarFromScroll();
+        clearTimeout(window.__progressTimer);
+        window.__progressTimer = setTimeout(() => {
+            const max = getMaxScroll();
+            const percent = max > 0 ? (window.scrollY / max) * 100 : 0;
+            sendProgress(percent);
+            if (percent >= 98 && nextChapterUrl && !nextChapterLoaded) {
+                nextChapterLoaded = true;
+                setTimeout(() => { window.location.href = nextChapterUrl; }, 1500);
+            }
+        }, 500);
+    });
+
+    window.addEventListener('resize', updateBarFromScroll);
+    updateBarFromScroll();
+
+    function seekFromEvent(clientX) {
+        const rect = bar.getBoundingClientRect();
+        const x = Math.min(Math.max(clientX - rect.left, 0), rect.width);
+        const ratio = x / rect.width;
+        window.scrollTo({ top: ratio * getMaxScroll(), behavior: 'auto' });
+        fill.style.width = (ratio * 100) + '%';
+        if (label) label.textContent = Math.round(ratio * 100) + '%';
+        bar.style.setProperty('--pos', (ratio * 100) + '%');
+    }
+
+    bar.addEventListener('mousedown', e => { isDragging = true; bar.classList.add('dragging'); seekFromEvent(e.clientX); });
+    document.addEventListener('mousemove', e => { if (isDragging) seekFromEvent(e.clientX); });
+    document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false; bar.classList.remove('dragging');
+        const max = getMaxScroll();
+        sendProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
+    });
+    bar.addEventListener('touchstart', e => { isDragging = true; bar.classList.add('dragging'); seekFromEvent(e.touches[0].clientX); }, {passive: true});
+    bar.addEventListener('touchmove', e => { if (isDragging) seekFromEvent(e.touches[0].clientX); }, {passive: true});
+    bar.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false; bar.classList.remove('dragging');
+        const max = getMaxScroll();
+        sendProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
+    });
+
+    // Fermer dropdowns au clic ailleurs
+    document.addEventListener('click', function(e) {
+        const chaptersDd = document.getElementById('chapters-dropdown');
+        if (chaptersDd && !e.target.closest('#chapters-dropdown') && !e.target.closest('#chapters-btn')) {
+            chaptersDd.classList.remove('open');
+        }
+        const fontPp = document.getElementById('font-size-popup');
+        if (fontPp && !e.target.closest('#font-size-popup') && !e.target.closest('#reader-font-btn')) {
+            fontPp.classList.remove('open');
+        }
+    });
+
+    console.log('âœ… All readers initialized');
+})();
+</script>
+{% endblock %}
+

@@ -1,0 +1,110 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Modifier le profil" %} - Armpad{% endblock %}
+
+{% block content %}
+<div class="auth-card" style="max-width:560px;">
+    <h1 class="section-title" style="text-align:center;margin-bottom:24px;">
+        <i class="fa-solid fa-pen"></i> {% trans "Modifier mon profil" %}
+    </h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- â•â•â• AVATAR CLIQUABLE â•â•â• -->
+        <div style="text-align:center;margin-bottom:24px;">
+            <div id="avatar-clickable" style="position:relative;display:inline-block;cursor:pointer;" title="Cliquez pour changer la photo">
+                {% if user.avatar and user.avatar.name %}
+                    <img id="avatar-preview" src="{{ user.avatar.url }}" alt="{{ user.username }}"
+                         style="width:120px;height:120px;border-radius:50%;object-fit:cover;display:block;box-shadow:0 4px 16px var(--shadow-md);transition:all 0.25s ease;">
+                {% else %}
+                    <div id="avatar-preview-placeholder"
+                         style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--primary-light),var(--primary));color:white;font-size:48px;font-weight:700;display:flex;align-items:center;justify-content:center;text-transform:uppercase;box-shadow:0 4px 16px var(--shadow-md);transition:all 0.25s ease;">
+                        {{ user.username|first|upper }}
+                    </div>
+                    <img id="avatar-preview" src="" alt=""
+                         style="display:none;width:120px;height:120px;border-radius:50%;object-fit:cover;box-shadow:0 4px 16px var(--shadow-md);transition:all 0.25s ease;">
+                {% endif %}
+
+                <div id="avatar-overlay" style="position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,0.55);display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;opacity:0;transition:opacity 0.25s ease;pointer-events:none;">
+                    <i class="fa-solid fa-camera" style="font-size:28px;margin-bottom:6px;"></i>
+                    <span style="font-size:12px;font-weight:600;">{% trans "Changer" %}</span>
+                </div>
+            </div>
+
+            <p class="text-muted" style="font-size:13px;margin-top:12px;">
+                <i class="fa-solid fa-hand-pointer"></i> {% trans "Cliquez sur la photo pour la changer" %}
+            </p>
+
+            <input type="file" name="avatar" id="avatar-input" accept="image/*" style="display:none;">
+        </div>
+
+        {% for field in form %}
+            {% if field.name != 'avatar' %}
+                <div class="form-group">
+                    <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}<small class="text-muted" style="font-size:12px;display:block;margin-top:4px;">{{ field.help_text }}</small>{% endif %}
+                    {% if field.errors %}<small style="color:#DC2626;display:block;margin-top:4px;">{{ field.errors.0 }}</small>{% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;">
+            <button type="submit" class="btn btn-primary" style="flex:1;justify-content:center;padding:12px;">
+                <i class="fa-solid fa-check"></i> {% trans "Enregistrer" %}
+            </button>
+            <a href="{% url 'web:profile' user.username %}" class="btn btn-ghost" style="padding:12px;">{% trans "Annuler" %}</a>
+        </div>
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const clickable = document.getElementById('avatar-clickable');
+    const input = document.getElementById('avatar-input');
+    const preview = document.getElementById('avatar-preview');
+    const placeholder = document.getElementById('avatar-preview-placeholder');
+    const overlay = document.getElementById('avatar-overlay');
+
+    if (!clickable || !input) return;
+
+    clickable.addEventListener('click', function() { input.click(); });
+
+    clickable.addEventListener('mouseenter', function() {
+        overlay.style.opacity = '1';
+        preview.style.transform = 'scale(1.05)';
+        if (placeholder) placeholder.style.transform = 'scale(1.05)';
+    });
+    clickable.addEventListener('mouseleave', function() {
+        overlay.style.opacity = '0';
+        preview.style.transform = 'scale(1)';
+        if (placeholder) placeholder.style.transform = 'scale(1)';
+    });
+
+    input.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) {
+            alert('Veuillez sÃ©lectionner une image.');
+            input.value = '';
+            return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+            alert('L\'image ne doit pas dÃ©passer 5 Mo.');
+            input.value = '';
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            preview.src = ev.target.result;
+            preview.style.display = 'block';
+            if (placeholder) placeholder.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+    });
+});
+</script>
+{% endblock %}
+

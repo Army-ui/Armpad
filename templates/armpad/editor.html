@@ -1,0 +1,29 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% block title %}Éditeur - Armpad{% endblock %}
+
+{% block content %}
+<div style="max-width:760px;margin:40px auto;padding:0 20px;">
+    <h1 class="section-title" style="margin-bottom:24px;">
+        <i class="fa-solid fa-pen"></i> Éditeur
+    </h1>
+    <form method="post" enctype="multipart/form-data" class="card" style="padding:24px;">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label class="form-label">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}<small class="text-muted" style="font-size:12px;">{{ field.help_text }}</small>{% endif %}
+                {% if field.errors %}<small style="color:#DC2626;display:block;margin-top:4px;">{{ field.errors.0 }}</small>{% endif %}
+            </div>
+        {% endfor %}
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-check"></i> Enregistrer
+            </button>
+            <a href="{% url 'web:home' %}" class="btn btn-ghost">Annuler</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

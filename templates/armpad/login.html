@@ -1,0 +1,51 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Connexion" %} - Armpad{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <div class="auth-logo">
+        <img src="{% static 'img/logo.png' %}" alt="Armpad">
+        <h1>Armpad</h1>
+        <p class="font-asaemon" style="color:var(--text-muted);font-size:14px;margin-top:4px;">✨ {% trans "Content de vous revoir !" %}</p>
+    </div>
+
+    {% if form.errors %}
+        <div style="background:#FEE2E2;color:#DC2626;padding:10px 14px;border-radius:var(--radius-sm);margin-bottom:16px;font-size:13px;">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            {% for error in form.non_field_errors %}{{ error }}{% empty %}{% trans "Email ou mot de passe incorrect." %}{% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.GET.next|default:'' }}">
+
+        <div class="form-group">
+            <label class="form-label" for="id_username"><i class="fa-solid fa-envelope"></i> {% trans "Adresse email" %}</label>
+            <input type="email" name="username" id="id_username" class="form-control" placeholder="vous@email.com" autocomplete="email" required autofocus value="{{ form.username.value|default:'' }}">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="id_password"><i class="fa-solid fa-lock"></i> {% trans "Mot de passe" %}</label>
+            <input type="password" name="password" id="id_password" class="form-control" placeholder="••••••••" autocomplete="current-password" required>
+        </div>
+
+        <div style="text-align:right;margin-bottom:20px;">
+            <a href="{% url 'users_web:password_reset' %}" style="font-size:13px;color:var(--primary);font-weight:500;">{% trans "Mot de passe oublié ?" %}</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;">
+            <i class="fa-solid fa-right-to-bracket"></i> {% trans "Se connecter" %}
+        </button>
+    </form>
+
+    <p style="text-align:center;margin-top:20px;font-size:14px;color:var(--text-muted);">
+        {% trans "Pas encore de compte ?" %}
+        <a href="{% url 'web:register' %}" class="font-asaemon" style="color:var(--primary);font-weight:600;">{% trans "S'inscrire" %}</a>
+    </p>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,94 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{{ profile_user.username }} - Armpad{% endblock %}
+
+{% block content %}
+<div class="profile-header">
+    {% if profile_user.avatar and profile_user.avatar.name %}
+        <img src="{{ profile_user.avatar.url }}" alt="{{ profile_user.username }}" class="profile-avatar">
+    {% else %}
+        <div class="profile-avatar" style="background:linear-gradient(135deg,var(--primary-light),var(--primary));color:white;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:700;text-transform:uppercase;margin:0 auto;">
+            {{ profile_user.username|first|upper }}
+        </div>
+    {% endif %}
+
+    <h1 class="profile-name">{{ profile_user.username }}</h1>
+    {% if profile_user.bio %}<p class="profile-bio">{{ profile_user.bio }}</p>{% endif %}
+
+    <div class="profile-stats">
+        <div class="profile-stat">
+            <div class="profile-stat-number">{{ profile_user.works.count }}</div>
+            <div class="profile-stat-label">{% trans "Œuvres" %}</div>
+        </div>
+        <a href="{% url 'users:followers_list' profile_user.username %}" class="profile-stat" style="text-decoration:none;">
+            <div class="profile-stat-number" id="followers-count">{{ profile_user.followers_count }}</div>
+            <div class="profile-stat-label">{% trans "Abonnés" %}</div>
+        </a>
+        <a href="{% url 'users:following_list' profile_user.username %}" class="profile-stat" style="text-decoration:none;">
+            <div class="profile-stat-number">{{ profile_user.following_count }}</div>
+            <div class="profile-stat-label">{% trans "Abonnements" %}</div>
+        </a>
+    </div>
+
+    <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        {% if user == profile_user %}
+            <a href="{% url 'web:profile_edit' %}" class="btn btn-primary">
+                <i class="fa-solid fa-pen"></i> {% trans "Modifier mon profil" %}
+            </a>
+            <a href="{% url 'web:write' %}" class="btn btn-outline">
+                <i class="fa-solid fa-plus"></i> {% trans "Nouvelle œuvre" %}
+            </a>
+        {% elif user.is_authenticated %}
+            {% if is_friend %}
+                <span class="btn btn-outline" style="cursor:default;background:var(--primary-soft);">
+                    <i class="fa-solid fa-user-group"></i> {% trans "Vous êtes amis" %}
+                </span>
+            {% endif %}
+            <button class="btn {% if is_following %}btn-outline{% else %}btn-primary{% endif %}" id="follow-btn" data-url="{% url 'users:toggle_follow' profile_user.username %}">
+                {% if is_following %}
+                    <i class="fa-solid fa-check"></i> {% trans "Abonné" %}
+                {% elif is_follower %}
+                    <i class="fa-solid fa-rotate-left"></i> {% trans "Suivre en retour" %}
+                {% else %}
+                    <i class="fa-solid fa-plus"></i> {% trans "Suivre" %}
+                {% endif %}
+            </button>
+            <a href="{% url 'web:chat_conversation' profile_user.username %}" class="btn btn-outline">
+                <i class="fa-solid fa-comment"></i> {% trans "Message" %}
+            </a>
+        {% else %}
+            <a href="{% url 'users_web:login' %}" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i> {% trans "Suivre" %}
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+<section>
+    <div class="section-header">
+        <h2 class="section-title">{% trans "Œuvres publiées" %}</h2>
+    </div>
+    <div class="works-grid">
+        {% for work in profile_user.works.all %}
+            <a href="{% url 'web:work_detail' work.pk %}" class="card">
+                {% if work.cover and work.cover.name %}
+                    <img src="{{ work.cover.url }}" alt="{{ work.title }}" class="card-cover">
+                {% else %}
+                    <div class="card-cover-placeholder"><i class="fa-solid fa-book"></i></div>
+                {% endif %}
+                <div class="card-body">
+                    <h3 class="card-title">{{ work.title }}</h3>
+                    <p class="card-author">{{ work.author.username }}</p>
+                </div>
+            </a>
+        {% empty %}
+            <p class="text-muted" style="grid-column:1/-1;padding:40px;text-align:center;">
+                <i class="fa-solid fa-book" style="font-size:40px;display:block;margin-bottom:12px;opacity:0.4;"></i>
+                {% trans "Aucune œuvre publiée." %}
+            </p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+

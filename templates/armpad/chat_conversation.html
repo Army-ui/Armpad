@@ -1,0 +1,168 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Chat avec" %} {{ other.username }} - Armpad{% endblock %}
+
+{% block content %}
+<div style="max-width:720px;margin:0 auto;padding:20px;height:calc(100vh - 200px);display:flex;flex-direction:column;">
+
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);margin-bottom:16px;">
+        <a href="{% url 'web:chat' %}" class="btn btn-ghost" style="padding:6px;"><i class="fa-solid fa-arrow-left"></i></a>
+        <a href="{% url 'web:profile' other.username %}" style="display:flex;align-items:center;gap:12px;text-decoration:none;flex:1;">
+            {% if other.avatar and other.avatar.name %}
+                <img src="{{ other.avatar.url }}" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+            {% else %}
+                <div class="comment-avatar" style="width:40px;height:40px;font-size:15px;">{{ other.username|first|upper }}</div>
+            {% endif %}
+            <strong style="color:var(--text);">{{ other.username }}</strong>
+        </a>
+    </div>
+
+    {% if not are_friends %}
+        <div class="card" style="padding:20px;text-align:center;color:var(--text-muted);">
+            <i class="fa-solid fa-lock" style="font-size:32px;display:block;margin-bottom:12px;opacity:0.4;"></i>
+            {% trans "Vous devez vous suivre mutuellement pour discuter." %}
+        </div>
+    {% else %}
+        <div id="chat-box" style="flex:1;overflow-y:auto;padding:12px 0;">
+            {% for msg in chat_messages %}
+                <div class="chat-msg {% if msg.sender == user %}mine{% endif %}" data-message-id="{{ msg.id }}" data-is-mine="{% if msg.sender == user %}true{% else %}false{% endif %}">
+                    <div class="chat-bubble {% if msg.sender == user %}mine{% else %}other{% endif %}">{{ msg.content }}</div>
+                    {% if msg.reactions.all %}
+                        <div class="msg-reactions">
+                            {% for reaction in msg.reactions.all %}<span class="msg-reaction">{{ reaction.emoji }}</span>{% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:8px;">
+            <input type="text" id="chat-input" class="form-control" placeholder="{% trans 'Ã‰crire un message...' %}">
+            <button id="chat-send" class="btn btn-primary" data-chat-send-url="{% url 'users:api_chat' other.username %}">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+
+        <div id="reaction-menu" style="display:none;position:fixed;z-index:999;background:var(--bg-card);border:1px solid var(--border);border-radius:24px;padding:6px 10px;box-shadow:0 4px 20px var(--shadow-lg);">
+            <div style="display:flex;gap:4px;">
+                <button class="emoji-btn" data-emoji="â¤ï¸">â¤ï¸</button>
+                <button class="emoji-btn" data-emoji="ðŸ˜‚">ðŸ˜‚</button>
+                <button class="emoji-btn" data-emoji="ðŸ˜®">ðŸ˜®</button>
+                <button class="emoji-btn" data-emoji="ðŸ˜¢">ðŸ˜¢</button>
+                <button class="emoji-btn" data-emoji="ðŸ‘">ðŸ‘</button>
+                <button class="emoji-btn" data-emoji="ðŸ”¥">ðŸ”¥</button>
+                <button class="emoji-btn" data-emoji="ðŸ˜">ðŸ˜</button>
+                <button class="emoji-btn" data-emoji="ðŸŽ‰">ðŸŽ‰</button>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+(function() {
+    const chatBox = document.getElementById('chat-box');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send');
+    const reactionMenu = document.getElementById('reaction-menu');
+
+    function getCookie(name) {
+        let v = null;
+        document.cookie.split(';').forEach(c => { c = c.trim(); if (c.startsWith(name + '=')) v = decodeURIComponent(c.substring(name.length + 1)); });
+        return v;
+    }
+
+    if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+
+    if (chatSend) {
+        chatSend.addEventListener('click', function() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            chatSend.disabled = true;
+            fetch(chatSend.dataset.chatSendUrl, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken')},
+                body: JSON.stringify({content: text})
+            })
+            .then(r => r.json())
+            .then(data => {
+                chatSend.disabled = false;
+                if (data.error) { alert(data.error); return; }
+                const div = document.createElement('div');
+                div.className = 'chat-msg mine';
+                div.dataset.messageId = data.id;
+                div.dataset.isMine = 'true';
+                div.innerHTML = `<div class="chat-bubble mine">${data.content}</div>`;
+                chatBox.appendChild(div);
+                chatInput.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+            })
+            .catch(() => { chatSend.disabled = false; });
+        });
+        chatInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') chatSend.click(); });
+    }
+
+    let pressTimer = null, activeMessage = null, touchMoved = false;
+
+    function showReactionMenu(el, x, y) {
+        activeMessage = el;
+        reactionMenu.style.display = 'block';
+        reactionMenu.style.left = Math.min(x, window.innerWidth - 320) + 'px';
+        reactionMenu.style.top = Math.max(y - 60, 10) + 'px';
+    }
+    function hideReactionMenu() { reactionMenu.style.display = 'none'; activeMessage = null; }
+
+    if (chatBox && reactionMenu) {
+        chatBox.addEventListener('touchstart', function(e) {
+            const msg = e.target.closest('.chat-msg');
+            if (!msg) return;
+            touchMoved = false;
+            pressTimer = setTimeout(() => {
+                if (!touchMoved) {
+                    const touch = e.touches[0];
+                    showReactionMenu(msg, touch.clientX - 120, touch.clientY);
+                    if (navigator.vibrate) navigator.vibrate(20);
+                }
+            }, 500);
+        }, { passive: true });
+
+        chatBox.addEventListener('touchmove', function() { touchMoved = true; clearTimeout(pressTimer); }, { passive: true });
+        chatBox.addEventListener('touchend', function() { clearTimeout(pressTimer); });
+
+        chatBox.addEventListener('contextmenu', function(e) {
+            const msg = e.target.closest('.chat-msg');
+            if (!msg) return;
+            e.preventDefault();
+            showReactionMenu(msg, e.clientX - 120, e.clientY);
+        });
+
+        document.addEventListener('click', function(e) {
+            if (reactionMenu && !reactionMenu.contains(e.target)) hideReactionMenu();
+        });
+
+        reactionMenu.querySelectorAll('.emoji-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!activeMessage) return;
+                const msgId = activeMessage.dataset.messageId;
+                fetch('/api/v1/users/react/' + msgId + '/', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken')},
+                    body: JSON.stringify({emoji: btn.dataset.emoji})
+                }).then(() => {
+                    let reactions = activeMessage.querySelector('.msg-reactions');
+                    if (!reactions) {
+                        reactions = document.createElement('div');
+                        reactions.className = 'msg-reactions';
+                        activeMessage.appendChild(reactions);
+                    }
+                    reactions.innerHTML = `<span class="msg-reaction">${btn.dataset.emoji}</span>`;
+                    hideReactionMenu();
+                });
+            });
+        });
+    }
+})();
+</script>
+{% endblock %}
+

@@ -1,0 +1,215 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{{ work.title }} - Armpad{% endblock %}
+
+{% block content %}
+<div style="max-width:1000px;margin:0 auto;padding:32px 20px;">
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;">
+        <div style="width:200px;flex-shrink:0;">
+            {% if work.cover and work.cover.name %}
+                <img src="{{ work.cover.url }}" alt="{{ work.title }}" style="width:100%;border-radius:var(--radius);box-shadow:0 8px 24px var(--shadow-md);">
+            {% else %}
+                <div class="card-cover-placeholder" style="border-radius:var(--radius);aspect-ratio:2/3;font-size:64px;"><i class="fa-solid fa-book"></i></div>
+            {% endif %}
+        </div>
+
+        <div style="flex:1;min-width:280px;">
+            <h1 class="hero-title" style="font-size:32px;text-align:left;">{{ work.title }}</h1>
+
+            <p class="text-muted" style="margin-top:8px;">
+                {% trans "par" %} <a href="{% url 'web:profile' work.author.username %}" style="font-weight:600;">{{ work.author.username }}</a>
+                {% if work.genre %} · <span class="card-genre">{{ work.genre.name }}</span>{% endif %}
+                {% if work.is_premium %} · <span class="card-badge premium">Premium</span>{% endif %}
+                {% if work.status == 'ongoing' %} · <span class="card-badge" style="background:#DBEAFE;color:#1E40AF;border-color:#93C5FD;">{% trans "En cours" %}</span>{% endif %}
+                {% if work.status == 'completed' %} · <span class="card-badge" style="background:#D1FAE5;color:#065F46;border-color:#6EE7B7;">{% trans "Terminé" %}</span>{% endif %}
+                {% if work.status == 'hiatus' %} · <span class="card-badge" style="background:#FEF3C7;color:#92400E;border-color:#FCD34D;">{% trans "En pause" %}</span>{% endif %}
+            </p>
+
+            <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
+                <button class="btn btn-outline like-btn" data-like-url="{% url 'web:toggle_like' work.pk %}">
+                    <i class="fa-{% if user_liked %}solid{% else %}regular{% endif %} fa-heart"></i>
+                    <span class="like-count">{{ work.likes_count }}</span>
+                </button>
+
+                <!-- ═══ BOUTON BIBLIOTHÈQUE CONDITIONNEL ═══ -->
+                {% if user.is_authenticated %}
+                    <button id="library-btn" class="btn btn-outline" data-library-url="{% url 'web:toggle_library' work.pk %}">
+                        {% if is_in_library %}
+                            <i class="fa-solid fa-check"></i> {% trans "Dans la bibliothèque" %}
+                        {% else %}
+                            <i class="fa-solid fa-plus"></i> {% trans "Ajouter à la bibliothèque" %}
+                        {% endif %}
+                    </button>
+                {% else %}
+                    <a href="{% url 'users_web:login' %}?next={{ request.path }}" class="btn btn-outline">
+                        <i class="fa-solid fa-plus"></i> {% trans "Ajouter à la bibliothèque" %}
+                    </a>
+                {% endif %}
+
+                {% if user.is_authenticated and last_chapter %}
+                    <a href="{% url 'web:work_detail' work.pk %}?continue=1" class="btn btn-primary">
+                        <i class="fa-solid fa-play"></i> {% trans "Reprendre au chapitre" %} {{ last_chapter.order }}
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if work.summary %}
+                <p style="margin-top:24px;line-height:1.7;color:var(--text-secondary);">{{ work.summary }}</p>
+            {% endif %}
+
+            {% if work.tag_list %}
+                <div style="margin-top:16px;display:flex;gap:6px;flex-wrap:wrap;">
+                    {% for tag in work.tag_list %}
+                        <span class="card-genre" style="font-size:11px;">#{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <section style="margin-top:48px;">
+        <div class="section-header" style="padding:0 0 12px;">
+            <h2 class="section-title">{% trans "Chapitres" %} ({{ chapters.count }})</h2>
+        </div>
+        <div>
+            {% for chapter in chapters %}
+                <div style="display:flex;gap:16px;align-items:center;padding:16px 8px;border-bottom:1px solid var(--border);">
+                    <a href="{% url 'web:reader' work.id chapter.order %}" style="display:flex;gap:16px;align-items:center;flex:1;text-decoration:none;min-width:0;">
+                        {% if chapter.image %}
+                            <img src="{{ chapter.image.url }}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:10px;flex-shrink:0;">
+                        {% elif chapter.images.first %}
+                            <img src="{{ chapter.images.first.image.url }}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:10px;flex-shrink:0;">
+                        {% else %}
+                            <div style="width:64px;height:64px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--primary-soft),var(--accent2));display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:22px;">
+                                <i class="fa-solid fa-file-lines"></i>
+                            </div>
+                        {% endif %}
+                        <div style="flex:1;min-width:0;">
+                            <strong style="color:var(--text);display:block;">{% trans "Ch." %} {{ chapter.order }} — {{ chapter.title }}</strong>
+                            <small class="text-muted">
+                                <i class="fa-solid fa-heart"></i> <span class="chapter-like-count-{{ chapter.id }}">{{ chapter.likes_count }}</span>
+                                · {{ chapter.images.count }} {% trans "image(s)" %}
+                                {% if chapter.is_draft %} · <span style="color:#92400E;">{% trans "Brouillon" %}</span>{% endif %}
+                                {% if progress and progress.chapter_id == chapter.id %} · <span style="color:var(--primary);">{% trans "Lu à" %} {{ progress.progress_percent }}%</span>{% endif %}
+                            </small>
+                        </div>
+                    </a>
+                    {% if user.is_authenticated %}
+                        <button class="btn btn-ghost chapter-like-btn" data-url="{% url 'web:toggle_chapter_like' chapter.pk %}" style="flex-shrink:0;">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p class="text-muted" style="padding:20px;text-align:center;">{% trans "Aucun chapitre pour le moment." %}</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section style="margin-top:48px;">
+        <div class="section-header" style="padding:0 0 16px;">
+            <h2 class="section-title"><i class="fa-solid fa-comments"></i> {% trans "Commentaires" %} ({{ work.comments.count }})</h2>
+        </div>
+
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'web:add_comment' work.pk %}" style="margin-bottom:24px;">
+                {% csrf_token %}
+                <div style="display:flex;gap:12px;align-items:flex-start;">
+                    {% if user.avatar and user.avatar.name %}
+                        <img src="{{ user.avatar.url }}" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+                    {% else %}
+                        <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--primary-light),var(--primary));color:white;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;">{{ user.username|first|upper }}</div>
+                    {% endif %}
+                    <div style="flex:1;">
+                        <textarea name="content" class="form-control" rows="3" placeholder="{% trans 'Laissez un commentaire...' %}" required></textarea>
+                        <button type="submit" class="btn btn-primary" style="margin-top:8px;">
+                            <i class="fa-solid fa-paper-plane"></i> {% trans "Publier" %}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        {% else %}
+            <p class="text-muted" style="margin-bottom:24px;">
+                <a href="{% url 'users_web:login' %}?next={{ request.path }}">{% trans "Connectez-vous" %}</a> {% trans "pour commenter." %}
+            </p>
+        {% endif %}
+
+        <div>
+            {% for comment in comments %}
+                <div class="comment-item" style="display:flex;gap:12px;padding:16px 0;border-bottom:1px solid var(--border);">
+                    {% if comment.user.avatar and comment.user.avatar.name %}
+                        <img src="{{ comment.user.avatar.url }}" alt="" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+                    {% else %}
+                        <div class="comment-avatar">{{ comment.user.username|first|upper }}</div>
+                    {% endif %}
+                    <div style="flex:1;">
+                        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                            <a href="{% url 'web:profile' comment.user.username %}" style="font-weight:600;color:var(--text);">{{ comment.user.username }}</a>
+                            <small class="text-muted">{{ comment.created_at|timesince }} {% trans "ago" %}</small>
+                        </div>
+                        <p style="margin-top:4px;color:var(--text-secondary);line-height:1.6;">{{ comment.content }}</p>
+                        <div style="display:flex;gap:12px;margin-top:6px;">
+                            {% if user.is_authenticated %}
+                                <button class="comment-like-btn" data-url="{% url 'web:toggle_comment_like' comment.pk %}">
+                                    <i class="fa-regular fa-heart"></i>
+                                    <span class="comment-like-count">{{ comment.likes_count }}</span>
+                                </button>
+                                <button class="comment-reply-btn" data-comment-id="{{ comment.pk }}" style="background:none;border:none;color:var(--text-muted);font-size:12px;cursor:pointer;">
+                                    <i class="fa-regular fa-comment"></i> {% trans "Répondre" %}
+                                </button>
+                            {% endif %}
+                        </div>
+
+                        {% for reply in comment.replies.all %}
+                            <div style="display:flex;gap:10px;padding:10px 0 0 20px;margin-top:8px;border-left:2px solid var(--border);">
+                                {% if reply.user.avatar and reply.user.avatar.name %}
+                                    <img src="{{ reply.user.avatar.url }}" alt="" style="width:28px;height:28px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+                                {% else %}
+                                    <div class="comment-avatar" style="width:28px;height:28px;font-size:11px;">{{ reply.user.username|first|upper }}</div>
+                                {% endif %}
+                                <div style="flex:1;">
+                                    <strong style="font-size:13px;">{{ reply.user.username }}</strong>
+                                    <small class="text-muted" style="font-size:11px;">{{ reply.created_at|timesince }} {% trans "ago" %}</small>
+                                    <p style="font-size:14px;color:var(--text-secondary);margin-top:2px;">{{ reply.content }}</p>
+                                    {% if user.is_authenticated %}
+                                        <button class="comment-like-btn" data-url="{% url 'web:toggle_comment_like' reply.pk %}" style="margin-top:4px;">
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span class="comment-like-count">{{ reply.likes_count }}</span>
+                                        </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        {% if user.is_authenticated %}
+                            <form method="post" action="{% url 'web:add_comment' work.pk %}" class="reply-form" data-comment-id="{{ comment.pk }}" style="display:none;margin-top:12px;">
+                                {% csrf_token %}
+                                <input type="hidden" name="parent_id" value="{{ comment.pk }}">
+                                <textarea name="content" class="form-control" rows="2" placeholder="{% trans 'Répondre...' %}" required></textarea>
+                                <button type="submit" class="btn btn-primary" style="margin-top:6px;font-size:13px;padding:6px 14px;">{% trans "Répondre" %}</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-muted" style="text-align:center;padding:32px;">{% trans "Aucun commentaire. Soyez le premier !" %}</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    {% if user == work.author %}
+        <div style="margin-top:32px;display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="{% url 'web:edit_work' work.pk %}" class="btn btn-outline"><i class="fa-solid fa-pen"></i> {% trans "Modifier l'œuvre" %}</a>
+            <a href="{% url 'web:add_chapter' work.id %}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> {% trans "Ajouter un chapitre" %}</a>
+            <form method="post" action="{% url 'web:delete_work' work.pk %}" onsubmit="return confirm('{% trans "Supprimer définitivement ?" %}');" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn" style="background:#FEE2E2;color:#DC2626;">
+                    <i class="fa-solid fa-trash"></i> {% trans "Supprimer" %}
+                </button>
+            </form>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

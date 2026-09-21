@@ -1,0 +1,51 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Ma bibliothèque" %} - Armpad{% endblock %}
+
+{% block content %}
+<div style="padding:32px 20px 0;">
+    <h1 class="section-title" style="font-size:28px;">
+        <i class="fa-solid fa-bookmark"></i> {% trans "Ma bibliothèque" %}
+    </h1>
+</div>
+
+<div class="works-grid">
+    {% for item in library_items %}
+        <a href="{% url 'web:reader' item.work.id item.resume_order %}" class="card" style="position:relative;">
+            {% if item.work.cover and item.work.cover.name %}
+                <img src="{{ item.work.cover.url }}" alt="{{ item.work.title }}" class="card-cover">
+            {% else %}
+                <div class="card-cover-placeholder"><i class="fa-solid fa-book"></i></div>
+            {% endif %}
+
+            {% if item.has_update %}
+                <span class="new-badge">{% trans "NOUVEAU" %}</span>
+            {% endif %}
+
+            <div class="card-progress-bar">
+                <div class="card-progress-fill" style="width: {{ item.progress_percent }}%;"></div>
+            </div>
+
+            <div class="card-body">
+                <h3 class="card-title">{{ item.work.title }}</h3>
+                <p class="card-author">{{ item.work.author.username }}</p>
+                {% if item.progress_percent > 0 %}
+                    <small class="text-muted" style="font-size:10px;">
+                        {{ item.progress_percent }}% · Ch. {{ item.resume_order }}
+                    </small>
+                {% endif %}
+            </div>
+        </a>
+    {% empty %}
+        <div style="grid-column:1/-1;padding:60px 20px;text-align:center;">
+            <i class="fa-solid fa-bookmark" style="font-size:56px;color:var(--primary);opacity:0.4;display:block;margin-bottom:16px;"></i>
+            <p class="text-muted">{% trans "Votre bibliothèque est vide." %}</p>
+            <a href="{% url 'web:catalogue' %}" class="btn btn-primary" style="margin-top:16px;">
+                <i class="fa-solid fa-compass"></i> {% trans "Explorer" %}
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,271 @@
+﻿{% load i18n %}
+{% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#E8739A">
+    <title>{% block title %}Armpad{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    {% block static %}{% endblock %}
+
+    <script>
+    (function() {
+        var theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+        if (sessionStorage.getItem('splashShown') === 'true') {
+            document.documentElement.classList.add('splash-skipped');
+        }
+    })();
+    </script>
+</head>
+<body>
+
+    <div id="splash-screen">
+        <img src="{% static 'img/logo.png' %}" alt="Armpad" class="splash-logo" width="180" height="180">
+        <div class="splash-bar-container"><div class="splash-bar"></div></div>
+        <div class="splash-from">Powered by Armpad</div>
+    </div>
+
+    <nav class="navbar">
+        <a href="{% url 'web:home' %}" class="navbar-brand" id="navbar-brand" data-home-url="{% url 'web:home' %}">
+            <img src="{% static 'img/logo.png' %}" alt="Armpad" class="navbar-logo">
+            <span class="brand-text">Armpad</span>
+        </a>
+
+        <div class="navbar-actions">
+            <a href="{% url 'web:home' %}" class="btn btn-ghost nav-desktop-only">
+                <i class="fa-solid fa-house"></i> {% trans "Accueil" %}
+            </a>
+            <a href="{% url 'web:catalogue' %}" class="btn btn-ghost nav-desktop-only">
+                <i class="fa-solid fa-book"></i> {% trans "Catalogue" %}
+            </a>
+            <a href="{% url 'web:write' %}" class="btn btn-ghost nav-desktop-only">
+                <i class="fa-solid fa-pen"></i> {% trans "Écrire" %}
+            </a>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'web:library' %}" class="btn btn-ghost nav-desktop-only">
+                    <i class="fa-solid fa-bookmark"></i> {% trans "Biblio" %}
+                </a>
+                <a href="{% url 'web:chat' %}" class="btn btn-ghost nav-desktop-only" style="position:relative;">
+                    <i class="fa-solid fa-comments"></i> {% trans "Chat" %}
+                    {% if unread_messages_count > 0 %}
+                        <span class="notif-dot" style="position:absolute;top:0;right:0;"></span>
+                    {% endif %}
+                </a>
+            {% else %}
+                <a href="{% url 'users_web:login' %}?next={% url 'web:library' %}" class="btn btn-ghost nav-desktop-only">
+                    <i class="fa-solid fa-bookmark"></i> {% trans "Biblio" %}
+                </a>
+                <a href="{% url 'users_web:login' %}?next={% url 'web:chat' %}" class="btn btn-ghost nav-desktop-only">
+                    <i class="fa-solid fa-comments"></i> {% trans "Chat" %}
+                </a>
+            {% endif %}
+
+            <a href="{% url 'web:catalogue' %}?focus=search" class="icon-btn" title="{% trans 'Rechercher' %}">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
+
+            {% if user.is_authenticated %}
+                <button class="icon-btn notif-btn" id="notif-toggle" title="{% trans 'Notifications' %}">
+                    <i class="fa-solid fa-bell"></i>
+                    {% if unread_notifications_count > 0 %}
+                        <span class="notif-dot"></span>
+                    {% endif %}
+                </button>
+
+                <div class="notif-dropdown" id="notif-dropdown">
+                    <div style="padding:14px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+                        <strong style="font-size:14px;">{% trans "Notifications" %}</strong>
+                        <button type="button" id="mark-all-read" style="background:none;border:none;color:var(--primary);font-size:12px;cursor:pointer;font-weight:600;">
+                            {% trans "Tout marquer lu" %}
+                        </button>
+                    </div>
+                    <div style="max-height:400px;overflow-y:auto;">
+                        {% for notif in recent_notifications %}
+                            <a href="{{ notif.link|default:'#' }}" class="notif-item {% if not notif.is_read %}unread{% endif %}" style="display:flex;gap:12px;text-decoration:none;align-items:flex-start;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:{{ notif.color }}20;color:{{ notif.color }};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fa-solid {{ notif.icon }}"></i>
+                                </div>
+                                <div style="flex:1;min-width:0;">
+                                    <div class="notif-text">{{ notif.message }}</div>
+                                    <div class="notif-time">{{ notif.created_at|timesince }}</div>
+                                </div>
+                            </a>
+                        {% empty %}
+                            <div style="padding:32px 16px;text-align:center;color:var(--text-muted);font-size:13px;">
+                                <i class="fa-regular fa-bell" style="font-size:32px;display:block;margin-bottom:8px;opacity:0.4;"></i>
+                                {% trans "Aucune notification" %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a href="{% url 'web:notifications' %}" style="display:block;text-align:center;padding:12px;font-size:13px;font-weight:600;color:var(--primary);border-top:1px solid var(--border);text-decoration:none;">{% trans "Voir tout" %}</a>
+                </div>
+
+                <button class="icon-btn" id="settings-toggle" title="{% trans 'Paramètres' %}">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+
+                <div class="settings-dropdown" id="settings-dropdown">
+                    <a href="{% url 'web:profile' user.username %}" class="settings-item">
+                        <i class="fa-solid fa-user"></i>
+                        <span>{% trans "Mon profil" %}</span>
+                    </a>
+                    <a href="{% url 'web:write' %}" class="settings-item">
+                        <i class="fa-solid fa-pen"></i>
+                        <span>{% trans "Écrire une œuvre" %}</span>
+                    </a>
+                    <a href="{% url 'web:library' %}" class="settings-item">
+                        <i class="fa-solid fa-bookmark"></i>
+                        <span>{% trans "Ma bibliothèque" %}</span>
+                    </a>
+
+                    <div class="settings-divider"></div>
+
+                    <button type="button" class="settings-item" id="settings-theme-toggle">
+                        <i class="fa-solid fa-moon" id="settings-theme-icon"></i>
+                        <span id="settings-theme-label">{% trans "Mode sombre" %}</span>
+                    </button>
+
+                    <div class="settings-item settings-item-lang" id="settings-lang-toggle">
+                        <i class="fa-solid fa-globe"></i>
+                        <span id="settings-lang-label">
+                            {% if LANGUAGE_CODE == 'en' %}English{% else %}Français{% endif %}
+                        </span>
+                        <i class="fa-solid fa-chevron-right settings-arrow" id="settings-lang-arrow"></i>
+                    </div>
+
+                    <div class="settings-sublist" id="settings-lang-sublist">
+                        <form action="{% url 'set_language' %}" method="post" style="margin:0;">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ request.path }}">
+                            <button type="submit" name="language" value="fr" class="settings-item settings-item-sub {% if LANGUAGE_CODE == 'fr' %}active{% endif %}">
+                                <i class="fa-solid fa-check" style="opacity: {% if LANGUAGE_CODE == 'fr' %}1{% else %}0{% endif %};"></i>
+                                <span>Français</span>
+                            </button>
+                            <button type="submit" name="language" value="en" class="settings-item settings-item-sub {% if LANGUAGE_CODE == 'en' %}active{% endif %}">
+                                <i class="fa-solid fa-check" style="opacity: {% if LANGUAGE_CODE == 'en' %}1{% else %}0{% endif %};"></i>
+                                <span>English</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <a href="{% url 'web:conditions' %}" class="settings-item">
+                        <i class="fa-solid fa-circle-question"></i>
+                        <span>{% trans "Aide & Conditions" %}</span>
+                    </a>
+
+                    <div class="settings-divider"></div>
+                    <form action="{% url 'users_web:logout' %}" method="post" style="margin:0;">
+                        {% csrf_token %}
+                        <button type="submit" class="settings-item settings-logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span>{% trans "Déconnexion" %}</span>
+                        </button>
+                    </form>
+                </div>
+            {% else %}
+                <a href="{% url 'users_web:login' %}" class="btn btn-outline">
+                    <i class="fa-solid fa-right-to-bracket"></i> {% trans "Connexion" %}
+                </a>
+                <a href="{% url 'web:register' %}" class="btn btn-primary">
+                    <i class="fa-solid fa-user-plus"></i> {% trans "Inscription" %}
+                </a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main>{% block content %}{% endblock %}</main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Armpad. {% trans "Tous droits réservés." %}</p>
+        <div class="footer-links">
+            <a href="{% url 'web:conditions' %}">{% trans "Conditions d'utilisation" %}</a>
+            <a href="{% url 'web:confidentialite' %}">{% trans "Confidentialité" %}</a>
+        </div>
+    </footer>
+
+    <nav class="bottom-nav">
+        <a href="{% url 'web:home' %}" class="bottom-nav-item {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+            <i class="fa-solid fa-house"></i>
+            <span>{% trans "Accueil" %}</span>
+        </a>
+        <a href="{% url 'web:write' %}" class="bottom-nav-item {% if request.resolver_match.url_name == 'write' %}active{% endif %}">
+            <i class="fa-solid fa-pen"></i>
+            <span>{% trans "Écrire" %}</span>
+        </a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'web:library' %}" class="bottom-nav-item {% if request.resolver_match.url_name == 'library' %}active{% endif %}">
+                <i class="fa-solid fa-bookmark"></i>
+                <span>{% trans "Biblio" %}</span>
+            </a>
+        {% else %}
+            <a href="{% url 'users_web:login' %}?next={% url 'web:library' %}" class="bottom-nav-item">
+                <i class="fa-solid fa-bookmark"></i>
+                <span>{% trans "Biblio" %}</span>
+            </a>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <a href="{% url 'web:chat' %}" class="bottom-nav-item {% if request.resolver_match.url_name == 'chat' %}active{% endif %}" style="position:relative;">
+                <i class="fa-solid fa-comments"></i>
+                {% if unread_messages_count > 0 %}
+                    <span class="notif-dot" style="top:4px;right:calc(50% - 14px);"></span>
+                {% endif %}
+                <span>{% trans "Chat" %}</span>
+            </a>
+        {% else %}
+            <a href="{% url 'users_web:login' %}?next={% url 'web:chat' %}" class="bottom-nav-item">
+                <i class="fa-solid fa-comments"></i>
+                <span>{% trans "Chat" %}</span>
+            </a>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <a href="{% url 'web:profile' user.username %}" class="bottom-nav-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+                {% if user.avatar and user.avatar.name %}
+                    <img src="{{ user.avatar.url }}" alt="" class="bottom-nav-avatar">
+                {% else %}
+                    <i class="fa-solid fa-user"></i>
+                {% endif %}
+                <span>{% trans "Profil" %}</span>
+            </a>
+        {% else %}
+            <a href="{% url 'users_web:login' %}" class="bottom-nav-item {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>{% trans "Connexion" %}</span>
+            </a>
+        {% endif %}
+    </nav>
+
+    {% if request.resolver_match.url_name not in 'login,register,password_reset,password_reset_done,password_reset_confirm,password_reset_complete,verify_email' %}
+    <script>
+    (function() {
+        var path = window.location.pathname;
+        if (path === '/' || path === '') return;
+
+        var brand = document.getElementById('navbar-brand');
+        if (!brand) return;
+
+        var fullTitle = document.title || '';
+        var pageTitle = fullTitle.replace(/\s*-\s*Armpad\s*$/i, '').trim();
+
+        if (!pageTitle) return;
+
+        brand.classList.add('page-title-mode');
+        brand.textContent = pageTitle;
+    })();
+    </script>
+    {% endif %}
+
+    <script src="{% static 'js/main.js' %}" defer></script>
+</body>
+</html>

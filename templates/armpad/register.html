@@ -1,0 +1,36 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Inscription" %} - Armpad{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <div class="auth-logo">
+        <img src="{% static 'img/logo.png' %}" alt="Armpad">
+        <h1>Armpad</h1>
+        <p class="font-asaemon" style="color:var(--text-muted);font-size:14px;">✨ {% trans "Rejoignez la communauté !" %}</p>
+    </div>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}<small class="text-muted" style="font-size:12px;display:block;margin-top:4px;">{{ field.help_text }}</small>{% endif %}
+                {% if field.errors %}<small style="color:#DC2626;display:block;margin-top:4px;">{{ field.errors.0 }}</small>{% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;">
+            <i class="fa-solid fa-user-plus"></i> {% trans "Créer mon compte" %}
+        </button>
+    </form>
+
+    <p style="text-align:center;margin-top:20px;font-size:14px;color:var(--text-muted);">
+        {% trans "Déjà un compte ?" %}
+        <a href="{% url 'users_web:login' %}" class="font-asaemon" style="color:var(--primary);font-weight:600;">{% trans "Se connecter" %}</a>
+    </p>
+</div>
+{% endblock %}
+
+

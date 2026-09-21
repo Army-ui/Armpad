@@ -1,0 +1,35 @@
+
+services:
+  db:
+    image: postgres:15
+    container_name: armpad_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "@Rmy2007"
+      POSTGRES_DB: armpad_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: armpad_redis
+    ports:
+      - "6379:6379"
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+ 
+volumes:
+  db_data:

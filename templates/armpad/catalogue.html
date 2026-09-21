@@ -1,0 +1,123 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Catalogue" %} - Armpad{% endblock %}
+
+{% block content %}
+<div style="max-width:1200px;margin:0 auto;padding:24px 20px;">
+
+    <div style="margin-bottom:24px;">
+        <h1 style="font-family:var(--font-asaemon);font-size:32px;font-weight:700;">
+            <i class="fa-solid fa-book"></i> {% trans "Catalogue" %}
+        </h1>
+        <p class="text-muted" style="margin-top:6px;">{% trans "Découvrez des milliers d'histoires." %}</p>
+    </div>
+
+    <!-- Barre de recherche -->
+    <form method="get" style="margin-bottom:24px;">
+        <div style="display:flex;gap:8px;background:var(--bg-card);border:1.5px solid var(--border);border-radius:var(--radius);padding:6px;box-shadow:0 4px 16px var(--shadow);">
+            <input type="text" name="search" value="{{ request.GET.search|default:'' }}"
+                   placeholder="{% trans 'Rechercher une œuvre, un auteur, un tag...' %}"
+                   style="flex:1;padding:12px 16px;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--font-ui);font-size:15px;">
+            <button type="submit" class="btn btn-primary" style="padding:10px 20px;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+    </form>
+
+    <!-- Filtres de genres (chips) -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;overflow-x:auto;padding-bottom:8px;">
+        <a href="{% url 'web:catalogue' %}{% if request.GET.search %}?search={{ request.GET.search }}{% endif %}"
+           class="genre-chip {% if not request.GET.genre %}active{% endif %}">
+            <i class="fa-solid fa-star"></i> {% trans "Tous" %}
+        </a>
+        {% for genre in genres %}
+            <a href="?genre={{ genre.slug }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+               class="genre-chip {% if request.GET.genre == genre.slug %}active{% endif %}">
+                {{ genre.name }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <!-- Résultats -->
+    {% if works %}
+        <div class="works-grid" style="padding:0;">
+            {% for work in works %}
+                <a href="{% url 'web:work_detail' work.pk %}" class="card">
+                    {% if work.cover and work.cover.name %}
+                        <img src="{{ work.cover.url }}" alt="{{ work.title }}" class="card-cover">
+                    {% else %}
+                        <div class="card-cover-placeholder"><i class="fa-solid fa-book"></i></div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h3 class="card-title">{{ work.title }}</h3>
+                        <p class="card-author">{{ work.author.username }}</p>
+                        {% if work.genre %}
+                            <span class="card-genre">{{ work.genre.name }}</span>
+                        {% endif %}
+                        {% if work.is_premium %}
+                            <span class="card-badge premium">Premium</span>
+                        {% endif %}
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div style="padding:80px 20px;text-align:center;color:var(--text-muted);">
+            <i class="fa-solid fa-magnifying-glass" style="font-size:56px;opacity:0.3;display:block;margin-bottom:16px;"></i>
+            <h3 style="font-family:var(--font-asaemon);font-size:20px;color:var(--text);margin-bottom:8px;">
+                {% trans "Aucun résultat" %}
+            </h3>
+            <p>{% trans "Essayez avec d'autres mots-clés ou changez de genre." %}</p>
+        </div>
+    {% endif %}
+
+    <!-- Pagination -->
+    {% if is_paginated %}
+        <div style="display:flex;justify-content:center;gap:8px;margin-top:40px;">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.genre %}&genre={{ request.GET.genre }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                   class="btn btn-outline">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+            {% endif %}
+            <span class="btn btn-ghost">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if request.GET.genre %}&genre={{ request.GET.genre }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                   class="btn btn-outline">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+
+<style>
+.genre-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all var(--transition);
+}
+.genre-chip:hover {
+    background: var(--primary-soft);
+    color: var(--primary-dark);
+    border-color: var(--primary-light);
+}
+.genre-chip.active {
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    color: white;
+    border-color: transparent;
+}
+</style>
+{% endblock %}
+

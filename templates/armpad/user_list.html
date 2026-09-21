@@ -1,0 +1,68 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{{ title }} - Armpad{% endblock %}
+
+{% block content %}
+<div style="max-width:720px;margin:0 auto;padding:20px;">
+    <h1 class="section-title" style="margin-bottom:16px;">{{ title }}</h1>
+
+    <div style="display:flex;gap:8px;margin-bottom:20px;">
+        <a href="{% url 'users:followers_list' profile_user.username %}"
+           class="btn {% if active_tab == 'followers' %}btn-primary{% else %}btn-ghost{% endif %}">
+            <i class="fa-solid fa-users"></i> {% trans "Abonnés" %}
+        </a>
+        <a href="{% url 'users:following_list' profile_user.username %}"
+           class="btn {% if active_tab == 'following' %}btn-primary{% else %}btn-ghost{% endif %}">
+            <i class="fa-solid fa-user-plus"></i> {% trans "Abonnements" %}
+        </a>
+    </div>
+
+    <div class="card" style="padding:0;overflow:hidden;">
+        {% for item in users_data %}
+            <div style="display:flex;gap:12px;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);">
+                <a href="{% url 'web:profile' item.user.username %}" style="display:flex;gap:12px;align-items:center;flex:1;min-width:0;text-decoration:none;">
+                    {% if item.user.avatar and item.user.avatar.name %}
+                        <img src="{{ item.user.avatar.url }}" alt="" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+                    {% else %}
+                        <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--primary-light),var(--primary));color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex-shrink:0;">
+                            {{ item.user.username|first|upper }}
+                        </div>
+                    {% endif %}
+                    <div style="min-width:0;flex:1;">
+                        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                            <strong style="color:var(--text);font-size:15px;">{{ item.user.username }}</strong>
+                            {% if item.is_friend %}
+                                <span class="friend-badge"><i class="fa-solid fa-user-group"></i> {% trans "Amis" %}</span>
+                            {% endif %}
+                        </div>
+                        <small class="text-muted" style="display:block;font-size:12px;margin-top:2px;">
+                            {{ item.user.followers_count }} {% trans "abonné(s)" %}
+                            {% if item.is_follower and not item.is_following %}
+                                · <span style="color:var(--primary);">{% trans "Vous suit" %}</span>
+                            {% endif %}
+                        </small>
+                    </div>
+                </a>
+                <button class="btn {% if item.is_following %}btn-outline{% else %}btn-primary{% endif %} follow-list-btn"
+                        data-url="{% url 'users:toggle_follow' item.user.username %}"
+                        style="flex-shrink:0;padding:6px 12px;font-size:13px;">
+                    {% if item.is_following %}
+                        <i class="fa-solid fa-check"></i> {% trans "Abonné" %}
+                    {% elif item.is_follower %}
+                        <i class="fa-solid fa-rotate-left"></i> {% trans "Suivre en retour" %}
+                    {% else %}
+                        <i class="fa-solid fa-plus"></i> {% trans "Suivre" %}
+                    {% endif %}
+                </button>
+            </div>
+        {% empty %}
+            <div style="padding:60px 20px;text-align:center;color:var(--text-muted);">
+                <i class="fa-solid fa-user-group" style="font-size:48px;display:block;margin-bottom:16px;opacity:0.4;"></i>
+                <p>{% trans "Aucun utilisateur." %}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

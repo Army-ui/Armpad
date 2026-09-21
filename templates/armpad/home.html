@@ -1,0 +1,91 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Accueil" %} - Armpad{% endblock %}
+
+{% block content %}
+
+<section class="hero-carousel" id="hero-carousel">
+    {% for work in trending_works %}
+        <a href="{% url 'web:work_detail' work.pk %}" class="carousel-slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}">
+            {% if work.cover and work.cover.name %}
+                <img src="{{ work.cover.url }}" alt="{{ work.title }}" class="carousel-bg">
+            {% else %}
+                <div class="carousel-bg" style="background:linear-gradient(135deg,var(--primary-soft),var(--accent2));"></div>
+            {% endif %}
+            <div class="carousel-overlay"></div>
+            <div class="carousel-content">
+                <h2 class="carousel-title">{{ work.title }}</h2>
+                <p class="carousel-summary">{{ work.summary|truncatewords:25 }}</p>
+                <span class="carousel-cta">{% trans "Lire maintenant" %} →</span>
+            </div>
+        </a>
+    {% endfor %}
+    <div class="carousel-dots" id="carousel-dots">
+        {% for work in trending_works %}
+            <button class="carousel-dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}"></button>
+        {% endfor %}
+    </div>
+</section>
+
+<div style="text-align:center;padding:32px 20px 0;">
+    <h1 class="hero-title" style="font-size:clamp(28px,5vw,42px);">{% trans "Bienvenue sur" %} <span>Armpad</span></h1>
+    <p class="hero-subtitle" style="margin-top:12px;">{% trans "Lisez, écrivez et partagez vos histoires avec une communauté passionnée." %}</p>
+</div>
+
+{% if not user.is_premium %}
+<div class="premium-banner">
+    <span><span class="premium-icon"><i class="fa-solid fa-crown"></i></span> <strong>{% trans "Passez Premium" %}</strong> {% trans "pour un accès illimité !" %}</span>
+    <a href="{% url 'web:premium' %}" class="btn">{% trans "Découvrir" %}</a>
+</div>
+{% endif %}
+
+<section>
+    <div class="section-header">
+        <h2 class="section-title">{% trans "Récemment publiés" %}</h2>
+        <a href="{% url 'web:catalogue' %}" class="section-link">{% trans "Voir tout" %} →</a>
+    </div>
+    <div class="works-grid">
+        {% for work in recent_works %}
+            <a href="{% url 'web:work_detail' work.pk %}" class="card">
+                {% if work.cover and work.cover.name %}
+                    <img src="{{ work.cover.url }}" alt="{{ work.title }}" class="card-cover">
+                {% else %}
+                    <div class="card-cover-placeholder"><i class="fa-solid fa-book"></i></div>
+                {% endif %}
+                <div class="card-body">
+                    <h3 class="card-title">{{ work.title }}</h3>
+                    <p class="card-author">{{ work.author.username }}</p>
+                </div>
+            </a>
+        {% empty %}
+            <p class="text-muted" style="grid-column:1/-1;padding:20px;text-align:center;">{% trans "Aucune œuvre pour le moment." %}</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section>
+    <div class="section-header">
+        <h2 class="section-title">{% trans "Tendances" %}</h2>
+        <a href="{% url 'web:catalogue' %}" class="section-link">{% trans "Voir tout" %} →</a>
+    </div>
+    <div class="works-grid">
+        {% for work in trending_works %}
+            <a href="{% url 'web:work_detail' work.pk %}" class="card">
+                {% if work.cover and work.cover.name %}
+                    <img src="{{ work.cover.url }}" alt="{{ work.title }}" class="card-cover">
+                {% else %}
+                    <div class="card-cover-placeholder"><i class="fa-solid fa-fire"></i></div>
+                {% endif %}
+                <div class="card-body">
+                    <h3 class="card-title">{{ work.title }}</h3>
+                    <p class="card-author">{{ work.author.username }}</p>
+                </div>
+            </a>
+        {% empty %}
+            <p class="text-muted" style="grid-column:1/-1;padding:20px;text-align:center;">{% trans "Aucune tendance." %}</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+

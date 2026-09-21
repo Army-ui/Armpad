@@ -1,0 +1,49 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Messagerie" %} - Armpad{% endblock %}
+
+{% block content %}
+<div style="max-width:720px;margin:0 auto;padding:20px;">
+    <h1 class="section-title" style="margin-bottom:20px;">
+        <i class="fa-solid fa-comments"></i> {% trans "Messagerie" %}
+    </h1>
+
+    {% if conversations %}
+        <div class="card" style="padding:0;overflow:hidden;">
+            {% for conv in conversations %}
+                <a href="{% url 'web:chat_conversation' conv.user.username %}" style="display:flex;gap:14px;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);text-decoration:none;position:relative;">
+                    {% if conv.user.avatar and conv.user.avatar.name %}
+                        <img src="{{ conv.user.avatar.url }}" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+                    {% else %}
+                        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--primary-light),var(--primary));color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;flex-shrink:0;">{{ conv.user.username|first|upper }}</div>
+                    {% endif %}
+                    <div style="flex:1;min-width:0;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+                            <strong style="color:var(--text);font-size:15px;">{{ conv.user.username }}</strong>
+                            {% if conv.last_message %}<small class="text-muted" style="font-size:11px;flex-shrink:0;">{{ conv.last_message.created_at|date:"d/m H:i" }}</small>{% endif %}
+                        </div>
+                        {% if conv.last_message %}
+                            <p style="font-size:13px;color:var(--text-muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                                {% if conv.last_message.sender == user %}<i class="fa-solid fa-check"></i> {% endif %}{{ conv.last_message.content }}
+                            </p>
+                        {% else %}
+                            <p style="font-size:13px;color:var(--text-muted);font-style:italic;">{% trans "Aucun message" %}</p>
+                        {% endif %}
+                    </div>
+                    {% if conv.unread_count > 0 %}
+                        <span style="background:var(--primary);color:white;font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px;flex-shrink:0;min-width:22px;text-align:center;">{{ conv.unread_count }}</span>
+                    {% endif %}
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="card" style="padding:60px 20px;text-align:center;">
+            <i class="fa-solid fa-comments" style="font-size:56px;color:var(--primary);opacity:0.4;display:block;margin-bottom:16px;"></i>
+            <p class="text-muted">{% trans "Aucune conversation pour le moment." %}</p>
+            <p class="text-muted" style="font-size:13px;margin-top:8px;">{% trans "Suivez quelqu'un qui vous suit en retour pour discuter." %}</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+

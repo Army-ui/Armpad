@@ -1,0 +1,15 @@
+{% extends 'armpad/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Conditions d'utilisation" %} - Armpad{% endblock %}
+
+{% block content %}
+<div style="max-width:720px;margin:40px auto;padding:0 20px;">
+    <h1 class="section-title" style="margin-bottom:20px;">
+        <i class="fa-solid fa-file-contract"></i> {% trans "Conditions d'utilisation" %}
+    </h1>
+    <div class="card" style="padding:24px;line-height:1.8;color:var(--text-secondary);">
+        <p>{% trans "En utilisant Armpad, vous acceptez les présentes conditions. [À compléter]" %}</p>
+    </div>
+</div>
+{% endblock %}
+

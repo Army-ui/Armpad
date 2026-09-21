@@ -1,0 +1,30 @@
+{% extends 'armpad/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}Premium - Armpad{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1 class="hero-title"><span>Armpad Premium</span></h1>
+    <p class="hero-subtitle">{% trans "Débloquez toutes les fonctionnalités et soutenez la création." %}</p>
+</section>
+
+<div style="max-width:1000px;margin:0 auto;padding:40px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
+    {% for plan in plans %}
+        <div class="card" style="padding:28px;text-align:center;">
+            <h2 class="section-title">{{ plan.name }}</h2>
+            <p style="font-size:32px;font-weight:700;color:var(--primary);margin:16px 0;">
+                {{ plan.price }} €
+                <span style="font-size:14px;color:var(--text-muted);">/ {{ plan.duration_days }} {% trans "jours" %}</span>
+            </p>
+            <p class="text-muted" style="margin-bottom:20px;">{{ plan.description }}</p>
+            <a href="#" class="btn btn-primary" style="width:100%;justify-content:center;">
+                <i class="fa-solid fa-crown"></i> {% trans "Choisir" %}
+            </a>
+        </div>
+    {% empty %}
+        <p class="text-muted" style="grid-column:1/-1;text-align:center;">{% trans "Aucun plan disponible." %}</p>
+    {% endfor %}
+</div>
+{% endblock %}
+

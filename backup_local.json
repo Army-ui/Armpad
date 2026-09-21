@@ -1,0 +1,2104 @@
+[
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 4,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 4,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 4,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 4,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 5,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 5,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 5,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 5,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add Utilisateur",
+    "content_type": 6,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change Utilisateur",
+    "content_type": 6,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete Utilisateur",
+    "content_type": 6,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view Utilisateur",
+    "content_type": 6,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add Message",
+    "content_type": 7,
+    "codename": "add_message"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change Message",
+    "content_type": 7,
+    "codename": "change_message"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete Message",
+    "content_type": 7,
+    "codename": "delete_message"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view Message",
+    "content_type": 7,
+    "codename": "view_message"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add Notification",
+    "content_type": 8,
+    "codename": "add_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change Notification",
+    "content_type": 8,
+    "codename": "change_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete Notification",
+    "content_type": 8,
+    "codename": "delete_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view Notification",
+    "content_type": 8,
+    "codename": "view_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add Abonnement",
+    "content_type": 9,
+    "codename": "add_follow"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change Abonnement",
+    "content_type": 9,
+    "codename": "change_follow"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete Abonnement",
+    "content_type": 9,
+    "codename": "delete_follow"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view Abonnement",
+    "content_type": 9,
+    "codename": "view_follow"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add Chapitre",
+    "content_type": 10,
+    "codename": "add_chapter"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change Chapitre",
+    "content_type": 10,
+    "codename": "change_chapter"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete Chapitre",
+    "content_type": 10,
+    "codename": "delete_chapter"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view Chapitre",
+    "content_type": 10,
+    "codename": "view_chapter"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add Genre",
+    "content_type": 11,
+    "codename": "add_genre"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change Genre",
+    "content_type": 11,
+    "codename": "change_genre"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete Genre",
+    "content_type": 11,
+    "codename": "delete_genre"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view Genre",
+    "content_type": 11,
+    "codename": "view_genre"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add Image de chapitre",
+    "content_type": 12,
+    "codename": "add_chapterimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change Image de chapitre",
+    "content_type": 12,
+    "codename": "change_chapterimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete Image de chapitre",
+    "content_type": 12,
+    "codename": "delete_chapterimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view Image de chapitre",
+    "content_type": 12,
+    "codename": "view_chapterimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add Commentaire",
+    "content_type": 13,
+    "codename": "add_comment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change Commentaire",
+    "content_type": 13,
+    "codename": "change_comment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete Commentaire",
+    "content_type": 13,
+    "codename": "delete_comment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view Commentaire",
+    "content_type": 13,
+    "codename": "view_comment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add Œuvre",
+    "content_type": 14,
+    "codename": "add_work"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change Œuvre",
+    "content_type": 14,
+    "codename": "change_work"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete Œuvre",
+    "content_type": 14,
+    "codename": "delete_work"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view Œuvre",
+    "content_type": 14,
+    "codename": "view_work"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add Like",
+    "content_type": 15,
+    "codename": "add_like"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change Like",
+    "content_type": 15,
+    "codename": "change_like"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete Like",
+    "content_type": 15,
+    "codename": "delete_like"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view Like",
+    "content_type": 15,
+    "codename": "view_like"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 61,
+  "fields": {
+    "name": "Can add Vue d'œuvre",
+    "content_type": 16,
+    "codename": "add_workview"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 62,
+  "fields": {
+    "name": "Can change Vue d'œuvre",
+    "content_type": 16,
+    "codename": "change_workview"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 63,
+  "fields": {
+    "name": "Can delete Vue d'œuvre",
+    "content_type": 16,
+    "codename": "delete_workview"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 64,
+  "fields": {
+    "name": "Can view Vue d'œuvre",
+    "content_type": 16,
+    "codename": "view_workview"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 65,
+  "fields": {
+    "name": "Can add Progression de lecture",
+    "content_type": 17,
+    "codename": "add_readingprogress"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 66,
+  "fields": {
+    "name": "Can change Progression de lecture",
+    "content_type": 17,
+    "codename": "change_readingprogress"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 67,
+  "fields": {
+    "name": "Can delete Progression de lecture",
+    "content_type": 17,
+    "codename": "delete_readingprogress"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 68,
+  "fields": {
+    "name": "Can view Progression de lecture",
+    "content_type": 17,
+    "codename": "view_readingprogress"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 69,
+  "fields": {
+    "name": "Can add Bibliothèque",
+    "content_type": 18,
+    "codename": "add_library"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 70,
+  "fields": {
+    "name": "Can change Bibliothèque",
+    "content_type": 18,
+    "codename": "change_library"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 71,
+  "fields": {
+    "name": "Can delete Bibliothèque",
+    "content_type": 18,
+    "codename": "delete_library"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 72,
+  "fields": {
+    "name": "Can view Bibliothèque",
+    "content_type": 18,
+    "codename": "view_library"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 73,
+  "fields": {
+    "name": "Can add plan",
+    "content_type": 19,
+    "codename": "add_plan"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 74,
+  "fields": {
+    "name": "Can change plan",
+    "content_type": 19,
+    "codename": "change_plan"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 75,
+  "fields": {
+    "name": "Can delete plan",
+    "content_type": 19,
+    "codename": "delete_plan"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 76,
+  "fields": {
+    "name": "Can view plan",
+    "content_type": 19,
+    "codename": "view_plan"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 77,
+  "fields": {
+    "name": "Can add abonnement",
+    "content_type": 20,
+    "codename": "add_subscription"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 78,
+  "fields": {
+    "name": "Can change abonnement",
+    "content_type": 20,
+    "codename": "change_subscription"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 79,
+  "fields": {
+    "name": "Can delete abonnement",
+    "content_type": 20,
+    "codename": "delete_subscription"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 80,
+  "fields": {
+    "name": "Can view abonnement",
+    "content_type": 20,
+    "codename": "view_subscription"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 81,
+  "fields": {
+    "name": "Can add payment",
+    "content_type": 21,
+    "codename": "add_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 82,
+  "fields": {
+    "name": "Can change payment",
+    "content_type": 21,
+    "codename": "change_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 83,
+  "fields": {
+    "name": "Can delete payment",
+    "content_type": 21,
+    "codename": "delete_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 84,
+  "fields": {
+    "name": "Can view payment",
+    "content_type": 21,
+    "codename": "view_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 85,
+  "fields": {
+    "name": "Can add Réaction",
+    "content_type": 22,
+    "codename": "add_messagereaction"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 86,
+  "fields": {
+    "name": "Can change Réaction",
+    "content_type": 22,
+    "codename": "change_messagereaction"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 87,
+  "fields": {
+    "name": "Can delete Réaction",
+    "content_type": 22,
+    "codename": "delete_messagereaction"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 88,
+  "fields": {
+    "name": "Can view Réaction",
+    "content_type": 22,
+    "codename": "view_messagereaction"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "users",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "users",
+    "model": "message"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "users",
+    "model": "notification"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "users",
+    "model": "follow"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "works",
+    "model": "chapter"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "works",
+    "model": "genre"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "works",
+    "model": "chapterimage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "works",
+    "model": "comment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "works",
+    "model": "work"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "works",
+    "model": "like"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 16,
+  "fields": {
+    "app_label": "works",
+    "model": "workview"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 17,
+  "fields": {
+    "app_label": "works",
+    "model": "readingprogress"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 18,
+  "fields": {
+    "app_label": "works",
+    "model": "library"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 19,
+  "fields": {
+    "app_label": "subscriptions",
+    "model": "plan"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 20,
+  "fields": {
+    "app_label": "subscriptions",
+    "model": "subscription"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 21,
+  "fields": {
+    "app_label": "subscriptions",
+    "model": "payment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 22,
+  "fields": {
+    "app_label": "users",
+    "model": "messagereaction"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "9x468valc2r26j53selfgjskjcvlq0iv",
+  "fields": {
+    "session_data": ".eJxVizkKwzAQAP-ydTC6D5eBvEOsdrXI5CiiuAr5uzG4cMqZYb5QcP30so72LgvDDAYuZ1eR7u21hx3HdPCYbk9cHtej_i0dR4cZvFZRggo2EWeXTfDKmqxJC-fG2VWMOjaUFMUlCqyEmyYbVLK-Gkfw2wBwHTI4:1x5R1G:rCUQ-KPQpUOXeonsliIEqUVrRq3RnNC-qlzPhLG618w",
+    "expire_date": "2026-10-12T16:56:02.796Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "nszswhwc9atlh0ferv3zkblfy4ss64ma",
+  "fields": {
+    "session_data": ".eJxVizkKwzAQAP-ydTC6D5eBvEOsdrXI5CiiuAr5uzG4cMqZYb5QcP30so72LgvDDAYuZ1eR7u21hx3HdPCYbk9cHtej_i0dR4cZvFZRggo2EWeXTfDKmqxJC-fG2VWMOjaUFMUlCqyEmyYbVLK-Gkfw2wBwHTI4:1x6Y2E:TyxnPgcGPNcuj_BtDMf-5TUwys2DWi165PuE8EL3-gY",
+    "expire_date": "2026-10-15T18:37:38.242Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "vjrwrns7fwiulauzz0p88lh8owagu3t2",
+  "fields": {
+    "session_data": ".eJxVizkKAkEQAP_SsSxza28o-I6hj2lm8QgcNxL_LgsbaFhV1Bsqra9e19GedVGYIcHh1zHJtT22sOGYdh7T5U7L7bzXv6XT6DCDBXLoA3I5mZWoIk5zU5-ZTaJvx4LigiTyyDFHRXbSjFVSyISa4fMFrlEzoA:1x6T3v:kgKqejNsd-GT247uwJsN5QGgHYXf0Hzl-b_PSEkHINM",
+    "expire_date": "2026-10-15T13:19:03.369Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "yaxtc7vaurwewzpm7nutno6wi2i8isdk",
+  "fields": {
+    "session_data": "e30:1x52Ca:b-SdSakjVHxxxIRBehq_xXJ2M7x2_RmENLyIhPns7GE",
+    "expire_date": "2026-10-11T14:26:04.068Z"
+  }
+},
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$MPbZHuId4WRLaYM8Uiz5ZT$+vRxrQ9VxUcXk6E1K5K43Wjvsw54d6xoxgACQm/h6qQ=",
+    "last_login": "2026-09-14T15:55:38.010Z",
+    "is_superuser": true,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-09-11T12:42:51.965Z",
+    "username": "Army",
+    "avatar": "avatars/KomikoAI_3.png",
+    "bio": "Future Ingénieure informatique✨",
+    "email": "armyvanga@gmail.com",
+    "email_verified": true,
+    "email_verification_token": null,
+    "email_verification_sent_at": "2026-09-15T12:59:56.452Z",
+    "preferred_language": "fr",
+    "theme": "dark",
+    "followers_count": 1,
+    "following_count": 1,
+    "created_at": "2026-09-11T12:42:59.465Z",
+    "updated_at": "2026-09-11T13:10:42.786Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$m5dC3ZOUAFLYPDJpoHNAwl$dLoRXgxtBR3XuhpqMA4hg8RD1zE+l4n5PDlSDVhzL3Q=",
+    "last_login": "2026-09-14T14:12:26.248Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-11T14:25:51.241Z",
+    "username": "E.Otakul👄✨",
+    "avatar": "avatars/kei_karuizawa.jpg",
+    "bio": "I'm the Engineer Otaku Girl❤️‍🔥✨",
+    "email": "armyvanga205@gmail.com",
+    "email_verified": true,
+    "email_verification_token": null,
+    "email_verification_sent_at": "2026-09-15T12:59:52.709Z",
+    "preferred_language": "fr",
+    "theme": "dark",
+    "followers_count": 1,
+    "following_count": 1,
+    "created_at": "2026-09-11T14:26:04.033Z",
+    "updated_at": "2026-09-11T14:48:20.877Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$EPFtomaaWN2NZt0dpnscWX$HkFlWD41EoooiM/XQd8WMQmJQUVkBvuTwhh/LTXxMU8=",
+    "last_login": "2026-09-14T14:07:15.936Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-14T14:07:04.917Z",
+    "username": "Vate🍀",
+    "avatar": "",
+    "bio": "",
+    "email": "beni.ngoma@gmail.com",
+    "email_verified": false,
+    "email_verification_token": "lWp1R-9iZcqGqQBvDSAwliJUdGgvbrC0jBWKJiUhxOMqMSJWjwEqxvkNzBrcEWTq",
+    "email_verification_sent_at": "2026-09-15T12:59:36.232Z",
+    "preferred_language": "fr",
+    "theme": "dark",
+    "followers_count": 0,
+    "following_count": 0,
+    "created_at": "2026-09-14T14:07:15.767Z",
+    "updated_at": "2026-09-14T14:07:15.767Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$G4ek414awT1DLimgHjMdh6$DTGqBjLhvpS7EKFSHUAPa5XWSQ6VkiHVNg2jI9/VpcE=",
+    "last_login": "2026-09-15T13:19:02.269Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-14T23:00:24.168Z",
+    "username": "Exaucé✨",
+    "avatar": "",
+    "bio": "",
+    "email": "exauce.vanga@2029.ucac-icam.com",
+    "email_verified": false,
+    "email_verification_token": "ormELWSoaxqDuWLPEvHWrGk0g8v5OL5Vt2TAzClP-P5BSyl6zH671J60GKj3_rBu",
+    "email_verification_sent_at": "2026-09-15T12:59:59.738Z",
+    "preferred_language": "fr",
+    "theme": "light",
+    "followers_count": 0,
+    "following_count": 0,
+    "created_at": "2026-09-14T23:00:33.753Z",
+    "updated_at": "2026-09-14T23:00:33.753Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$ALYQWC2lYHlOhWCQiCtSmf$oG86xLpCKvRs3aXHsGt4UmwMI/5cfUYrlxGrP/uxPWk=",
+    "last_login": "2026-09-14T23:06:25.968Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-14T23:06:19.106Z",
+    "username": "Lea",
+    "avatar": "",
+    "bio": "",
+    "email": "lea@gmail.com",
+    "email_verified": false,
+    "email_verification_token": "F5DpVJAtyxSoUAwupgUv4Hw-1NfgahnVFIN7-vG1OSdKPLwVbYDXpnwTUBlRBE9H",
+    "email_verification_sent_at": "2026-09-15T13:00:03.295Z",
+    "preferred_language": "fr",
+    "theme": "light",
+    "followers_count": 0,
+    "following_count": 0,
+    "created_at": "2026-09-14T23:06:25.865Z",
+    "updated_at": "2026-09-14T23:06:25.865Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.follow",
+  "pk": 1,
+  "fields": {
+    "follower": 2,
+    "followed": 1,
+    "created_at": "2026-09-12T10:28:59.409Z"
+  }
+},
+{
+  "model": "users.follow",
+  "pk": 2,
+  "fields": {
+    "follower": 1,
+    "followed": 2,
+    "created_at": "2026-09-12T12:29:41.167Z"
+  }
+},
+{
+  "model": "users.message",
+  "pk": 1,
+  "fields": {
+    "sender": 1,
+    "receiver": 2,
+    "content": "Hello🙃",
+    "is_read": true,
+    "created_at": "2026-09-12T12:30:42.649Z"
+  }
+},
+{
+  "model": "users.message",
+  "pk": 2,
+  "fields": {
+    "sender": 1,
+    "receiver": 2,
+    "content": "Hello🙃",
+    "is_read": true,
+    "created_at": "2026-09-12T12:30:42.898Z"
+  }
+},
+{
+  "model": "users.message",
+  "pk": 3,
+  "fields": {
+    "sender": 2,
+    "receiver": 1,
+    "content": "hi",
+    "is_read": true,
+    "created_at": "2026-09-12T12:32:54.920Z"
+  }
+},
+{
+  "model": "users.message",
+  "pk": 4,
+  "fields": {
+    "sender": 2,
+    "receiver": 1,
+    "content": "hi",
+    "is_read": true,
+    "created_at": "2026-09-12T12:32:55.387Z"
+  }
+},
+{
+  "model": "users.message",
+  "pk": 5,
+  "fields": {
+    "sender": 2,
+    "receiver": 1,
+    "content": "hi",
+    "is_read": true,
+    "created_at": "2026-09-12T12:32:55.468Z"
+  }
+},
+{
+  "model": "users.message",
+  "pk": 6,
+  "fields": {
+    "sender": 2,
+    "receiver": 1,
+    "content": "hi",
+    "is_read": true,
+    "created_at": "2026-09-12T12:32:55.637Z"
+  }
+},
+{
+  "model": "users.message",
+  "pk": 7,
+  "fields": {
+    "sender": 2,
+    "receiver": 1,
+    "content": "hi",
+    "is_read": true,
+    "created_at": "2026-09-12T13:19:08.061Z"
+  }
+},
+{
+  "model": "users.message",
+  "pk": 8,
+  "fields": {
+    "sender": 2,
+    "receiver": 1,
+    "content": "hi",
+    "is_read": true,
+    "created_at": "2026-09-12T13:19:08.525Z"
+  }
+},
+{
+  "model": "users.message",
+  "pk": 9,
+  "fields": {
+    "sender": 2,
+    "receiver": 1,
+    "content": "fall in love",
+    "is_read": true,
+    "created_at": "2026-09-14T14:13:36.376Z"
+  }
+},
+{
+  "model": "users.messagereaction",
+  "pk": 1,
+  "fields": {
+    "message": 6,
+    "user": 1,
+    "emoji": "❤️",
+    "created_at": "2026-09-12T15:26:42.737Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "sender": 2,
+    "type": "like",
+    "message": "E.Otakul👄✨ a aimé votre œuvre « Astro Jam🏀 »",
+    "link": "/oeuvre/82307401-c7ee-4b7e-9c12-92fc98b72571/",
+    "is_read": true,
+    "created_at": "2026-09-11T14:42:35.074Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "sender": 1,
+    "type": "like",
+    "message": "Army a aimé votre œuvre « Derrière le voile🎭 »",
+    "link": "/oeuvre/84f582b7-5fd1-4d91-864f-126381021216/",
+    "is_read": true,
+    "created_at": "2026-09-12T10:23:21.865Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 3,
+  "fields": {
+    "user": 2,
+    "sender": 1,
+    "type": "like",
+    "message": "Army a aimé votre œuvre « Derrière le voile🎭 »",
+    "link": "/oeuvre/84f582b7-5fd1-4d91-864f-126381021216/",
+    "is_read": true,
+    "created_at": "2026-09-12T10:23:21.884Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 4,
+  "fields": {
+    "user": 2,
+    "sender": 1,
+    "type": "like",
+    "message": "Army a aimé votre chapitre « Prologue. »",
+    "link": "/oeuvre/84f582b7-5fd1-4d91-864f-126381021216/chapitre/1/",
+    "is_read": true,
+    "created_at": "2026-09-12T10:23:54.291Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 5,
+  "fields": {
+    "user": 2,
+    "sender": 1,
+    "type": "like",
+    "message": "Army a aimé votre chapitre « Prologue. »",
+    "link": "/oeuvre/84f582b7-5fd1-4d91-864f-126381021216/chapitre/1/",
+    "is_read": true,
+    "created_at": "2026-09-12T10:23:54.314Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 6,
+  "fields": {
+    "user": 1,
+    "sender": 2,
+    "type": "follow",
+    "message": "E.Otakul👄✨ s'est abonné à votre profil",
+    "link": "/profil/E.Otakul👄✨/",
+    "is_read": true,
+    "created_at": "2026-09-12T10:28:59.488Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 7,
+  "fields": {
+    "user": 1,
+    "sender": 2,
+    "type": "follow",
+    "message": "E.Otakul👄✨ s'est abonné à votre profil",
+    "link": "/profil/E.Otakul👄✨/",
+    "is_read": true,
+    "created_at": "2026-09-12T10:28:59.500Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 8,
+  "fields": {
+    "user": 1,
+    "sender": 2,
+    "type": "like",
+    "message": "E.Otakul👄✨ a aimé votre chapitre « Premier jour d'école »",
+    "link": "/oeuvre/82307401-c7ee-4b7e-9c12-92fc98b72571/chapitre/1/",
+    "is_read": true,
+    "created_at": "2026-09-12T10:30:38.831Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 9,
+  "fields": {
+    "user": 1,
+    "sender": 2,
+    "type": "like",
+    "message": "E.Otakul👄✨ a aimé votre chapitre « Premier jour d'école »",
+    "link": "/oeuvre/82307401-c7ee-4b7e-9c12-92fc98b72571/chapitre/1/",
+    "is_read": true,
+    "created_at": "2026-09-12T10:30:38.855Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 10,
+  "fields": {
+    "user": 1,
+    "sender": 2,
+    "type": "comment",
+    "message": "E.Otakul👄✨ a commenté votre œuvre « Astro Jam🏀 »",
+    "link": "/oeuvre/82307401-c7ee-4b7e-9c12-92fc98b72571/",
+    "is_read": true,
+    "created_at": "2026-09-12T10:31:39.037Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 11,
+  "fields": {
+    "user": 2,
+    "sender": 1,
+    "type": "like",
+    "message": "Army a aimé votre œuvre « Slocup💀 »",
+    "link": "/oeuvre/2a063390-3a6f-4b70-87d3-8285ee7dec04/",
+    "is_read": true,
+    "created_at": "2026-09-12T12:29:10.403Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 12,
+  "fields": {
+    "user": 2,
+    "sender": 1,
+    "type": "follow",
+    "message": "Army s'est abonné à votre profil",
+    "link": "/profil/Army/",
+    "is_read": true,
+    "created_at": "2026-09-12T12:29:41.175Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 13,
+  "fields": {
+    "user": 2,
+    "sender": 1,
+    "type": "message",
+    "message": "Army vous a envoyé un message",
+    "link": "/chat/Army/",
+    "is_read": true,
+    "created_at": "2026-09-12T12:30:42.664Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 14,
+  "fields": {
+    "user": 2,
+    "sender": 1,
+    "type": "message",
+    "message": "Army vous a envoyé un message",
+    "link": "/chat/Army/",
+    "is_read": true,
+    "created_at": "2026-09-12T12:30:42.930Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 15,
+  "fields": {
+    "user": 1,
+    "sender": 2,
+    "type": "message",
+    "message": "E.Otakul👄✨ vous a envoyé un message",
+    "link": "/chat/E.Otakul👄✨/",
+    "is_read": true,
+    "created_at": "2026-09-12T12:32:54.930Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 16,
+  "fields": {
+    "user": 1,
+    "sender": 2,
+    "type": "message",
+    "message": "E.Otakul👄✨ vous a envoyé un message",
+    "link": "/chat/E.Otakul👄✨/",
+    "is_read": true,
+    "created_at": "2026-09-12T12:32:55.394Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 17,
+  "fields": {
+    "user": 1,
+    "sender": 2,
+    "type": "message",
+    "message": "E.Otakul👄✨ vous a envoyé un message",
+    "link": "/chat/E.Otakul👄✨/",
+    "is_read": true,
+    "created_at": "2026-09-12T12:32:55.481Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 18,
+  "fields": {
+    "user": 1,
+    "sender": 2,
+    "type": "message",
+    "message": "E.Otakul👄✨ vous a envoyé un message",
+    "link": "/chat/E.Otakul👄✨/",
+    "is_read": true,
+    "created_at": "2026-09-12T12:32:55.642Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 19,
+  "fields": {
+    "user": 1,
+    "sender": 2,
+    "type": "message",
+    "message": "E.Otakul👄✨ vous a envoyé un message",
+    "link": "/chat/E.Otakul👄✨/",
+    "is_read": true,
+    "created_at": "2026-09-12T13:19:08.254Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 20,
+  "fields": {
+    "user": 1,
+    "sender": 2,
+    "type": "message",
+    "message": "E.Otakul👄✨ vous a envoyé un message",
+    "link": "/chat/E.Otakul👄✨/",
+    "is_read": true,
+    "created_at": "2026-09-12T13:19:08.618Z"
+  }
+},
+{
+  "model": "users.notification",
+  "pk": 21,
+  "fields": {
+    "user": 1,
+    "sender": 2,
+    "type": "message",
+    "message": "E.Otakul👄✨ vous a envoyé un message",
+    "link": "/chat/E.Otakul👄✨/",
+    "is_read": true,
+    "created_at": "2026-09-14T14:13:36.447Z"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 1,
+  "fields": {
+    "name_en": "Romance",
+    "name_fr": "Romance",
+    "slug": "romance"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 2,
+  "fields": {
+    "name_en": "Dark Romance",
+    "name_fr": "Dark Romance",
+    "slug": "dark-romance"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 3,
+  "fields": {
+    "name_en": "Dark",
+    "name_fr": "Dark",
+    "slug": "dark"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 4,
+  "fields": {
+    "name_en": "Fantasy",
+    "name_fr": "Fantasy",
+    "slug": "fantasy"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 5,
+  "fields": {
+    "name_en": "Science Fiction",
+    "name_fr": "Science-Fiction",
+    "slug": "science-fiction"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 6,
+  "fields": {
+    "name_en": "Adventure",
+    "name_fr": "Aventure",
+    "slug": "adventure"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 7,
+  "fields": {
+    "name_en": "Mystery",
+    "name_fr": "Mystère",
+    "slug": "mystery"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 8,
+  "fields": {
+    "name_en": "Horror",
+    "name_fr": "Horreur",
+    "slug": "horror"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 9,
+  "fields": {
+    "name_en": "Comedy",
+    "name_fr": "Comédie",
+    "slug": "comedy"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 10,
+  "fields": {
+    "name_en": "Drama",
+    "name_fr": "Drame",
+    "slug": "drama"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 11,
+  "fields": {
+    "name_en": "Slice of Life",
+    "name_fr": "Tranche de vie",
+    "slug": "slice-of-life"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 12,
+  "fields": {
+    "name_en": "Action",
+    "name_fr": "Action",
+    "slug": "action"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 13,
+  "fields": {
+    "name_en": "Historical",
+    "name_fr": "Historique",
+    "slug": "historical"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 14,
+  "fields": {
+    "name_en": "Isekai",
+    "name_fr": "Isekai",
+    "slug": "isekai"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 15,
+  "fields": {
+    "name_en": "Fantastic",
+    "name_fr": "Fantastique",
+    "slug": "fantastic"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 16,
+  "fields": {
+    "name_en": "Thriller",
+    "name_fr": "Thriller",
+    "slug": "thriller"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 17,
+  "fields": {
+    "name_en": "Detective",
+    "name_fr": "Policier",
+    "slug": "detective"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 18,
+  "fields": {
+    "name_en": "Sports",
+    "name_fr": "Sport",
+    "slug": "sports"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 19,
+  "fields": {
+    "name_en": "Shonen",
+    "name_fr": "Shonen",
+    "slug": "shonen"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 20,
+  "fields": {
+    "name_en": "Shojo",
+    "name_fr": "Shojo",
+    "slug": "shojo"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 21,
+  "fields": {
+    "name_en": "Seinen",
+    "name_fr": "Seinen",
+    "slug": "seinen"
+  }
+},
+{
+  "model": "works.genre",
+  "pk": 22,
+  "fields": {
+    "name_en": "Mecha",
+    "name_fr": "Mecha",
+    "slug": "mecha"
+  }
+},
+{
+  "model": "works.work",
+  "pk": "2a063390-3a6f-4b70-87d3-8285ee7dec04",
+  "fields": {
+    "author": 2,
+    "title": "Slocup💀",
+    "summary": "Au 18 ème siècle , le continent Ouest fut ravagé pas des créatures aussi abominables qu'épouvantes: Les Slocups. \r\nAujourd'hui, ce continent qui fut autres fois le plus prospère de tous est devenu l'antre de ces créatures et nul n'en revient vivant. c'est ainsi, qu'une armée a été mise en place dans le but d'éradiquer ces monstres de la surface terrestre et de récupérer le continent.",
+    "cover": "works/covers/Lurking_Terror__The_Monster_Under_the_Bed.jpg",
+    "genre": 8,
+    "language": "fr",
+    "tags": "épouvante, drame",
+    "status": "ongoing",
+    "is_premium": false,
+    "likes_count": 1,
+    "views_count": 0,
+    "created_at": "2026-09-12T10:41:45.359Z",
+    "updated_at": "2026-09-12T10:46:11.639Z",
+    "last_update_at": "2026-09-12T12:20:18.306Z",
+    "published_at": "2026-09-12T10:41:35.143Z"
+  }
+},
+{
+  "model": "works.work",
+  "pk": "82307401-c7ee-4b7e-9c12-92fc98b72571",
+  "fields": {
+    "author": 1,
+    "title": "Astro Jam🏀",
+    "summary": "Le basket est une activité sportive se basant sur plusieurs : l'agilité, le corps à corps, la transcendance le jeu aérien et la vitesse. Chacun de ces principes se réfère à l'un des cinq éléments: l'eau, la terre, le feu, l'air, et l'éclair. Un joueur spécialisé dans l'un de ces principes possède la faculté d'exploiter l'élément associé à ce principe et a ainsi la possibilité de mieux l'explorer afin d'avoir une maitrise complète de son élément. Ce phénomène s'appelle le jeu astral.",
+    "cover": "works/covers/KomikoAI_21_MMs934d.png",
+    "genre": 18,
+    "language": "fr",
+    "tags": "sport, tranche de vie, drame",
+    "status": "ongoing",
+    "is_premium": false,
+    "likes_count": 2,
+    "views_count": 0,
+    "created_at": "2026-09-11T13:16:40.421Z",
+    "updated_at": "2026-09-11T13:48:25.105Z",
+    "last_update_at": "2026-09-12T12:20:18.306Z",
+    "published_at": "2026-09-11T13:16:40.379Z"
+  }
+},
+{
+  "model": "works.work",
+  "pk": "84f582b7-5fd1-4d91-864f-126381021216",
+  "fields": {
+    "author": 2,
+    "title": "Derrière le voile🎭",
+    "summary": "Après avoir réussi sa vie au Canada, un jeune homme par amour pour sa patrie revient dans son pays natal le Congo dans le but de le faire évolué. Mais rentre mythe, drame, sorcelerie, corruption et trahison ; la tâche ne sera pas aussi simple.",
+    "cover": "works/covers/Voile.jpg",
+    "genre": 10,
+    "language": "fr",
+    "tags": "Drame, Politique",
+    "status": "ongoing",
+    "is_premium": false,
+    "likes_count": 1,
+    "views_count": 0,
+    "created_at": "2026-09-11T14:52:24.129Z",
+    "updated_at": "2026-09-11T14:57:44.922Z",
+    "last_update_at": "2026-09-12T12:20:18.306Z",
+    "published_at": "2026-09-11T14:52:24.100Z"
+  }
+},
+{
+  "model": "works.work",
+  "pk": "cb435485-a141-4120-a07e-6b9cdf38907b",
+  "fields": {
+    "author": 2,
+    "title": "Van X Vlad🧛🏼",
+    "summary": "Au début 16 eme siecle la terre tromblait sous la terreur d'un individu aussi effrayant que malfaisant: Dracula.\r\nAyant à sa solde une armée de vampires et de goules, il faisait régner la crainte et le désespoir durant chaque nuit. Heureusement qu'il fut vaincu par un valeureux combatant vers la fin du 18 eme siècle et emporta avec lui toute son armée dans sa tombe.\r\nAujourd'hui, les vampires ont refait surface et cela ne veux dire qu'une chose: Dracula est revenu à la vie. Ainsi, ils sont en quête de retrouver les précieux roi.",
+    "cover": "works/covers/.jpg",
+    "genre": 4,
+    "language": "fr",
+    "tags": "fantasy, mystère",
+    "status": "ongoing",
+    "is_premium": false,
+    "likes_count": 0,
+    "views_count": 0,
+    "created_at": "2026-09-12T10:58:34.259Z",
+    "updated_at": "2026-09-12T11:01:56.469Z",
+    "last_update_at": "2026-09-12T12:20:18.306Z",
+    "published_at": "2026-09-12T10:58:34.207Z"
+  }
+},
+{
+  "model": "works.chapter",
+  "pk": 1,
+  "fields": {
+    "work": "82307401-c7ee-4b7e-9c12-92fc98b72571",
+    "title": "Premier jour d'école",
+    "content": "PROLOGUE\r\nÀ votre avis, quel est le principe lié à l’existence des éléments ? Leurs propriétés définissent-elles leur corrélation avec le monde ? Et la vie, n’est-elle qu’une conséquence de cette relation ? Cette logique s’explique-t-elle par le fonctionnement de ses divers domaines ? Dès lors, le principe élémentaire est-il une source primordiale ? Si tel est le cas, que pourrait bien être cette relation ? Un souffle invisible parcourt l’univers, reliant chaque fragment de matière, chaque étincelle de lumière, chaque battement de cœur. Mais ce lien, aussi ancien que le temps lui-même, reste voilé aux yeux des hommes. Seuls ceux qui osent questionner l’ordre établi peuvent espérer en entrevoir les contours.                                                                             \r\n\r\n   \t\tCHAPITRE 1\r\n\r\nDans un taxi, j’étais en chemin pour le lycée que je m’apprêtais à intégrer. Tout au long du chemin, je regardais par la vitrine ; admirant le paysage qui s’étendait à l’horizon. Quelques instants plutard, la voiture s’arrêtait.  \r\n-Le chauffeur : c’est bon, nous y sommes.\r\n\r\nJe déscendis du taxi.\r\n \r\n-Moi : Je vous remercie.\r\n\r\n-Le chauffeur : Passez une excellente rentrée.\r\n\r\nIl redémarrait et s’éloignait pendant que je restais debout face à l’entrée.\r\n\r\n-Moi : Quand faut y aller, faut y aller.\r\n\r\nDis-je lors d’un profond soupire. J’entrais ainsi dans l’enceinte de l’établissement.\r\nLa cour était bourrée de stands. Il s’agissait en effet des différents clubs qui profitait de ce premier jour de cour pour recruter de nouveaux membres.\r\n\r\n-inscrivez-vous dans le club de judo, celui dans lequel vous apprenez et maitrisez des techniques de self défense en moins d’un mois !\r\n\r\n-Rejoignez le club de littérature, avec la lecture en s’ennuie jamais !\r\n\r\nIl y avait des bruits de partout et l’ambiance était à son comble. Une multitude d’étudiants emplissait chaque stand. Bien tous sauf un.\r\nJe m’arrêtais devant le stand au bout du chemin et à quelques pas de l’immeuble principale. C’était le stand de basket-ball qui se trouvait sans la moindre personne pour faire de la pub. Faut croire qu’aucun de ses membres n’avait voulu se déranger pour une tache aussi pénible. Je prenais l’une des fiches qui s’y trouvait tout en sentant une présence dans mon dos. Cependant, lorsque je me retournais il n’y avait personne. Pourtant, j’aurais parié avoir vu quelqu’un.\r\nJ’entrais ensuite dans l’immeule.\r\n\r\n\r\n\r\n\r\n1\r\nDans la salle de classe, je remplissais ma fiche pendant le peu de temps qui me restait avant le début des cours.\r\n-T’as vu le mec aux cheuveux noirs là-bas ?\r\n-Oui, il est vraiment trop chou !\r\n-Non, il n’est pas seulement chou. Il est aussi trop craquant !\r\n-Ouais t’as raison ; j’ai tellement hâte de faire connaissance avec lui…\r\nSuis-je vraiment serieux ? non, je ne dirais pas. Depuis le collège, j’ai toujours eu du succès auprès des filles. Mais pour être franc, j’aurais préféré que ce ne soit pas le cas. D’ailleurs, je ne sais même pas pour quoi elles sont comme-ça.\r\n-J’en étais sûre, c’est bien toi Noah !\r\nQuelqu’un frappait fort sur mon bureau. A son ton, je pouvais deviner qu’il s’agissait d’une fille. Le fait qu’elle connaissait mon prénom m’interpellait ; je levais la tête pour voir qui s’était.\r\n-Je n’arrive pas à y croire.\r\nJe ne me souvenais pas très bien d’elle au début, mais cette chevelure rose et ces yeux d’un pourpre profond me mirent sur la voie. \r\n-moi : Miyura, c’est toi ?\r\n-Miyura : Comme cela fait longtemps, notre dernière rencontre remonte il y a 5 ans au primaire.\r\nEn réalité, Miyura était une veille amie d’enfance avec qui j’ai passé toute la maternelle et le primaire.\r\nEt elle a dû déménager à Nagasaki suite à l’affectation de son père.\r\n-Moi : ça fait un bail ouais.\r\nJe me mis aussitôt dans le bain des retrouvailles. Miyura semblait extrêmement heureuse à l’idée de me revoir. Je n’osais pas lui dire que je ne me souvenais plus d’elle il y a pas plus de deux minutes.\r\nElle se mit à observer la salle pendant un court instant.\r\n-Miyura : T’as beaucoup de succès auprès des filles en dirait.\r\nElle remarquait déjà le regard que les autres filles posaient sur moi à peine arrivée. Ce n’était pas très étonnant, depuis notre enfance Miyura avait des capacités analytiques hors pair.\r\n-Moi : ah ça, n’y fais pas trop attention. Ça leur passera dans moins d’une semaine.\r\nTout ce que l’on disait ou pensait de moi m’importait peu.\r\nElle m’observait d’un air suspicieux.\r\n-Miyura : Cela est quand même surprenant.\r\n-Moi : Qu’y a -t-il de surprenant ?\r\n-Miyura : Le fait que tu ais décidé de faire une 2nde C. T’es pas du genre à aimer réfléchir.\r\nElle n’avait pas tout à fait tort. En primaire, je n’ai jamais vraiment aimé étudier ce qui restait toujours le cas aujourd’hui. Etant donné que la série c demandait une certaine volonté d’étudier ; cela était totalement en contradiction avec ma personnalité. Cependant\r\n-Moi : Ouais, t’as raison ; ça me soul de réfléchir, ce n’est pas de mon bore…\r\nJe me frottais la tête en parlant.\r\n-Moi : Seulement, la série C restait la meilleure approche pour moi.\r\n-Miyura : Et pourquoi ?\r\nElle posait cette question toute souriante. Tout cela juste pour m’embêter. Je fis un légé soupire.\r\n-Moi M la série C demande une certaine volonté d’étudier ; c’est vrai. Néanmoins ici tout se résume dans les cours, les formules en particulier. Pas besoin de me creuser les méninges pour comprendre un cours que je devrais ensuite reformuler lors d’un quelquonque examen. C’est hyper crevant.\r\n-Miyura : tu te réfère donc aux matières scientifiques. Ne retenir que les cours pour ainsi les appliquer sans trop réfléchir, ça c’est tout toi.\r\nEn effet mon problème se situait au niveau de la réflexion. Pour moi réfléchir c’était comme être en confrontation avec le diable.  S’était trop chiant. J’en avais mal au crane rien que d’y penser. Or la science est une suite de déductions, rien à avoir avec la littérature.\r\nElle me regardait à présent d’un air admiratif. Ses changements soudains d’expressions ne cessaient pas de m’étonner.\r\n-Miyura : Il n’y a pas à dire, t’as beaucoup changé depuis le temps.\r\nSur ses lèvres se dessinait l’esquisse d’un sourire chaleureux.\r\nMes dires lui avaient profondément influencé sur sa perception de ma personnalité : pour elle, ce que je venais de dire était tel «la parole d’un sage ». Seulement, je ne voyais pas les choses sur le même angle.\r\n-Moi : peut-être bien. Par contre, toi tu n’as pas changé d’un pouce.\r\nMiyura a toujours été une fille joviale et ouverte à la conversation, sans compter ses performances analytiques. Le fait qu’elle m’ait reconnu tout de suite après 5 ans de séparation en est la preuve.\r\n-Miyura : ça tu l’as dit. Il n’y a vraiment pas grand-chose de change chez moi. C’est tout à fait normal, nous les filles nous ne sommes pas du genre à courir de gauche à droite. Lorsqu’on se trace un chemin, on le suit jusqu’au bout.\r\nDisait-elle en gesticulant toute fiéreuse : cela était assez comique.\r\n-Moi : tout à fait ouais.\r\n-Miyura : hum, je suis vraiment crédible là ?\r\n-Moi : bah…je n’sais pas.\r\nEle voulait que je juge son numéro qui était loin d’être crédible. J’ai préféré me taire.\r\nMiyura tappait encore plus fort sur mon bureau, rapprochant ainsi son visage du mien.\r\n-Miyura : comment ça « tu ne sais pas » ? ce n’est pas une réponse ça.\r\nSon regard était serieux.\r\n-Moi: bof, c’était nul.\r\nDisais-je sans aucune hésitation. Pas besoin d’en rajouter, Miyura savait pertinemment qu’elle n’était pas très bonne actrice. Elle le fit dans le seul but que je lui rétorque cette bonne vielle phrase « la comédie n’est pas faite pour toi » comme au bon vieux temps lorsque je lui taquinais au primaire. Ce qui ne sera plus le cas maintenant.\r\n-Miyura : quoi ! autant que ça ?\r\nElle se tenait le bout du menton.\r\n-Miyura : j’ai encore bien des progrès à faire.\r\n-Moi : je ne te le fais pas dire.\r\nJe finissais de remplir ma fiche et posait mon stylo sur le bureau.\r\n-Miyura : ah, j’ai faillit oublier. Que je suis bête ; j’aurais dû commencer par là. Est-ce que tu j…\r\n-prenez place et faites silence s’il vous plait.\r\nUn professeur entrait brusquement, coupant la parole à Miyura.\r\n-Miyura : oups, le prof\r\nMurmurait-elle. Elle se précipitait sur le bureau à côté du mien dans la rangée suivante.\r\n-Miyura : on discutera plutard d’accord.\r\nMe soufflait-elle.\r\n-le prof : bien, je vais être bref et clair. Pour commencer, je me nomme Tanto KIMURA. A compter de ce jour et jusqu’à la fin de votre cursus, je serai votre professeur de mathématique mais aussi votre tuteur (professeur principal). Ce lycée comme vous le savez tous ; repond à certaines exigences. D’ailleurs, chacun d’entre vous sait exactement dans quelle circonstance et les raisons pour lesquelles il a été admis ici…\r\nCe prof pouvait à peine nager dans la trentaine et son regard était serieux et imposant.\r\n-Le prof : Tout ce que je vous demande, c’est de bien prendre vos études au serieux et de ne surtout pas agir de façon inconsidérée.\r\nIl déposait sur son bureau le manuel qu’il détenait.\r\n-Le prof : bonne et franche collaboration. \r\n\r\n2\r\nC’était la pause. Je me levais de mon bureau, me dirigeant ainsi vers la sortie de la salle de classe. J’allais remettre ma fiche d’inscription à la direction.\r\n-Miyura : Noah !\r\nMiyura me suivais, je détournais mon regard vers elle sans m’arrêter de marcher.\r\n-Miyura : Tu vas où ? \r\nJe lui montrais ma fiche.\r\n-Moi : Déposer ceci à la direction.\r\nElle me la ravissait.\r\n-Miyura : une fiche d’inscription pour le club de basket.\r\nElle faisait mine de lire le contenu.\r\n-Miyura : t’as toujours autant d’intérêt pour ce sport. Tu n’as totalement pas changé en fin de compte.\r\n-Moi : s’il y a bien quelque chose pour laquelle je ne peux y renoncer, c’est bien le basket. Je mise beaucoup dessus.\r\nPour moi, le basket-ball était significatif d’une activité salutaire. Que ce soit pour mes objectifs ou mes projets ; le basket était cette carte maitresse qui me permettrait de tous les réaliser. Mon futur même dépendait de mon évolution dans le domaine.\r\nNous arrivions enfin devons la porte de la direction des études. \r\nJe frappais.\r\n-Entrez.\r\nLa voix qui résonnait par-delà cette porte était grave et stoïque. J’ouvrais donc la porte et entrais avec Miyura. Le proviseur était là assis sur son bureau consultant des documents. Je fermais ainsi la porte derrière nous. \r\n-Bonjour monsieur le proviseur.\r\n-Bien le bonjour les jeunes, comment puis-je vous aider ?\r\n-Je viens vous remettre ma fiche d’inscription pour le club de basket-ball.\r\n-Je vois.\r\nIl me faisait signe de m’approcher. \r\nJe lui tendais la fiche. Pendant ce temps, l’on frappait à la porte.\r\n-Veuillez entrer.\r\nDeux étudiant, l’un aux cheuveux roux et l’autre aux cheuveux couleur jade entraient.\r\n-Bonjour monsieur, nous venons vous remettre nos fiches d’inscriptions.\r\nDisait le garçon aux cheuveux de couleur jade.\r\n-Oui, approchez.\r\nIls s’approchaient tandis que je quittais les lieux.\r\nCes types qui venaient de rentrer, s’étaient-ils inscrits dans le club de basket ? Et si tel est le cas alors, étaient-ils doués ? Aurions-nous l’occasion de nous affronter ? toutes ces questions me taraudaient l’esprit. Cependant, je décidais de prendre mon mal en patience car s’il fallait que nos chemins se croisent à nouveau, alors en se croisera.\r\nTout d’un coup, je sentais des picotements à mon oreille gauche et j’étais attiré vers le bas.\r\n-Bon sang, tu n’écoutes pas quand on te parle !?\r\nS’était Miyura qui me tirait l’oreille un peu contrariée. \r\n-Tu me parlais ?\r\nDisais-je.\r\n-Tu rigoles ! Je ne fais que t’appeler depuis tout-à-l’heure. T’es dans les vapes ou quoi ?\r\n-J’étais perdu dans mes pensé, désolé. Alors, tu peux me lâcher maintenant. Tu vas finir par me l’arracher.\r\nEn effet, elle me saisissait toujours l’oreille.\r\n-Ah oui désolée.\r\nElle la lachait.\r\n-Wesh, toujours aussi brutale.\r\nDisais-je en frottant mon oreille rougie. Elle en avait beaucoup souffert.\r\n-Ne me cherche pas…Je parie que tu n’as même pas entendu les infos sur les qualifications.\r\n-Des qualifs, lesquelles ?\r\nJ’étais un peu perdu ?\r\nMiyura soupirait d’exaspération.\r\n-Tu n’as vraiment rien entendu…Au vu du nombre colossal de postulant pour ce club. L’intégration au club de basket-ball se fait par étape. Donc tu dois devoir passer les qualifications.\r\n-Quoi, c’était de ça que tu parlais. Aucun problème, je n’ai juste qu’à les passer.\r\n-Mais, ils commencent demain. Tu penses être prêt ? N’est-ce pas un peu brusque.\r\n-Au contraire, plus vite je les aurai passé mieux ce sera.\r\nDerrière nous\r\n-Dis, ton frère viendra demain. ?\r\nDemandait le garçon cheuveux jade à son pote et sortant du bureau.\r\n-J’sais pas trop, ce n’est pas comme-ci il était obligé de venir.  Il est déjà membre de l’équipe principale alors…\r\n\r\nLe rouquin nous dépassait tandis que son pote s’arrêtait juste en face de nous.\r\n-Tu fous quoi ?\r\nDemandait le rouquin à l’autre.\r\n-un instant. Bonjour à vous, il me semble que nous intégrant le même club tous les trois alors j’ai pensé qu’il nous serait bénéfique de faire connaissance.\r\n- On intègre le même club et alors ? je ne vois pas la nécessité de me familiariser avec vous.\r\nJe lui répondais d’un ton sec.\r\n- Ma foi, tu n’as pas tort. Mais tu vois, ce serait assez embarrassant d’ignorer un potentiel futur coéquipier. De surcroit, nous sommes de la même promotion.\r\nSoulignait-il.\r\n-Je me disais bien vous avoir déjà vu. C’était donc en classe.\r\nRemarquait Miyura.\r\n-Oui en effet.\r\n-C’est pas faut. T’as pas tort.\r\n-J’en suis ravi. Je me nomme Rail IMASE et le rouquin là-bas c’est Keito KIMITSU.\r\n-Moi c’est Noah ATSUMI et voici…\r\n-Miyura OSAKI, ravie de faire ta connaissance IMASE.\r\nElle me coupait la parole. Mais bon, c’était Miyura.\r\n-Tout le plaisir est pour moi OSAKI. De même pour toi ATSUMI…\r\nATSUMI…\r\n-ola, pas de ça avec moi. Je déteste me faire appeler par mon nom de famille alors appelle moi juste Noah.\r\nJe lui lançais l’un de ces regards noirs. Je n’ai jamais aimé ce genre de formalités. Sinon, à quoi cela servait d’avoir un prénom.\r\n-Je comprends, alors ce sera Rail pour moi. Cela nous fait déjà un point en commun Noah.\r\n-Dans ce cas Rail, tu devras aussi m’appeler par mon prénom.\r\nDisait Miyura.\r\n-…D’accord.\r\n- Dis, tu te grouilles.\r\nKeito interpellait Rail de là où il était.\r\n-Patiente encore un peu.\r\n-Et combien de temps exactement, je te signale que j’ai la dale là. Si tu ne te magnes pas, j’y vais sans toi.\r\n-Tu es trop impatient, c’est pathétique. \r\n-Eh ben, le type pathétique te laisse à tes occupations.\r\nJ’assistais à cette dispute qui n’avait normalement pas leu d’être. Le rouquin continuait sa route assez nerveu.\r\n-Je penses que tu devrais le rejoindre.\r\nSuggérait Miyura.\r\n-pas la peine, c’est dans sa nature d’être ainsi. Ça lui passera.\r\n-Bon, je me grouille. Moi aussi j’ai grave la dale. Tu viens Miyura ?\r\n-Hum…oui.\r\n-Attends Noah.\r\nDisait Rail. Je m’arrêtais et me retournais.\r\n- On pourrait déjeuner ensemble si ça vous dit.\r\n\r\n\r\n\r\n\r\n\r\n\r\n3\r\n\r\nQuelques minutes plutard.\r\nNous étions tous les quatre à une même table à la cantine. Je me contentais d’engloutir mon plat tandis que Keito avec l’air de ne pas comprendre cette situation. Les traits de grimace sur son visage étaient plus que perspectibles.\r\n\r\n-Je ne pensais pas que tu viendrais avec eux mais bon.\r\nIl avait l’air surpris de nous voir mais cela ne semblait pas l’affecter plus que ça. Par contre, cela paraissait malaisant pour Miyura.\r\n-Miyura : Tu t’appelles Keito n’est-ce pas ? Bien le plaisir de te connaitre.\r\nComme toujours elle entama la conversation. Cherchait-elle certainement à mieux cerner Keito. Celui-ci répondit à ses mots par un regard indifférent.\r\n\r\n-Miyura : Hum…Désolée, j’aurais dû t’appeller par ton nom…\r\n -Keito : Non, ça va. Je préfèrerais que tu m’appelles Keito. Mentionner mon nom pourrait porter à confusion. \r\n-Miyura : Une confusion ?\r\n-Rail : Il ne veut pas qu’on se mette à le confondre avec son frère ainé qui fréquente également ici.\r\n-Miyura : Je comprends mieux maintenant.\r\n-Rail : c’est d’ailleurs mieux ainsi. Il ne faudrait pas prendre le chat pour le lion.\r\nIl disait cela, sortant un roman de son uniforme qu’il se mis à feuilleter.\r\n\r\n-Keito : Qu’est ce que tu insinues par-là !\r\nIl réagissait de manière agressive.\r\n-Rail : tu sais bien de quoi je parle à moins que tu sois assez bête pour ne pas comprendre cette simple méthaphore.\r\nÇa sentait la provocation.\r\n-keito: Tu cherches les embrouilles c’est ça !\r\nIl était encore plus furax.\r\n-Rail : Parle moins fort, nous sommes dans un lieu public.\r\nIl était toujours plongé dans son bouquin.\r\n-Keito : Espèce de…Et arrête de répondre en lisant ce foutu bouquin, c’est rageant !\r\n-Rail comment t’ignorer avec tout le boucon que tu fais.\r\n-Keito : Je vais te trucider.\r\n-Rail : D’abord, faudrait que tu en sois capable.\r\n-Keito : Répète un peu pour voir !...\r\n\r\n…C’était là une dispute qui éclatait. Je n’aurais pas pensé assister à une querelle amicale le jour même de la rentrée. Mais bon, j’observais sans trop intervenir. Me nourrir était ma priorité…\r\n-Miyura : calmez-vous je vous en prie.\r\nElle essayait de baisser les tensions \r\n-Rail :…Tes actes ne font que prouver ton immaturité : Ce serait normal que des élèves préfèreraient ne pas avoir à te cotoyer, cela leur évitera de nombreux problèmes.\r\n-Keito : Ne fais pas attention à ce qu’il dit…humm…c’est quoi ton nom en fait ?\r\nIl s’adressait aussitôt à Miyura qui fut surprise qu’il lui adresse la parole alors qu’il se disputait avec Rail.\r\n\r\n-Rail : Tu ne prends même pas la peine de connaitre le nom de ceux avec qui tu partages ta table. C’est déplorable.\r\n-Keito : Ferme-la!\r\n-Miyura: Miyura OSAKI mais apelle moi juste Miyura ça ira\r\n-Keito : Tu voudrais vraiment que je t’appelle par ton prénom ? hum… je veux dire, les gens pourrons mal l’nterpréter.\r\n\r\nCette question avait tout son sens. En effet, dans la société japonaise, les étudiants ont toujours tendance à s’appeler par leur nom de famille. A moins-ce qu’ils soient de très bon amis (le plus souvent de même sexe) ; seuls des individus très proches le faisaient. Appeler un collègue de sexe opposé au sien par son prénom paraissait donc suspect. Enfin, cela est le cas pour certains.\r\n-Miyura : On s’en fout de ce que les autres en pensent, le plus important c’est nous. N’est ce pas Noah ?\r\n-Moi : Ben évidemment, A quoi ça sert de posséder un prénom si on ne l’utilise pas pour t’appeler ?\r\n\r\nJe répondaits toujours concentrésur mon plat.\r\n-Keito : Alors tu t’appelles Noah, tu ne dois pas être bien bavard.\r\n-Moi : Qu’est ce qui te fais penser ça ?\r\n-Keito : Tu n’as quasiment rien dit depuis tout-àl’heure, à  croire que tu n’étais pas préesnt.\r\n-Moi : Je n’avais aucune raison de le faire. Et puis…je préfère me concentrer sur ce que je fais.\r\n-Keito : Je vois…\r\nIl prennait un air plus amical.\r\n-Keito : …Tu m’as l’air d’un type cool. Que dirais-tu d’un 1 contre 1 histoire de joger mutuellement nos compétences ?\r\n-Moi : Tu veux qu’on s’affronte ?\r\nCela ne me déplaisait pas mais je restais pour le mois surpris.\r\n-Rail : Ne fais pas trop attention à lui. Keito est du genre compétutif ; Dès qu’il rencontre un basketteur qui l’intéresses il lui propose toujours une confrontation. Ça lui passsera.\r\n-Keito : Tu peux parler, comme-ci tu n’as jamais mis quelqu’un au défit.\r\n-Rail : je ne le nie pas bien entendu. Mais contrairement à toi, moi je ne mets pas la pression sur mon adversaire.\r\n\r\nEt c’était le début d’une seconde dispute.\r\n\r\n-Keito : Comment-ça :\r\n-Rail : Dois-je te rappeler comment tu as obtenu un face à face avec le pilier de Taiko ou encore la façon dont tu as obtenu un duel avec l’AS de Taizen qui se sont tous les deux soldés par un échec ?\r\n-Keito : Et alors,…Je te rappelle que nous avions tous les deux perdus à l’époque contre Kuro.\r\n-Rail : Et c’est ça le problème, par ta faute je me suis retrouvé mêlé  dans une confrontation pourtant déséquilibrée de deux contre un et qui n’a pour autant pas été en notre faveur !...\r\n-Miyura : Ces deux là se disputent vraiment comme chien et chat.\r\n-Moi : Oui en effet. N’empêche, moi je n’aurais pas été contre un duel.\r\n\r\n\r\n4\r\nDe retour chez moi dans la soirée, je prenais un bain puis me jetais ensuite dans mon lit rejettant un profond soupire. La journée d’aujourd’hui a été pour le moins pas très banale ; entre mes retrouvailles avec Miyura et les disputes à répétition entre Rail et Keito, ce premier jour d’école était plutôt top. \r\nRegardant les étoiles au-delà de ma fenêtre, Je tendis ma main droite vers elles.\r\n-Moi : 3 ans, Encore 3 petite années à tenir et je pourrai,,,\r\nJe refermais mon poing :\r\n-Moi :  …Je réussirai à atteindre mon objectif. Je te le promets.",
+    "image": "chapters/covers/KomikoAI_28_Hncdi1F.png",
+    "order": 1,
+    "is_draft": false,
+    "is_premium": false,
+    "likes_count": 1,
+    "views_count": 0,
+    "created_at": "2026-09-11T13:19:56.254Z",
+    "updated_at": "2026-09-11T13:40:59.548Z"
+  }
+},
+{
+  "model": "works.chapter",
+  "pk": 2,
+  "fields": {
+    "work": "82307401-c7ee-4b7e-9c12-92fc98b72571",
+    "title": "Une réalité presque fictive",
+    "content": "Le chant des oiseaux, le vent qui sifflait dans le feuillage des arbres, cette lumière qui me frappait au visage et par la suite ce réveil qui se déclencha que j’éteignis sans tarder : c’était une nouvelle journée qui s’annonçait.\r\nJe sortis de mon lit, me dirigeant vers le balquant ouvrant ainsi les rideaux me demandant quel genre de journée pouvait m’attendre. Je fis ensuite ma toilette puis partis prendre mon petit déjeuné. \r\nJe me tenais là assise toute seule à cette vaste table comportant plusieurs mes pour une alimentation riche et variée.\r\n__Excusez-moi mademoiselle…\r\nUne domestique s’adressait à moi, je pris la peine de lui regarder en signe de réponse  \r\n__Veillez m’excuser pour ce dérangement. Monsieur STANER vous attend devant l’entrée principale. Je tenais à vous passer cette information.\r\nMon garde du corps Feld STANER, communément appelé Mr STANER par les domestiques venait d’arriver. \r\n__Moi : entendu.\r\nRépondis-je simplement.\r\nLa domestique me salua discrètement puis se retira.\r\nJe venais de terminer de toute façon, alors tout lentement je me levais de la table une seconde domestique me suivait avec mes affaires rejoindre Mr Feld. En effet, pour moi il est plus naturel de l’appeler par son prénom et non par son nom.\r\nIl était là posé devant l’entrée, portant comme toujours un costume noir uniforme qui faisait ressortir parfaitement sa carrure imposante et son charme de jeune adulte. Il avait le regard perdu vers l’extérieur mais se rendit tout de suite compte de ma présence et le détournait vers moi pendant que je me rapprochais.\r\n__Monsieur Feld : Bonjour Mademoiselle.\r\n__Moi : Bonjour Monsieur Feld\r\n__Monsieur Feld : Bien, nous pouvons y aller.\r\n__Attendez un instant\r\nA peine se retournait-il que ma mère déballait les escaliers en furi élégante vers nous. Ses beaux cheveux dorés et bouclés dansaient au rythme de ses pas. Elle finissait son chemin face à nous.\r\n__Mère : Vous ne comptiez tout de même pas partir sans me laisser dire aurevoir à ma petite étoile…\r\nElle prenait mes mains dans les siennes.\r\n\u001f\u001f__Mère :  C'est son premier jour de lycée après tout, il est de mon devoir de lui donner mes bénédictions.\r\nHeileine SPARKLES, ma mère. Elle a souvent tendance à trop me chouchouter, car pour elle je suis et reste éternellement une gamine. \r\n__Ta mère a raison Clara.\r\nCette voix distinguée et imposante, je la reconnaitrais parmi tan d’autres. Je détournais le regard vers l’endroit où provenait la voix et là : Damian SPARKLES une figure très réputée dans le monde des affaires et aussi…mon père.\r\nIl descendait les escaliers d’un geste professionnel les mains dans les poches de son pantalon taillé sur mésure de façon tellement naturelle que l’on pourrait deviner son rang social juste ave cela.\r\n\u001f__Père : Tu aurais pu passer nous saluer avant ton départ. Et si nous n’étions pas descendus ?\r\n__Moi :  J’en suis navrée. Toutes mes excuses.\r\nSa présence m’a toujours été intimidante. En effet, non seulement sa réputation mais aussi celle des personnalités de son entourage était parfaite. Ma mère par exemple, bien qu’elle soi son épouse a aussi une grande renommée dans ce monde. Faisant ainsi d’eux les des couples les plus professionnels qui soient. Issue d’une telle union, je me devais de toujours être à la hauteur et de suivre leurs traces.\r\n\u001f\u001f__Père : Soit, je ne vous retiendrai pas plus longtemps. Vous pouvez partir.\r\nIl retournait sur ses pas.\r\n__Moi : Attendez père.\r\nIl était clair qu’il n’avait plus rien à me dire. Mais cela n’était pas mon cas.\r\nIl se retournait prétend attention à ce que je m’apprêtais à dire. Dans ce genre de moment je n’avais pas intérêt à sortir une bêtise. Tel était la signification du regard qu’il me lançait. Un regard bien trop sérieux et concentré qui pousse à bien choisir ses mots.\r\n__Moi : J’ai l’intention d’intégrer l’un des clubs du lycée.\r\nDisais-je clairement.\r\n\u001f\u001f__Père : Du moment que tu y trouve de l’intérêt, je n’ai aucune objection.\r\nIl remontait ensuite les escaliers.\r\nContrairement à ma mère, mon père lui ne voyait que mon côté mature. Pour lui, je sis née pour briller alors je me devais de toujours poser des actes réfléchis et entreprendre dans quelque chose qui apporte de l’intérêt. Enfin, ma mère aussi souhaiterait me voir briller. Mais ils ne le montrent malheureusement pas de la même manière.\r\nDe plus, cette réponse semblait bien implicite. Au moins, je lui aurais dit. Même-ci je ne l’ai pas fait dans les détails.\r\n__Mère : Feld, surtout prend bien soin de ma petite fille chérie.\r\n__Monsieur Feld : Je n’y manquerai pas madame.\r\n__Mère : Bien, j’ai confiance en toi.\r\nElle se retournait de nouveau vers moi \r\n__Mère : A ce soir ma petite étoile. Passe une adorable journée.\r\nMe souriait-elle.\r\n__Moi :  Oui, à ce soir maman.\r\n__Monsieur Feld : Vous venez mademoiselle ?\r\n__Moi : Oui, je vous suis.\r\nNous nous éloignons de l’entrée principale nous dirigeons vers le parking. Pendant que ma mère restait là à attendre que nous nous éclipsions me lançant un dernier sourire chaleureux quand nos regards se croisèrent de nouveau avant de disparaitre derrière la vitre fumée de la voiture.   Monsieur Feld démarrait et sortait de la residence par la grande clôture qui fut ouverte par le vigil.\r\nC’est ainsi que commençait ma première journée de lycée dans ce pays.\r\n1\r\nMonsieur Feld conduisait pendant que moi je regardais le paysage par la vitre, trouvant le chemin un peu trop long.\r\n__Monsieur Feld : Mademoiselle, quel club comptiez-vous intégrer ?\r\n__Moi : Vous saviez très bien monsieur Feld. Je ne peux qu’intégrer le club pour lequel j’ai le plus d’intérêt.\r\n__Monsieur Feld : je vois, vous restez fidèle à vos principes. \r\nIl ralentissait et s’arrêtait.\r\n\u001f\u001f__Monsieur Feld : Voulez-vous que je vous conduise jusqu’à votre salle de classe ?\r\n__Moi : Ne vous donnez pas cette peine, je saurai me retrouver.\r\nLe laisser m’escorter jusqu’à ma salle de cours attirerait beaucoup trop l’attention. Nul besoin d’en faire autant.\r\n__Monsieur Feld : Si tel est votre souhait…\r\nJe sortais de la voiture.\r\n__Monsieur Feld : Passer une bonne journée.\r\n_Moi : Je vous en souhaite autant.\r\nIl relançait le moteur puis s’en allait tandis que j’entrais dans l’enceinte de l’établissement.\r\nMa première destination fut le bureau du proviseur. Arrivée devant la porte qui en donnait l’accès, je frappais trois fois de suite. A la seconde suivante une voix grave étouffée par la barrière se fit entendre.\r\n__Entrez je vous prie.\r\nSur le point de saisir la serrure, un autre homme à la carrure assez imposante le fis. Il s’agissait sûrement d’un professeur. Il me laissait d’abord entrer puis referma derrière lui. \r\nLe proviseur était assis sur son bureau, un document ouvert devant lui qu’il examinait probablement. Le professeur se rapprochait.\r\n__Le professeur : Bonjour Mr ROBERT.\r\n__Moi : Bien le bonjour monsieur le proviseur.\r\nDisons-nous, presque à l’unissant.\r\n__Le proviseur : Bonjour monsieur KIMURA, vous vous porté bien j’espère.\r\n__Le professeur : Biensûr monsieur, vous semblez également être en pleine forme.\r\n__Le proviseur : Oh vous savez, à mon âge ; on fait attention à tout pour ne pas finir dans une situation défavorable. Alors, puis-je connaitre la raison de votre présence accompagnée de cette élève ? \r\n\r\n__Le professeur : Nous ne sommes pas ici pour les mêmes raisons, je l’ai trouvée devant cotre bureau. Certainement, a-t-elle quelque chose dont elle doit vous faire part. \r\nCette discussion était centrée qu’autour d’eux. J’avais l’impression d’être de trop.\r\n__Le professeur : N’est-ce pas mademoiselle ?\r\n__Moi : En effet monsieur. Ceci est mon premier jour de cours en tant qu’élève de ce lycée. Il était donc de bon aloi de me présente à vous avant de débuter.\r\n__Le proviseur : je vois.\r\nIl entreprit de feuilleter l’un des classeurs rangés sur son bureau.\r\n__Le proviseur : Quel est le niveau et la série à laquelle vous êtes inscrite ?\r\n__Moi : Je suis inscrite dans la série C du premier niveau.\r\n__Le proviseur : puis-je connaitre votre nom ?\r\n__Moi : je me nomme Clara SPARKLES.\r\n__Le professeur : SPARKLES…\r\nIl le marmonnait\r\n__Le proviseur : je suppose que vous êtes la fille de Mr Damian SPARKLES ?\r\n__Moi : Oui, c’est exact.\r\nIl donnait l’impression de très bien connaitre mon père. Après tout, cela n’avait rien d’étonnant.\r\n__Le proviseur : Cela fait une drôle de coïncidence. Vous ne trouvez pas monsieur KIMURA ?\r\nUne coïncidence ? qu’entendait-il par-là ?\r\n\u001f__Le professeur : Vous m’enlevez les mots de la bouche.\r\n__Le proviseur : Bref, mademoiselle SPARKLES. Le monsieur qui se tient près de vous se nomme Tanto KIMURA. Il s’agit de votre professeur principal.\r\nJe comprenais mieux la situation.\r\n__Monsieur KIMURA : la réputation de votre famille vous précède, j’espère que vous avoir sous mon aile ne fera que le démontrer.\r\n__Moi : J’espère être à la hauteur de vos attentes monsieur KIMURA.\r\nCe n’étaient que des mots, je savais que je l’étais déjà bien évidement. \r\n__Le proviseur : Bien, les cours vont débuter d’un instant à l’autre. Je devrais vous escorter à votre salle de classe.\r\nIl se levait de son siège.\r\n__Moi : Nul le besoin de vous déranger pour moi monsieur le proviseur, vous avez plus important à faire en ce moment.\r\nCela paraissait évident que monsieur TANTO avait à lui parler. Et puis, tout ce que je voulais c’était me présenter à lui et non pas le laisser m’excorter si jusqu’à ma salle de classe. \r\n__Le proviseur : Soit. Seulement, sauriez-vous vous retrouver ?\r\n__Moi : Ne vous en faites pas pour ça. Si besoin, je demanderai à un élève de me guider.\r\nCet établissement avait beau être grande mais pas pour moi. Je m’étais déjà retrouvée dans de plus grands labyrinthes. \r\n__Moi : Sur ce, je me retire.\r\n\r\nJe sortais du bureau me lançant ainsi dans une quête à la recherche de ma salle de classe. Les couloirs ainsi que les escaliers étaient vides, les cours venaient de débuter.\r\nJe marchais lentement, à petits pas évitant d’attirer l’attention.\r\n__Mademoiselle, que faites-vous dans les couloirs ?\r\nQuelqu’un m’interpellait par derriere. D’après sa voix, il s’agissait d’une femme. Je m’arrêtais alors et me retournait vers la source du son. Elle avait une chevelure brune bouclée et des documents en main. Allait-elle probablement donner un cour.\r\nElle s’avançait vers moi.\r\n__La dame: Les cours ont débutés il y a cela plus de 5 minutes. Alors que faites-vous à vous balader dans les couloirs alors que vous êtes sensée être en classe ?\r\n__Moi: Je suis bien consciente de l’heure qu’il est madame. Mais voyez-vous, je reviens de chez le proviseur car je suis nouvelle ici. Et en ce moment je me dirige vers ma salle de classe.\r\nÉtait-ce suffisant ou devrais-je développer?  \r\n__La dame : Quel est le niveau de votre classe ?\r\n__Moi : Il s’agit de la 2ndeC madame.\r\n__La dame : Bien, suivez-moi.\r\nElle poursuivait son chemin et moi je lui suivais tel un caneton derrière sa mère canne.\r\n__La dame : Vous êtes Clara SPARKLES je me trompe ?\r\n__Moi : Oui, c’est exact.\r\n__La dame : Mr ROBERT m’avait prévenu de votre arrivée aujourd’hui. Je suis madame KAZUKI, votre professeure de physique.\r\nNous arrivions devant la salle en question.\r\n__Madame KAZUKI : Attendez là un instant.\r\nElle entrait dans la salle et les élèves se levaient tous en guise de salutation.\r\n__Madame KAZUKI : Vous pouvez vous assoir.\r\nDisait-elle, se dirigeant vers son bureau.\r\nUne fois ses dossiers déposés :\r\n__Madame KAZUKI : Aujourd’hui nous accueillons une nouvelle élève. Made oiselle, veillez entrez s’l vous plait.\r\nJ’entrais ne laissant aucune expression se designer sur mon visage.\r\n__waouh, elle est canon cette fille.\r\n__C’est pas le genre de diva qu’on a la chance de croiser tous les jours.\r\n__ et elle est dans la même classe que nous en plus, chouette.\r\nA peine j’y mis les pieds que des marmonnements se faisaient entendre.\r\n__Madame KAZUKI : Un peu de silence je vous prie.\r\nAgir ainsi à cause de l’arrivée d’une nouvelle collègue. L’irrationnalité des hommes a toujours été barbante. De plus, j’étais obligée de me présenter. Je fis un léger soupir d’agacement.\r\n__Moi : Bonjour, je me nomme Clara SPARKLES. Je suis américaine…\r\n__Elle est américaine en plus.\r\n__C’est normal, une telle beauté ne pouvait pas être d’ici.\r\nIgnorons-les\r\n__Moi : …Mes parent ont aménagés dans ce pays en raison de leur travail. En ce qui me conserne, j ne fréquenterai ce lycée que pour un temps. Alors, nul besoin d’essayer d’approfondir des relations.\r\nA ce moment, les visages de la plupart des élèves changèrent d’expression.\r\n__Moi : ce sera tout pour moi.\r\nA voir leur tête, le message semblait être bien passé. \r\n__Madame KAZUKI : Bien…vous pouvez aller vous assoir.\r\nLa professeure était autant troublée qu’eux.\r\n__Moi : d’accord professeur.\r\nJe m’asseyais au premier siège du rang central. Le fait qu’il se trouvait vide était une bonne chose. S’assoir à l’arrière de la salle était trop malaisant pour moi.\r\n__Salut…\r\nMa voisine de bureau s’adressais à moi, elle avait les cheuveux rose et abordait un sourire amical.\r\n__je suis Miyura OSAKI, ravie de te connaitre Clara.\r\nD’abord un sourire puis elle m’appelait par mon prénom, j’avais cru comprendre que dans ce pays les étudiants s’appelaient par leur nom de famille. N’était-elle pas perspicace ou essayait-elle de me provoquer ?\r\n__Moi : le plaisir est pour moi.\r\nQuoiqu’il en était, je n’avais pas l’intention de réagir. Je me contentais de retirer le nécessaire de mon sac.\r\n__Miyura : Je peux de filer les cours que tu as manqué hier si tu veux.\r\nApparemment, ma réponse froide et vide ne l’affectait pas plus que ça. Néanmoins, recopier les cours que j’ai manqués n’était pas dénué d’intérêt.\r\n__Moi : Oui, je te remercie pour ta sympathie.\r\n__Miyura : Il n’y a pas de quoi tu sais.\r\nElle avait l’air aux anges que je ne décline pas son offre. \r\nJe me trouvais déjà embarquée dans une conversation avec ma voisine de bureau. Décidément, tout le monde ne comprend pas de la même façon. Où cela pourrait bien nous mener à l’avenir. Je lançais un soupire d’exaspération.\r\n\r\nC’était à présent l’heure du déjeuner : La classe se vidait de moitier et je finissais de me mettre à jour.\r\n__Moi : Tiens…\r\nJe rendais ses cours à OSAKI.\r\n__Moi :  …Et encore merci OSAKI. Grâce à toi je me suis mise à la marge plus rapidement que prévu.\r\nBien entendu, je restais impassible.\r\n__Miyura : N’y a pas de quoi, je t’en prie. Mais…\r\nQu’y a-t-il ? s’apprêtait-elle à me demander une faveur en retour ?\r\n__Miyura : …Tu pourrais m’appeler par mn prénom tu sais…\r\n__Miyura.\r\nUn garçon assez grand de taille aux cheuveux noir corbeaux et aux yeux azure se tenait derrière elle. Inexplicablement, son visage m’était familier.\r\n__le garçon: Rail, Keito et moi allons déjeuner. Tu viens ?\r\nEn effet, il y avait de autres garçons l’un aux cheuveux jade et l’autre roux  stationnés evant la porte d’entrée.\r\n__Miyura : Oui bien sûr, je viens avec vous…\r\nElle se levait de son bureau.\r\n__Miyura : …Clara, ça te dirait de te joindre à nous ?\r\nElle me demandait de partager leur table. N’avait-elle donc pas compris ce que j’eu dit récemment ? bien sûr que si ; ma formulation était bien trop claire pour ne pas être comprise. Ce qui laissait à supposer qu’elle n’en avait rien à faire de cela.\r\n__Moi : Désolée, mais je vais devoir décliner ton invitation.\r\n__Miyura : Ah…je vois, ce n’est pas grave. Une prochaine fois alors.\r\nEtonnement, elle restait toujours aussi sereine.\r\n__Alors vous venez ?\r\nDisait le roukin.\r\n__le garçon : Oui on arrive.\r\nIls se retirèrent de mon espace Bien-que j’entendais encore leurs marmonnements.\r\n__le garçon : t’étais oblige de lui demander ça ?\r\n__Miyura : En quelque sorte oui.\r\n__le garçon aux cheuveux de jade : « en quelque sorte » ?\r\n__le roukin : J e ne te connais que depuis hier, mais je dois affirmer que tu es assez bizarre comme fille Miyura.\r\n__Miyura : je prends ça pour un compliment. Et puis…Qui ne tente rien n’a rien.\r\n\r\nCette expression « Qui ne tente rien n’a rien », que voulait-elle dire ? viserait-elle à développer une meilleure entente entre nous ? cette relation de collègues de classe serait-elle destinée à évoluer ? Mon séjour dans ce lycée s’annonçait long et plein d’incertitudes.\r\nPeu de temps après, je me retrouvais seule dans cette classe. La solitude était un moment de pure détente.\r\n\r\n2\r\nC’était la fin des cours, une forte poignée d’élèves rentraient. La plupart de ceux qui restaient participaient aux qualifications de certains clubs au programme. \r\nDans la salle de 2nde C\r\n__Noah : Miyura, tu restes assister aux qualifs ?\r\n__Miyura : Biensûr que oui, je tiens absolument à vous voir jouer mais aussi à constater à quel point tu as évolué depuis le temps.\r\n__Noah : Ne me compare pas à ce gamin. Celui que tu as connu autre fois et le moi d’aujourd’hui sommes deux personnes complètement différentes.\r\n__Miyura : J’attends de voir ça.\r\n__Keito : dîtes, vous vous connaissez depuis combien de temps en fait ?\r\nIl posait la question à Noah et Miyura\r\n__Miyura : Depuis la maternelle, pourquoi ?\r\n__Keito : Rien d’important, je me demandais juste comment étiez-vous arrivés au point d’être aussi amical l’un envers l’autre. Une amitié d’enfance, tout s’explique.\r\n__Noah : N’est-ce pas le cas pour vous deux ?\r\n__Rail : Pas du tout. Keito et moi ne nous sommes connus qu’au collège. Notre relation n’est pas si vieille que ça.\r\n__Miyura : Ah bon, cela est surprenant. J’étais persuadée que vous aviez passé le primaire ensembles\r\n__Keito : Biensûr que non, je n’aurais pas pu supporter ce type pendant plus de 10 ans, impossible.\r\nIl pointait Rail du doigt.\r\n__Rail : Tu as raison. Si je t’avais côtoyé pendant tout ce temps, tu m’aurais sûrement filé ta stupidité. \r\n__Keito : Tu peux répéter ?\r\n__Rail : Tu m’as bien entendu.\r\n__Keito : Tu sais quoi, laisse tomber. Si nous commençons à nous chamailler maintenant, nous risquerons de louper les qualifs.\r\nIl montrait un air désintéressé.\r\n__Rail : Quelle sage décision, je suis épaté.\r\n__Keito : Qu’est ce que tu insinues?\r\nIl se levait de son siège en furie.\r\n__Miyura : Quoi, elle est déjà partie ?!\r\nS’exclamait Miyura en interrompant la dispute qui s’apprêtait à commencer.\r\n__Noah : Qui ça?\r\n__Miyura : Ben…Clara, à quel moment a-t-elle bien pu sortir ?\r\nElle marmonnait ces paroles\r\n__Noah : Je ne vois pas pourquoi tu te tracasse pour cette fille…\r\nIl se levait de son bureau.\r\n__Noah : …Elle a pourtant été claire sur le fait de ne vouloir avoir affaire à personne.\r\nIl avait un regard plein de dédain et se dirigeait vers l’entrée de la pièce après avoir récupéré son sac.\r\n__Noah : Faut qu’on se grouille. Nous allons finir par être en retard.\r\n__Keito : T’as raison.\r\n__Rail : Allé, à plus Miyura.\r\nIl se levait à son tour et se dirigeait vers la porte en faisant un signe de main à Miyura.\r\n__Miyura : Oui, on se voie au gymnase les gars.\r\nLes garçons partaient se changer.\r\n\r\n\r\n3\r\nLes qualifications débutaient dans une demi-heure. Je partais alors me changer. Les vestiaires étaient totalement vident, ce qui laissait à supposer qu’aucun club féminin organisait une quelquonque séance aujourd’hui et cela n’était pas pour me déplaire. J’avais tout le temps et l’espace pour me préparer. \r\nAprès cela, je sortais des vestiaires, me rendant ainsi vers le gymnase oriental car en effet, il y en avait deux : l’occidental et l’oriental.\r\n__Clara ?!\r\nQuelqu’un m’appelait et cette voix me paraissait assez familière, assez trop que je m’arrêtais et me retournais pour écarter le doute.\r\nComme je le pensais, c’était Miyura OSAKI ma voisine de bureau.\r\n__Miyura : je te croyais partie…\r\nElle venait dans ma direction.\r\n__Miyura : Alors, que fais-tu encore ici de surcroit en tenue de sport ?\r\nSa question était toute fondée. Cependant, je ne trouvais pas l’intérêt d’y répondre. Le fait que j’étais encore au lycée ou que je m’apprêtais à intégrer un club ne concernait que moi et moi seule. Néanmoins, même-ci je l’ignorais maintenant ; elle finira par le savoir tôt ou tard. Et de toute façon je n’avais rien à cacher alors…\r\n__Moi : je passe des qualifications pour un club.\r\nJe reprenais mon chemin après lui avoi répondu toujours indifférente.\r\n__Miyura : Attends une seconde, tu dis participer des qualifications mes aujourd’hui aucun club féminin est au programme.\r\n__Moi : Je ne vois pas où est le problème.\r\nRetorquai-je, de son regard dérivait un air perdu.\r\n__Moi : Je les passe dans un club masculin.\r\nRajoutai-je, son regard s’illuminait fort curieusement.\r\n__Miyura : Vraiment !? Je peux savoir lequel au juste ?\r\nDécidément elle se montrais trop curieuse et ne comptais pas le cacher.\r\nJe fis un léger soupir d’agacement\r\n__Moi : il s’agit du club de basket-ball.\r\n__Miyura : J’y crois pas, c’est trop cool !!\r\nToute excite, elle sautillait autour de moi tel un lapin et ce n’était pas pour mon aise.\r\nSa réaction était étonnant, me savoir joueuse de basket-ball masculin ne l’interpellait pas plus que ça.\r\n__Moi: Cela n’a pas l’air de beaucoup te surprendre.\r\n__Miyura : Pourquoi serais-je surprise ? je trouve cela extraordinaire.\r\nraison de plus pour mettre du doute et se tenir méfiante. Mais elle était plutôt à son aise et le prennait assez bien. Ce qui ne m’empêchait pas de la trouver intriguante.\r\n__Moi : Ne trouves-tu pas cela bizarre qu’une fille pratique un sport masculin ?\r\n__Miyura : Pas vraiment non. Après tout t’es américaine, et les USA sont en quelque sorte le berceau même du basket-ball. Alors, cela est totalement normal à mes yeux.\r\nSon raisonnement était coherent, cependant, elle ne pouvait pas se baser que sur ce fait. Elle restait étrange.\r\n__Moi : ta réaction reste néanmoins étrange. \r\n__Miyura : Alors nous sommes toutes les deux aussi étranges l’une que l’autre, tu ne trouves pas ? Et, cela me ravie car des amis passent aussi ses qualifs.\r\nElle parlait sûrement des trois garçons de tout-à-l’heure. Je comprenais mieux pourquoi elle continuait à me suivre.\r\n__Miyura :…De ce fait, je pourrais tous vous assister. Cela me fera une pierre deux coups….\r\nElle parlait tout le long du trajet. Cela me paraissait futile mais pas au point de me déplaire.\r\nSans m’y attendre, je venais de me faire une camarade. Enfin, façon de parler.\r\n4\r\n(Noah ATSUMI)\r\nNous arrivions au gymnase. Il était plein à craquer. Cependant, nous n’y trouvions pas Miyura.\r\n__Rail : Tiens, Miyura n’est pas encore arrivée.\r\n__Keito : Elle doit avoir eu un contre-temps.\r\n__Eh oh ! Keito ; Rail…\r\nQuelqu’un appelait Rail et Keito, nous détournions tous le regard vers la source du son. Il s’agissait d’un type aux cheveux roux comme ceux de Keito accompagné d’un autre aux cheveux blanc violacé qui se dirigeaient vers nous.\r\n__...Je vois que vous nous avez ramené un autre joueur.\r\n__Moi :  Qui sont ces types ?\r\n__Keito : Celui aux cheuveux roux c’est mon frère ainé Seito ; et l’autre c’est Yuta. Ils sont tous les deux en première et font partie de l’équipe principale du club.\r\nIls arrivaient vers nous. \r\n\u001f\u001f__Seito : Salut, je sis Sei…\r\n__Keito : Pas la peine, il le sait déjà.\r\nIl coupait la parole à son frère sous un ton indifférent.\r\n__Seito : Ah bon… !\r\n__Moi : Oui, c’est à moi de me présenter dans ce cas. Je m’appelle Noah ATSUMI et je compte bien intégrer votre équipe.\r\n__Yuta : T’as bien du cran, pour quelqu’un qui n’as pas encore fait ses preuves.\r\n__Moi : Un homme se doit d’avoir du cran.\r\n__Yuta : Si tu le dis. Rail, Keito\r\n__Rail : Oui ?\r\n__Keito: Quoi?\r\nDisaient-ils au même moment\r\n__Yuta : J’espère que vous vous êtes bien préparés pour ces qualifs ?\r\n__Keito : Pour qui est-ce que tu nous prends ?\r\n__Rail : Pas besoin de s’entrainer pour passer de simples qualifications. Ce sont juste des formalités.\r\nJ’étais totalement d’accord avec Rail et Keito, les qualifications n’étaient qu’un moyen d’accéder rapidement à l’équipe principale. Il était inutile de s’entrainer d’arrache-pieds.\r\nJe voyais Miyura arriver.\r\n__Miyura : Ah…Je vous ai enfin trouvé. Il y a vraiment trop de monde ici.\r\n__Moi : T’étais passée où ?\r\n__Miyura: J’étais avec Clara.\r\n__Keito : elle n’était pas censée déjà être partie ?\r\n__Miyura : Non, elle est venue avec moi.\r\n__Moi : Où est-elle dans ce cas ?\r\n__Miyura : elle est partie voir les membres du bureau du club car…\r\nElle pontait du doigt l’endroit où se trouvait les membres du bureau du club.\r\n__Miyura : …Elle passe elle aussi les qualifs, ne trouvez-vous pas ça fantastique !\r\nElle s’exclamait radieusement.\r\nCe qu’elle venait de dire nous étonnèrent tous.\r\n5 secondes de silences se firent sentir\r\n__Rail : Hum…On ne te suis pas là ?\r\nRail demandait à Miyura d’être plus claire, croyant avoir mal compris.\r\n__Keito : T’es pas sérieuse là ? Clara ne peut quand même pas participer aux qualifs. C’est une blague.\r\nMalheureusement pour Keito, ce n’en était pas une. Miyura n’était pas du genre à plaisanter sur ce genre de sujet. Seulement, cette même question ressassait dans ma tête : « elle ne compte tout de même pas jouer contre des mecs ? ».\r\nCette situation me paru fictive et même inconcevable. Jamais une fille n’avait fait partie d’une équipe masculine. Mais tout ça était bien réel.\r\nClara se rapprochait de nous.\r\n\r\n__Clara : Puis-je connaitre la raison pour laquelle vous me fixez tous de cette façon ?\r\nMiyura lui murmurait quelque chose à l’oreille. Je n’entendais point, mais il semblait evident qu’elle lui parlait de cette histoire de « participer aux qualifs ».\r\n__Seito : une joueuse de basket-ball masculin, cela est fort intéressant.\r\nSeito entamait une discussion sur le sujet. Il se tenait le bout du menton et n’avait pas l’air sarcastique. Yuta lui se retint de rire en détournant le regard.\r\n__Rail : Je ne vois pas ce qu’il y a de drôle dans cette histoire.\r\n__Yuta : Désolé, je n’y peux rien.\r\n__Seito : Dis Keito, …\r\nIl prenait son frère par l’épaule.\r\n__Seito : …Tu ne m’avais pas dit que t’avais de si ravissantes amies. Et que l’une d’entre elles avait de surcroit la même passion que nous.\r\n__Keito : Simplement parce que je ne le savais pas, je suis autant surpris que toi.\r\n__Yuta : Ainsi, tu joues au basket masculin, le monde a bien changé. J’ai hâte de te voir à l’œuvre tout-à-l’heure.\r\nLe regard qu’il lui lançait était plein de mépris. Cependant, cela n’influençait pas Clara.\r\n__Clara : Je comprends. Après tout, je suis ta future coéquipière. Cela dit…\r\nPostée bras croisés, elle répondait avec toute la nonchalance qui soit.\r\n__Clara : …Je me passerai très bien de toute critique.\r\nSa réplique était aussi agressive que le regard qu’ils se lançaient.\r\n__Miyura : Attends, tu veux dire par là qu’il font partie de l’équipe principale?\r\nElle questionnait Clara.\r\n__Clara : Effectivement : Yuta MITSURO le pivot et Seito KIMITSU le stratège.\r\n__Seito : Tu t’es drôlement bien renseignée sur nous dis donc.\r\nIls se frottait la nuque.\r\n__Seito : Bref, a qui avons nos l’honneur mesdemoiselles ?\r\n__Miyura : Je me nomme Miyura OSAKI.\r\n__Clara : Clara SPARKLES.\r\n__Seito : ”SPARKLES \", t’es américaine alors ?\r\n__Clara : En effet oui.\r\n__Seito : Alors tout s’explique. En tout cas, c’est étant sur le parquet que l’on saura réellement de quoi tu es capable.\r\nIl prenait un air un peu plus sérieux.\r\n__Seito :  Mis à part cela, j’suis ravie de faire votre connaissance à toutes les deux.\r\nLà il reprenait son air insouciant.\r\nEntre-temps, Keito et Rail marmonnaient dans leur coin.\r\n\r\n __Keito : Tu ne dis rien toi ?\r\n__Rail : Que veux-tu que je dise après ce qu’elle vient de sortir à Yuta. Elle a dit qu’elle passerait les qualifs haut la main, que veux-tu que je réplique à ça ?\r\n__Keito : Je sais pas trop…\r\nIl détournait le regard.\r\n__Keito : Mais je trouve cela un peu gonflé de sa part de s’auto proclamer membre de l’équipe principale. Et toi Noah, tu en penses quoi ?\r\nEt voilà l’inévitable, il me demandait mon avis sur la question. Heureusement que ma réponse était déjà toute trouvée.\r\n__Moi : Tous ce qui m’importe c’est de me qualifier au rang A, le reste je m’en fous.\r\nCertes, il m’était surprenant de savoir qu’une fille jouait dans un domaine masculin mais ça s’arrêtait là. Le comment ou le pourquoi ne m’intéressait pas. Mon objectif momentané étais de me isser au rang A afin d’intégrer directement l’équipe principale du lycée pour pouvoir jouer en matchs officiels. Et ces qualifs étaient un moyen sûr à ne pas laisser passer.",
+    "image": "chapters/covers/KomikoAI_35_IGW77lg.png",
+    "order": 2,
+    "is_draft": false,
+    "is_premium": false,
+    "likes_count": 0,
+    "views_count": 0,
+    "created_at": "2026-09-11T13:43:50.804Z",
+    "updated_at": "2026-09-11T13:44:58.748Z"
+  }
+},
+{
+  "model": "works.chapter",
+  "pk": 3,
+  "fields": {
+    "work": "82307401-c7ee-4b7e-9c12-92fc98b72571",
+    "title": "Les qualifications",
+    "content": "Le club de basket-ball du lycée Taizen World School est constitué de 3 rangs bien distincts.\r\nLe 3 ème, le rang C est celui comportant majoritairement des novices dans le domaine et aussi ceux don’t les capacités sont assez faibles.\r\nLe second, le rang B regroupe des joueurs moyens, Ce rang constitue également une aide dans des cas d’urgence pour le rang superieure.\r\nEt le premier, le rang A compte en son sein les joueurs les plus performants du club et il est celui le plus important car d’elle dérive l’équipe principale.\r\nL’equipe principale du club de basket-ball est le seul autorisé  à jouer en tournoi officiel. De plus, un nouveau membre n’avait presque aucune chance de l’intégrer s’il ne se faisait pas  remarqué: De ce fait, la phase de qualification était un moyen plus facile et  rapide d’intégrer directemnt l’équipe principale et dont l’occasion ne se présenterait pas deux fois. Il était donc salutaire pour ma carrière de basketteur au sein de cet établissement. Je n’avais aucun droit à l’erreur.\r\n\r\nLes qualifications commençaient, Seito, Yuta et Miyura nous quittaient allant observer d’un peu plus loin et Keito, Rail, Clara et moi attendions notre tour. Ces qualifications se déroulaient en une phase de confrontation de 8 minutes où 10 participants, 5 vs 5 s’affrontaient jusqu’à l’épuisement totale du nombre de candidats. L’heure tournait, les participants s’aménuissaient, les confrontations se poursuivaient et je m’impatientais.\r\n\r\n__Rail: Nous serons les derniers à passer je suppose.\r\nDisait-il en tenant le centre de ses lunettes. Il ne restait en effet qu’n petit effectif, assez pour une dernière confrontation.\r\n__Keito: Vous croyez que c’est dû au fait que nos fiches ont eu un retard de dépôt?\r\n__Moi: Peut-être bien oui, mais retard ou pas ; je n’en peux plus d’attendre.\r\n__Prochains particpants…\r\n__Keito: Tiens, on appelle d’autres participants.\r\n_Masaru TOKITA, Kamashi TOWA, Komo WATANABE, Keito KIMITSU et Rail IMASE ; vous formerez l’éqipe A.\r\n__Keito: Nous sommes tous les deux dans la même équipe.\r\n__Rail: Il y’avait 95% de chance que ça arrive.\r\n__Keito: Bon ben à toute Noah. J’espère que tu seras dans la seconde équipe.\r\nRait et Keito montent sur le parquet\r\n__Morino TENJI, Ocho YACHITA, Noah ATSUMI…\r\n__Moi: C’est pas trop tôt.\r\nDisais-je en montant sur le parquet.\r\n__ Clara SPARKLES, Amori RESTUKI. Vous formerez l’équipe B\r\nClara s’avançait. Plusieurs messe basses se firent entendre.\r\n__Une fille!?\r\n__Qu’est ce qu’elle fait ici?!\r\n__Comment la direction a pu lui autoriser de participer?\r\n__AH AH, je vous parie qu’elle ne touchera même pas le ballon.\r\n__Evidement, aucun de ses coéquipier n’oserait le lui passer.\r\n\r\nBien évidement, elle faisait l’objet des discussions. Je l’avais oublié au bout d’un moment. Mais tout ce grabuge faisait ressurgir l’idée selon laquelle je devait m’allier à elle pendant cette confrontation. Et merde! Néanmoins, le plus important  était de m’admettre au rang A. Je me devais de [rendre des précotions.\r\n\r\nJ’allais vers deux de mes autres coéquipiers.\r\n__Moi: Ecoutz moi les gars…\r\nJe me mettais entre eux et posais chacun de mes coudes sur leurs épaules.\r\n__Moi:  …Je ne veux pas que votre façon de jouer soi perturbée par la présence d’une fille dans l’équipe. Jouez comme à votre habitude et s’il le faut, passez-lui le ballon. Compris?\r\n__Morino: Oui d’accord.\r\n__Ocho: Aucun problème.\r\nLeur réponse était succincte mais étonnement sincère. Je ne me doutais pas que ce serait aussi facile de les convaincre. Je ne suis peut-être pas nul dans l’ art de la persuasion en fait.\r\n\r\n__Moi: Alors nous sommes potes.\r\nJe les tapotais légerement l’épaule puis me retirais de l’autre côté du parquet. \r\n__Keito: Génial, puisque Noah est dans l’équipe adverse ; autant en profiter pour faire une pierre deux coups.\r\nDisait - it tout exité.\r\n__Rail: Ne t’emporte pas trop, le plus important en cet instant c’est de ce qualifier au rang A. Néanmoins, j’ai cette sensation d’impatience de voir Clara à l’oeuvre\r\n Sur le côté opposé du parquet.\r\nClara s’avançait vers moi.\r\n__Clara: Il me semble ne t’avoir rien demandé.\r\nElle gardait toujours cette expression impassible. Cependant, je ne voyais pas de quoi elle parlait.\r\n__Moi: Pardon mais je ne te suis pas là .\r\n__Clara: Je parle du fait que tu soies allé parlé aux autres.\r\n__Moi: Ne te méprend pas, je l’ai fait pour la bonne coordination de cette fichue équipe temporaire et non pour toi.\r\nEn fait, je l’avais fait pour ma propre personne, il ne faudrait surtout pas que mais coéquipiers me ralentissent à cause de la présence d’une fille dans parmi nous.\r\n__Clara: Soit.\r\nElle fait volte face, se dirigeant vers la raquette.\r\nJe ne pu m’empécher de penser que nous ne nous entendrions pas très bien elle et moi. Mais je m’enfiche un peu.\r\nIl manquait un candidat à l’appel.\r\n__Où  est Amori RETSUKI?\r\n__Me voilà.\r\nUn type au cheuveux blanc Argenté ayant à peu-près  ma taille montait sur le parquet.\r\n__Lui: Navré pour l’attente.\r\nC’était le dernier participants. Et en ce qui me consernait, c’est à cet instant que les qualifs allaient vraiment débutter.\r\n\r\n\r\n1\r\nLa confrontation était sur le point de commencer, les joueur se mettaient en place.\r\n\r\nL’arbitre s’avançait entre les meneurs et lançait le ballon en l’air. C’était partie pour 8 minutes.\r\nMorino et Keito ( lesméneurs ) sautent afin de rattraper le ballon que seul le plus rapide des deux pourra. C’est Keito qui fini vainqueur de cette breve confrontation, il se lance tout juste après vers le pagné adverse en dribblant.\r\nDétenteur de balle: Keito KIMITSU\r\n  Morino ressurgit quelques instant après devant lui et le surprend. Alors il passe le ballon à Ral qui se trouvait  à 3m derrière lui.\r\nDétenteur de balle: Rail IMASE\r\nIl continuait en dribblant. Et alors qu’il se rapprochait de la raquette ; Noah le lui arachait par surprise et fonçait  à vive allure vers la raquette adverse.\r\n__Pensées de Rail: Quelle vitesse.\r\nPensa t-il, mais cela ne l’impressionnait pas plusque ça.\r\nDétenteur de balle: Noah ATSUMI.\r\nRail se décidait alors à le poursuivre, cependant Ocho le marquait. Keito se trouvait lui aussi marqué par Morino lorsque Noah le dépassait.\r\n__Keito: Bon sang, empêchez-le de passer! \r\nDit-il à la seconde à ses autres coéquipiers libres (Masaru, Komio, Kamashi) puis il se mis à fixer Morino qui le marquait.\r\n__Pensées de Keito: Ce type ne me lachera pas aussi facilement.\r\nMasaru et Komio attaque Noah au même moment. Celui-ci effectue un volte sur lui-même avant de passer Masaru puis exécute une feinte gauche afin de dépasser Komio. Ayant dépassé la ligne médiane et se raprochant de la raquette, il prend l’initiative de tirer  mais Kamashi l’en empêche en repoussant le ballon vers la droite de la raquette.\r\n__Kamashi: Désolé  mais je ne pouvais pas me permettre de te laisser mettre ce pagné.\r\n__Pensées de Noah: Eh merde, j’ai raté ,on coup.\r\nEn rebondissant, le ballon se retrouve entre les mains de Clara qui se trouvait à proximité. La quasitotalité des joueurs présents sur le parquet étaient surpris.\r\n__Pensée de Rail: Comment a-t-elle-pu arriver à l’autre bout du parquet?\r\n__Pensées de Keito: Je ne l’ai même pas vu pénetrer la raquette.\r\n  Clara s’apprettait à shooter. Cependant , Masaru se mit au travers de son chemin mais elle allait quand  même tirer malgré  ça.Elle sautait ainsi, Masaru lui rejoignit aussitôtdans son saut tendant de ce fait son bras droit dans le but de l’embrouiller dans son shoot.\r\n__Masaru: T’es bien plus courte que moi, le ballon ne pourra pas entré dans le pagné.\r\nAffirmait-il etant encore tous les deux dans les airs.\r\nSon regard disait beaucoup, il n’ y avit que du mépris dans ses yeux à son égard. Parcontre, Clara elle restait indifférente comme à son habitude et tirait.\r\nPour l’assemblée entière; il était évident qu’elle allait certainement manquer son tir au vu des contraintes imposées. Mais alors que le ballon effectuait sa trajectoire, on vint à se rendre compte que le ballon ne se dirigeait pas vers l’arçot\r\n__Keito: Mais attend, ce n’était pas un tir…\r\nIl aperçoit Amori se précipiter vers le ballon.\r\n__Keito: C’est un allé-up!\r\nAmori rattrapait le ballon et mettait le pagné. Le ballon rebondit j’usqu’à sortir du parquet.\r\nL’assemblée etait encore plus étonnée.\r\n\r\nDepuis l’escalier au dessus des tribunes, au lieu où Seito, Yuta et Miyura observait:\r\n__Yuta: D’abord la fille qui sort de nulpart et ensuite le mec au cheuveux argentés.  Ces deux là ont bien prévu leur coup.\r\n__Seito: En effet, ils ont tous les deux dû échafoder ce plan dans dès que le match a été lancé. L’attention que les autres portaient sur Noah leur a permi de filer en douce dans la raquette adverse. C’est assez futé oui.\r\n\r\nAu  même moment sur le parquet:\r\n__Clara: La prochaine fois au lieu de foncer tête baissée, pense à réfléchire avant de te lancer.\r\nDisait-elle à Noah pendant qu’elle le dépassait se rendant dans leur zone.\r\nCelui-ci laisse échappé un petit grognement étouffé.\r\nAmori va vers lui.\r\n__Amori: Ecoute, toi et moi allions faire un truc.\r\n__Noah: Qu’est ce que tu me veux toi?\r\n __Amori: Te proposer de former une alliance…\r\n\r\nAu même moment: \r\n__Keito: L’équipe de Noah nous mène déjà 2-0. C’est pas bon ça.\r\nMarmonait-il dans sa barbe en se frautant la tête avec sa main gauche, tenant le ballo dans l’autre.\r\n__Rail: Donne-moi ça.\r\nRail arrivait, lui arrachant le balon des mains.\r\n__Keito: EH, qu’est ce qui te prend?\r\n__Rail: On change de formation. Je prends le rôe de méneur.\r\n__Keito: Ah oui? Et pourrai-je savoir pourquoi MONSIEUR prend une telle décision sur un coup de tête?\r\nRail soupire d’exaspération avant de reprendre la parole:\r\n__Rail: A ton avis, pourquoi étions-nous marqués?\r\nLa conversation s’arrêtait là , Keito avait compris où son ami voulait en venir. Ce fut comme un petit déclique.\r\n\r\nLa confrontation se poursuit\r\nDétenteur de balle: Rail IMASE\r\nRial avançait en dribblant. Ocho l’attaquait  mais il le passait en effectuant une double feinte . C’était au tours d’Amori de se mettre sur sa route.\r\nEvénement: Rail IMASE Vs Amori RETSUKI\r\n__Pensées de Rail: Ils ne respectent pas leur formation de départ. Je vois.  \r\nAlors, passait le ballon à Masaru qui le passa tout de suite après à Keito qui se tennait vers la gauche de la raquette adverse.\r\n__Pensée de Keito:  Il est temps de passer au choses sérieuses.\r\nDétenteur de balle: Keito KIMITSU\r\nIl fonçait en dribblant se rapprochant de plus en plus de la raquette. Il dunke mais sur le point d’entrer dans le pagnié ; le tir est intercepté par Clara qui le rejette dans la direction de Noah en dehors de la raquette. Celui-ci le rattrapait .\r\nDétenteur de balle: Noah ATSUMI\r\nAlors qu’il se retournait pour poursuivre sa course, Rail surgissait devant lui.\r\nEvénement: Noah ATSUMI Vs Rail IMASE\r\n __Rail: Tu m’as surpris tout-à-l’heure je te l’accorde. Néanmoins, une fois n’est pas toujours coutume. \r\nIl passait Noah d’une manière assez rapide que l’on ne pouvais voir la façon à laquelle il lui avait arraché le ballon.\r\n__Pensée de Noah:  C’était quoi cette technique? Il était bien trop rapide pour qu’il s’agisse d’un simple cross.\r\nDétenteur de balle: Rail IMASE\r\nRail avançait en dribblant. Morino et Ocho se trouvaient assez loin de là. Quand à Amori lui, il se retrouvait marqué par Masaru et Kamashi et Keito ne lachait pas Clara d’une semelle après le coup qu’elle a dû faire tout-à-l’heure, il avait ses raisons de se méfier d’elle. \r\nC’est ainsi que la voie libre, Rail shoota se trouvant dos à dos avec Noah. Le ballon entrait dans le pagné: C’était un 3 points.\r\nScore:              02 - 03 \r\n   \r\n__Pensées de Noah; Et merde, putain! Je n’ai rien pu  faire.\r\nRail et keito se retiraient en tiéquant.\r\nNoah avait l’air perdu et énervé; Clara l’approchait.\r\n__Clara: Je te passe le ballon, et toi tu fais de ton mieux pour le perdre.  Mais bon…\r\nElle se dirigeait vers le centre du parquet, Amori lui vennait vers la première ligne.\r\nNoah déjà sur les nerfs, le fut encore plus face à la remarque de Clara.\r\n___Noah: J’accepte de m’allier à vous.\r\nIl s’adressait à Amori qui fit détournait le regard vers lui pour plus d’attention.\r\n__Noah: Je me suis trouvé un mobil. C’est carrément excitant.\r\nIl souriait d’extase.\r\nTemps restant: \t\t8 minutes\r\nClara s’attardait vers la raquette adverse en dribblant.\r\nDétenteur de balle: Clara SPARKLES\r\nKamashi l’attaquait et elle lui passait en cross. Elle pénétrait la première ligne. S’appercevant de l’arrivé de Rail, il fit une passe pour Noah qui se trouvait à 4m en diagonal d’elle à gauche. Ainsi, c’était à lui de poursuivre.\r\nDétenteur de balle: Noah ATSUMI\r\nIl effectuait, un double sprint sur Komio, pénétrait la raquette et se trouvait face à Keito.\r\nEvénement: Noah ATSUMI Vs Keito KIMITSU\r\n__Keito; Dis Noah, on ce le fait ce face à face?\r\n\r\n\r\n2\r\n(Noah ATSUMI)\r\n \r\nDeux minutes s’étaient écroulées depuis le début de la confrontation.\r\n__Keito: Dis Noah, on ce le fait ce face à face?\r\nIl sautait sur l’occasion pour concrétiser sa demande en duel.\r\n__Moi:  Ce sera quand tu voudras mais pas maintenat.\r\nLe défier n’était pas ma priorité, en ce moment  j’avais bien d’autre chats à fouéter.\r\nJe passais le ballon à Amori qui se trouvait à quelques mètres horizontalement à moi. Masaru l’attaquait à son tour. Je profitais ainsi de l’attention que Keito portait sur le ballon pour pénétrer la raquette. Amori me refilait tout de suite le ballon et je mettait directement le pagné.\r\nMe démarquer des autres joueurs. Je me le devais si je voulais m’admettre au rang A.\r\nLa confrontation continuait.\r\nDétenteur de balle: Komio WANABE\r\nKomio s’avançait en dribblant et se retrouvait attaqué par Morino et Ocho.Il fit la passe à Rail mais celle-ci est interceptée par Clara se dirigeant droit vers le pagné adverse.\r\nFaudrait l’admettre, cette fille est une As du fofilage.\r\nDétenteur de balle: Clara SPARKLES.\r\nJe me trouvais de l’autre côté de la ligne médiane du camp adverse.. Voulant me rapprocher de la première ligne, Keito me marqua.\r\n__Keito: Pas si vite.\r\n Amori de  son côté(A l’autre bout de la ligne médiane) se retrouvait doublement marqué par Masaru et Komio. Clara se retrouvait contre Rail. Face au dribble éclaire de Rail, je ne pensais pas qu’elle pourrais s’en sortir facilement.\r\nEvénement: Clara SPARKLES Vs Rail IMASE\r\n__Rail: Tu ne te débrouilles pas si mal en fait, Mais essaie d’esquiver ça.\r\nIl effectuait son dribble éclair. Mais après l’avoir traversé; il se rendait compte qu’il ne lui avait pas arraché  le ballon: Celui-ci ne lui avait pas quitté  d’une semelle et elle se rapprochait de la raquette en dribblant.\r\nL’on pouvait décrire la surprise de Rail et de Keito à la seule expression de leurs visage. Celà  vallait de même pour moi. Comment-avait-elle pu russire là oùmoi j’avais échoué? Avait-elle trouvé    la faille de la technique de Rail? Si tel était le cas, force était de reconnaitre qu’elle avait du talent.\r\nClara tire et met un trois point. \r\nScore:              07 - 03 \r\nRail récupérait sans attendre le ballon et se dirigeait droit vers notre pagné:\r\nDétenteur de balle: Rail IMASE\r\nFace à celà, Clara partait sur le champ à sa poursuite et Amori réussissait à se défaire des griffes de Masaru et Komio le poursuivant à son tour.\r\nC’est seulement à ce moment là que je me rendis  compte que Keito ne me marquait plus et après m’être retourné, il était déjà dans la raquette . Rail lui passait la balle et il se jettait férocement sur l’arçeau et mettait le pagné. Cela se passa à une vitesse   éclair que j’eu à peine le temps d’atteindre la ligne médiane. \r\nScore:              07 - 05 \r\nOcho récupérait le ballon et se mettait à dribbler. \r\n__Ocho: Allé les gars, ce pagné es.\r\n__Amori: Bouge de là.\r\nAmori lui ravissait le ballon et s’avançait , cette action surpris un bon nombre de joueurs excepté ceux qui comprenais…\r\nAmori avançait et se retrouvait face à Keito:\r\n Evénement: Amori RETSUKI Vs Keito KIMITSU\r\nCe fut un vrai duel de force: Cross droit, cross gauche, sprint…Aucun des deux ne se laissait dominer par l’autre.\r\n__Keito: T’es sacrément résistant toi.\r\n__Amori: J’en dirais autant de toi.\r\nMorino venait vers eux.\r\n__Morino:  Par ici, je suis démarqué:\r\nIl signalait   Amori puisqu’il n’était qu’à 4 mètres de sa position. Seulement, Amori choisissait de me passer le ballon à moi qui me trouvais à 7  mètres de sa position par passe aerienne. Je le receptionais. \r\nDétenteur de balle: Noah ATSUMI\r\nCelà m’arrangeait en quelque sorte car…\r\nRail venais dans ma direction. \r\n…J’allais enfin me défouler.\r\nJe me retrouvais face à lui après la 1ere ligne.\r\nEvénement: Noah ATSUMI Vs Rail IMASE\r\nJe dribblais encore plus rapidement.\r\n__Rail: Nous nous affrontons bien trop souvent je pense.\r\n__Moi: T’as raison. Alors…que dirais-tu de bouffer ça!\r\nJ’éffectuais un marcher et tirait malgrès la présence de Rail. Bien évidement, ce n’était pas réellement un tir. Jeprofitais de l’attention qu’avait Rail sur le ballon puor le passer du côté  opposé . le ballon rebondisait sur l’arceau, je le rattrapais puis je mis directement le pagné.\r\nPendant ces qualifs et sur ce parquet, seul le talent primait. La coordination, le jeu d’équipe sont le moindre importance.Tout se jouait sur les aptitudes individuelles. De ce fait, tous les coups étaient permis.\r\nRail récupérait le ballon et l’envoyait vers Keito à l’autre bout du terrain. Keito saute pour le récepter et tire dans la même action met le pagné. Ni Morino, ni Komio n’eurent le temps d’agir et Claraet moi étions dans la zone adverse. \r\nScore:              09 - 08 \r\nL’égoisme était le principe mê passer haut la main ces qualifs. Et ça, nous cinq l’avions compris(Rail, Keito, Amori, Clara et moi).\r\n\r\n\r\n3\r\nL’égo, une caractéristique prédominante chez les joueurs. Que ce soit pour les basketteurs, les foot-balleurs, les hand-balleurs et bien d’autres ; chacun d’entre eux est animé d’un sentiment bien précis:”L’envie d’êre au dessus de tous les autres”. De ce fait, bien qu’ils pratiquent un sport collectif, cela n’omet pas le fait qu’ils agissent parfois pour eux même dans le seul but de briller devant les autres joueurs et même devant ses coéquipiers. Ce sentiment était la règle d’or pour ces qualifications.Ils étaient organisés dans le seul but de recruter des joueurs performants peu importe leur jeu d’équipe. Car dans ce club, seul le talent primait. Ainsi, les participants se devaient d’être égoistes.\r\nLes minutes passaient, la confrontation se poursuivait. Noah, Clara, Amori, Rail et Keito enchainaient les pagnés. C’était une confrontation de 3 contre 2 au lieu de 5 Vs 5 ignorant totalement leurs autres coéquipiers.\r\nL’attention était à son comble et les spectateurs taient stupéfaits. C’était probablement le match le plus palpitant de ces qualifications. Il ne restait pas plus d’une minute et le score était de 16 partout.\r\nNoah interceptait le ballon alors que Keito le mettait dans le pagné.  Le ballon attérissait hors du parquet. Masaru allait le récupérer.\r\n__Pensées de Rail: Ce match est trop serré; on ne peut quand même pas  finir à égalité:\r\n Masaru lui passait le ballon. Sur le point de le rattraper Amori s’interposait et interceptait la passe fonçant tout de suite en dribblant.\r\n Détenteur de balle: Amori RETSUKI\r\nRail se mettait aussitôt à sa poursuite et se retrouvait en face de lui à un mètre après la ligne médiane. Amori passait directement le ballon à Clara qui se trouvait à 4 mètres vers sa gauche horizentalement à sa position par rapport au parquet. Celle-ci s’attarde aussitôvers le pagné.\r\nDétenteur de balle: Clara SPARKLES\r\nKomio et Kamashi l’attaquait et elle brisait leur défonce. Elle pénetrait la 1ere ligne s’aprétant ainsi à tirer. Masaru s’interposait entre elle et le pagné. Elle passa de ce fait le ballon à Noah (Elle effectuait une passe aerienne). Noah qui se trouvait de l’autre côté  de la ligne médiane le réceptait et profitait de cette prise pour se faufiler vers le pagné à  vive allure.\r\nTout se passait tellement vite que ni Komio, ni Kamashi, ni Ocho , ni Morino et encore moins Morino arrivaient à suivre.\r\nDétenteur de balle: Noah ATSUMI\r\nKeito l’attaquait et s’acharnait sur lui. De leur côté, Clara était marquée par Komio, Masaru et Kamashi et Amori compte à lui essayait d’échapper à Rail sans grand succès.\r\n__Pensée de Masaru: Marquer une meuf à 3, quelle indignation.\r\n__Pensées de Komio: Y a pas le choix, c’est la seule chose que l’on puisse faire. Si on lui lâche, ce type lui passera le ballon.\r\nIl faisait allusion à Noah qui se trouvait face à Keito.\r\nNoah s’efforç ait pour passer Keito, il finis par y arriver. Le compte à rebourt était lancé. Voyant le peu de temps qui lui restait, Noah se décidait à shooter. Avant qu’il puisse l’effectuer, la sirène retentis: c’était la fin de la confrontation.\r\nClara était la première à se retirer du parquet. Puis venait Amori, Keito,  Rail et ainsi suivèrent tous les autres. Noah laissait tomber le ballon avec rage et se retirait le dernier. Il alla s’assoire dans les tribunes. Clara venait vers lui.       \r\n  \r\n\r\n__Noah: Qu’est ce qu’il y a?\r\nDisait-il d’un air blasé.\r\n__Clara: Pourquoi tu n’as pas tiré.\r\nFace à sa question, Noah fit un soupire d’exaspération.  “Elle me demande vraiment pourquoi je n’ai pas tiré, séieux!?”, se demandait-il au fond de lui.\r\n__Noah: Je n’en ai pas eu le temps, tout simplement…\r\n__Clara: Biensur que tu en avais du temps, il restait encore 2 secondes avant la fin.\r\n__Noah: Et alors…? \r\n__Clara: Tirer n’est qu’une question de 4/5 de second, alors oui tu aurais pu tirer.\r\nNoah: Je te rappelle que plus l’on est éloigné de l’arçot, plus le fait de shooter prend du temps.\r\n__Clara: Ces deux secondes étaient suffisantes.\r\n__Noah: Quoi?!\r\nmédiane devait t’en en prendre 7/4. Alors, tu avais largement le temps.\r\n__Noah: Ah,j’en ai rien à foutre. De toutes façon shooter n’a jamais été mon point fort.De plus, nous avons fait match nul alors….\r\nIl rallait le regard détourné:\r\n__Noah: Même-ci j’aurais préféré un résultat un peu plus différent.\r\nAmori arrivait et s’assayait sur l’une des places.\r\n__Amori: Dites, vous pensez qu’on sera qualifié au rang A? Perso, j’en sais pas trop.\r\n__Clara: L’epreuve technique s’est bien déroulée, reste à voir la suite.\r\n__Keito: Eh Noah!…\r\nIl s’assayait sur le siege à côté de celui de Noah et mis sa main autour de ses epaules.\r\n__Keito: …Tu t’es bien défoulé tout-à-l’heure, on se refait une partie à la fin?\r\n__Noah: On vera.\r\nRail arrivait et se mettait face à Clara.\r\n__Rail: Je dois bien avoué qui je ne te croyais pas aussi douée, t’avoir vu à l’oeuvre m’a bien épaté.\r\n__Clara: Nul besoin de me rapporter cela, l’apprehension que vous avez tous de moi et de mon basket m’est égal.\r\n__Rail: Certes, mais je me devais de te le dire pour corriger ces préjugés que je me suis faits sur ta personne.\r\nMalgré l’indifférence de la jeune fille, Rail continuait. Il voulait définir de bonnes bases avec elle.\r\n__Clara: Soit,je te l’accorde.\r\n\r\nL’un des organisateurs se mis au centre du parquet et attirait l’attention des candidats.\r\n__Que les candidats don’t je vais citer les noms me rejoignent sur ce parquet.\r\n__ça y est\r\n__Je me demande quel rang j’ai pu intégrer.    \r\nMarmonaient certains candidats.\r\nLe monsieur se mit à appeller plusieurs candidats aui respecterent la consigne de monter sur le parquet d’un air joyeux. Mais Noah, Clara, Amori, Keito et Rail ne furent pas appelé.\r\nQuasiment la moitié des candidats furent appelés.\r\n__Bien, pour vous qui m’aviez rejoind sur ce parquet…\r\nIl affichait un sourir presque radieux\r\n--…Vous êtes tous disqualifiés.\r\nL’expression joyeuse qu’il arborait devint subitement froide.\r\nCela laissa les candidats concernés confus.\r\n__Hein, comment est-ce possible?\r\n__On peut nous expliquer?!\r\n__Comment pouvons-nous être disqualifiés c’est incensé!\r\n__Je confirme\r\nIls montraient clairement leur mécontentement.\r\n__Le monsieur: Incensé vous dites, dans ce monde tout comme dans les activités  sportives, seule une affirmation de soi et de sa survie compte. Ainsi, les personnes ne pouvant pas s’affirmer n’y font pas long feu. De ce fait, des joueurs depourvus d’ego n’ont aucun moyen d’avancer et n‘ont donc aucune place dans ce club…\r\nIl dégageait une hora imposante qui laissait les candidats sans voix.\r\n__Le monsieur: Je vous prie de vous retirer car votre chemin s’arret ici.\r\nLes candidats concernés se dirigerent tous vers la sortie, certains la mine morfondu tandis que d’autres dégageant une colere à peine dissimulée.\r\n__Merde…\r\n___Tch, et dire que j’étais un rand A  au collège, ce club est vraiment une merde.\r\nUne fois le gymnase libéré; le monsieur continuait\r\n__Le monsieur: Bien, vous venez de passer la premiere epreuve de ces qualification, au vu des resultats obtenus. L’épreuve suivante se tiendra ce week-end, le lieu et l’heure  vous sera communiqué  ulterieurement. C’etait tout pour aujourd’hui.\r\nIl se retirsait.\r\n__Une seconde, de quelle autre epreuve parle-t-il?\r\n__T’étais  aucourant toi?\r\n__Biensur que non wesh\r\n__On ne nous avait pas dit que ces qualifications se feraient sur plusieurs epreuves\r\nMarmonaient certains candidats se retirant peu à peu.\r\n__Noah: Keito, Rail ; vous étiez  aucourant de ça ?\r\n__Keito: Pas du tout.  \r\n__Rail: Le moins du monde.\r\n__Clara: Vous vous attendiez que cela se deroule sur une seule manche? Si tel etait le cas, le rang A serait à la portée de presque tout le monde. Ce serait beaucoup trop simple.\r\n__Amori: Effectivement, ce club ne compte que recruter les meilleurs. Les disqualifications ont été amorcés dès  la première epreuve, on peut en conclure qu’au fur et à mésure qu’on avancera, le nombre de candidats diminuera. Ilest clair que le but de ces qualififs est d’eliminer le plus de candidats que possible et cela sans la moindre pitié.\r\n__Je suis épaté tellement vos parole sont pleines de verité.\r\nDisait Seito, qui se rapprochait d’eux accompagné de Yuta et Miyura.\r\n__Seito: Félicitation les mecs, vous passez la premiere epreuve, c’est deja un grand pas.\r\n__Keito: Ne te fout pas de nos geule, passer une epreuve ne signifie rien.\r\n__Seito: T’es mechant.\r\nDisait-il d’un air morosse, pendant ce temps, Clara se retirait.\r\n__Miyura: Clara, attends…\r\nElle  l’emboitait le pas.\r\n__Clara: Qu’y a t-il?\r\nDemandait Clara en stoppant sa marche.\r\n__Miyura: La façon don’t tu as joué tout-à-l’heure était bluffante, tu es sacrement douée et…\r\n__Clara: Et?\r\n__Miyura: T’es sur le point de t’en aller n’est ce pas? Nous pouvant faire le chemin jusqu’à l’entrée du lycée ensemble, qu’en dis-tu?",
+    "image": "chapters/covers/KomikoAI_11.png",
+    "order": 3,
+    "is_draft": true,
+    "is_premium": false,
+    "likes_count": 0,
+    "views_count": 0,
+    "created_at": "2026-09-11T13:47:25.932Z",
+    "updated_at": "2026-09-11T13:47:25.932Z"
+  }
+},
+{
+  "model": "works.chapter",
+  "pk": 4,
+  "fields": {
+    "work": "84f582b7-5fd1-4d91-864f-126381021216",
+    "title": "Prologue.",
+    "content": "Nélius était un jeune homme animé par une ambition fervente. Son rêve n'était pas simplement une chimère d'enfant, mais une aspiration profonde à bâtir une société où chacun serait doté des mêmes droits. Pour lui, cette quête était un devoir sacré, un impératif dans la révolution qui secouait son pays.\r\nEn 2025, à l'âge de 17 ans, il avait franchi les portes de l'institut Ucac-Icam au Cameroun, plongeant avec détermination dans des études d'ingénierie. Cinq années plus tard, il obtenait son diplôme, mais sa soif de connaissance ne s'arrêtait pas là. En 2031, il poursuivait ses efforts en décrochant un mastère spécialisé, achevant ainsi son parcours académique à 24 ans.\r\nFort de ces acquis, Nélius projetait de retourner au Congo-Brazzaville, son pays natal, où il espérait transformer ses idéaux en actions concrètes, semant les graines d'un avenir meilleur pour tous.",
+    "image": "chapters/covers/KomikoAI_2.png",
+    "order": 1,
+    "is_draft": false,
+    "is_premium": false,
+    "likes_count": 1,
+    "views_count": 0,
+    "created_at": "2026-09-11T14:56:49.273Z",
+    "updated_at": "2026-09-11T14:56:49.273Z"
+  }
+},
+{
+  "model": "works.chapter",
+  "pk": 5,
+  "fields": {
+    "work": "2a063390-3a6f-4b70-87d3-8285ee7dec04",
+    "title": "Prologue",
+    "content": "La Ville était agitée.\r\n-Non !\r\n-A l’aide !\r\n-Non ! Par pitier !\r\n -Nyr.\r\nLe gamin se réveillait en sursaut.\r\n-Un cauchemard ?\r\nSon oncle qui étudiait lui posait la question.\r\n-Oui, enfin je crois (je ne m’en souviens quasiment plus)\r\nIl se passait la main dans les cheuveux.\r\n-Les garçons, à table !\r\nUne voix féminine raisonnait depuis le salon. Le gamin se précipitait hors de la chambre, tandis que l’adolescent (son oncle) sortait calmement.\r\n-Me voilà !\r\nLe gamin glissait le long des escaliers jusqu’à atterrir.\r\n-doucement Nyr, tu pourrais te faire mal.\r\nIl allait s’assoir pendant que sa mère lui parlait.\r\n-Ce gamin est un vrai petit garnement, le réprimander ne sert à rien.\r\nRévoqua l’ado\r\n-Mais quand même.\r\nLa famille passe à table. Le gamin englouti son repas mais s’arrête subitement.\r\n-Nyr, quelque chose ne va pas ? Pourquoi tu ne manges plus ?\r\nDemandait la mère inquiète.\r\n-Je ne te l’ai pas dit ? Nyr a fait un cauchemard tout à l’heure. Fallait le voir, il était très apeuré le pauvre.\r\nIl taquinait son neuveux.\r\n-Ce n’est même pas vrai, je n’étais pas apeuré !\r\nIl se levait de son siège.\r\n-Comment peux-tu en être aussi sûr ?\r\n-Maman, ne l’écoute pas !\r\n-Si sœurette, écoute moi jusqu’au bout.  \r\n-Arrête de mentir !\r\n-Mais je ne mens pas.\r\nLa mère de Nyr les observait en riant dans le silence.\r\n- Ce n’est pas drôle !...\r\n-Les garçons, je comprends que chacun de vous veut prouver qu’il a raison. Seulement, est-ce vraiment nécessaire ? \r\n-Mais maman, je dis la vérité.\r\n-Nyr, tu as beau être courageux mon fils ; il n’y a aucun mal à avoir peur. Cela est dans l’ordre naturel des choses. Et toi Ryan cesse un peu de le taquiner voyant.\r\n-Ok, ok, je ne m’en prendrais plus au bébé à maman.\r\n-Je ne suis pas un bébé.\r\n-si tu le dis. Bon, je dois filer. Je vous laisse, ciao !\r\nIl quittait la table.\r\n-Tu pars déjà à l’académie ?\r\nDemandais la mère de Nyr.\r\n-oui, j’ai un examen sur les aptitudes en temps réel ce matin.\r\n-Je vois, passe une bonne journée alors.\r\n-attend, je viens avec toi.\r\nNyr engloutissait rapidement le reste de son bol et quittait la table.\r\n-Mais doucement, tu pourrais avaler de travers.\r\n-C’est bon mom, faut pas t’inquiéter pour si peu.\r\nIl enfilait ses chaussures et rejoignait Ryan à porte.\r\n-A ce soir !\r\nDisait Nyr puis il claquait la porte derrière eux.\r\n-Oui, à ce soir.\r\nDans les rues de la ville.\r\n-Dis, pourquoi tu m’as suivi hein ?\r\n-je ne te suis pas, moi je vais autre part.\r\n-Oh, bonjour les jeunes. Vous allez bien ?\r\n-Bonjour Edouard, oui nous allons bien. Et toi, comment te portes-tu ?\r\nRyan répondait au marchand de fruits.\r\n-Juste comme d’habitude. Mais on dirait que ça ne va pas très forte pour le jeune Nyr ; qu’est-ce que t’as gamin ?\r\n-Juste une nervosité passagère.\r\nSa voix était à peine audible.\r\n-Waouh, tu t’exprimes bien pour un gamin, tu feras un parfait étudiant à l’académie c’est sûr.\r\n-Qu’est-ce que tu racontes, je n’ai aucune intention d’aller à cette académie.\r\n-Tu as parfaitement raison, Nyr fera un parfait étudiant.\r\n-Eh, et mon avis alors. Ça compte pour du beurre !\r\n-Nyr !\r\nUn gamin du même âge que Nyr venait vers eux.\r\n-Théo ?\r\n-Bonjour monsieur Edouard, bonjour monsieur Ryan.\r\n-Bonjour Théodore, ça roule ?\r\n-Ne l’appelle pas monsieur, il ne le mérite pas.\r\n-Toi alors. Bon, je dois me grouiller si je ne veux pas être en retard à l’évaluation. A toute.\r\nRyan s’éloignait. Les garçons se regardèrent, sourièrent puis se mirent à courir dans les ruent bandées. Ils escaladaient les murs tout en causant du grabuge sur leur passage. \r\nSur le pont de la grande place :\r\n-Nyr, savais-tu qu’au-delà de cette rivière, tout au centre de cette forêt vivent des créatures terrifiantes et abominables ?\r\n-Non, tout ce que je sais, c’est que c’est une forêt assez vaste et inexplorée.\r\n-Et à ton avis, pourquoi personne ne s’y aventure alors ?\r\n-Parce qu’elle abrite plusieurs félins et reptiles dangereux. \r\n-Non, ça c’est ce que l’Etat veux faire croire aux citoyens, en réalité c’est parce qu’il y vit des créatures des créatures démoniaques : les slocups !\r\n-Des…slocups ?\r\n-Oui c’est ça, et ils sont vraiment terrifiants.\r\nNyr éclatait de rire.\r\n-hahaha, serieux Théo ; qu’es-tu allé lire cette fois-ci hahaha\r\nIl ne cessait pas de rire.\r\n-C’est réel je te dis. Et c’est aussi pour leur combattre que l’académie a été créée !\r\n-Ah, oui ? T’insinue que Ryan passe son temps à tuer des créatures, et puis quoi encore. Tu devrais vraiment arrêter de lire ces trucs.\r\n-Laisse tomber, de toutes les façons tu ne voudras jamais me comprendre.\r\nThéodore regardait loin vers l’avant. Nyr le remarquait.\r\n-Qu’est-ce que tu regardes comme-ça…Oh, mais c’est Myane. My… ! \r\n-Attends !\r\nThéodore l’arrêtait les joues toutes rousses.\r\n-Mais qu’est ce qui t’prend ?\r\n-Ne l’appelle pas, pas maintenant.\r\n-hein, pour quelle raison ? Et, pourquoi t’es tout rouge d’un coup ?\r\n-tu veux vraiment que je te le redise ?\r\n-ouais, je ne sais pas.\r\n-Arrête de jouer les ignorants.\r\n-pouf, je ne te comprends pas. Si tu l’aime tant t’as qu’à le lui dire, c’est pas compliqué. Myan…\r\n-bien sûre que ça l’est. Tu ne peux pas comprendre.\r\n-de toutes les façons, je ne comprends jamais ce que tu dis.\r\n-eh les garçons!\r\nUne fille blonde s’approchait d’eux.\r\n-vous allez bien ?\r\nElle abordait un sourire chaleureux.\r\n-oui ça roule pour moi.\r\n-Théo, est ce que tu vas bien ? Tu es tout rouge.\r\nElle posait sa main sur son front.\r\n-t’es malade ?\r\n-non, je vais bien. J’ai juste pris un coup de chaleur c’est tout.\r\n-laissez-moi deviner, vous avez passez votre temps à courir dans tout le quartier n’est-ce pas.\r\n-Oui, on ne peut rien te cacher.\r\n-hu hu…Alors, vous devez avoir faim.\r\nElle présentait le panier repas qu’elle dissimulait.\r\n-ouais, moi j’ai vraiment la dale.\r\nNyr allait vers la pleine.\r\n-Vous venez ?\r\n\r\nils installaient sur la grande pleine au bord de la rivière. \r\n-dites les garçons, vous aviez déjà pensé à ce que vous allez faire plutard ? il y a tellement de choix.\r\n-moi j’irai à l’académie. Je compte bien devenir un chasseur de slocups !\r\nThéo répondait sans hésitation.\r\n-et tu recommence avec tes histoires de siloc je ne sais pas quoi. Ça n’existe pas je t’ai dit.\r\n-bien sûr que si. Et c’est slocup pas siloc.\r\n-ça revient au même.\r\n-pas du tout.\r\n-les slocup…\r\nMyane prononçait ces mots\r\n-myane, toi au moins tu les connais\r\n-j’en ai déjà entendu parler, mais cela était très vague. En plus, nombreux parmi ceux qui en entendent parler les prennent pour de simples histoires...\r\n-vraiment à dormir debout.\r\nJ’ajoutais mon propre commentaire.\r\n-…mais cela m’intrigue de connaitre leur lien avec l’académie. Alors, j’ai décidé de l’intégrer.\r\n-c’est super, je suis content pour vous deux.\r\nNyr s’allongeait sur le gazon et regardait vers le ciel. Et a cru apercevoir pendant une seconde, une silhouette qui survolait le ciel. Cependant, il osait croire que c’était un effet d’optique.\r\n-et toi Nyr, tu feras quoi.\r\nDemandait Myane\r\n-bof, aucune idée.\r\nNyr ne savait vraiment pas quoi faire, tout ce qu’il voulait c’était m’amuser, manger et dormir.\r\n-alors tu n’as qu’à rejoindre l’académie toi aussi.\r\n-du tout.\r\nThéo lui  proposait, mais il savait ce qu’il avait derrière la tête et il ne voulait absolument pas faire la même chose que Ryan.\r\n-je pense que Théo a raison, ton sens de la logique est un atout qui te serait bien utile là-bas.\r\n-c’est dommage mais tant pis.\r\n-tu dis ça, mais tu n’as clairement pas l’air désolé.\r\nRemarquait – elle\r\n-mais pourquoi tu ne veux y aller, ton oncle y est pourtant. Ce serait même un grand atout pour toi.\r\nDemandais Théo\r\n-c’est ça le problème, je n’ai aucune envie de suivre ses pas. Je veux faire quelque chose par moi – même. \r\n-je vois c’est compréhensible. Mais cela reste pour autant dommage…\r\nUne brise légère se mis à souffler pendant que Théo tenait son discours.\r\n-j’aurais voulu que l’on reste tous les trois ensembles. Bien que tu ne me croies pas et même si la paix règne aujourd’hui ; rien ne dit que les slocups ne débarqueront jamais ici. Cela pourrait bien arriver dans un an, un mois, demain, aujourd’hui, dans une heure ou peut – être même…dans une seconde.\r\nUne grande vague de fumée ressortant de la forêt survolait le ciel et se dirigeait vers la ville. Les yeux de Nyr toujours rivés au ciel, cette fois – ci, ça ne pouvait pas être un effet d’optique. Car la chose qui s’en suivait était plus que bizarre.\r\n-hein, c’est quoi ce truc ?\r\nNyr attirait ainsi l’attention des autres. Au premier abord, cela ne semblait qu’être bizarre ; mais avec une concentration plus nette sur la chose, il voyait l’horreur qui s’y cachait.                           \r\nDes squelettes fantômes sortaient d’une sorte de trou noir et se dirigeait dans la ville. \r\n-des slocups…\r\nMurmurait Théo pendant que Myane se sentait horrifier devant un tel fait. C’est alors que des hurlements commençaient à jaillir du village et comme - ci cela ne suffisait pas, Nyr se rappelait clairement du rêve de ce matin.\r\nLe calvaire ne faisait que commencer.",
+    "image": "chapters/covers/.jpg",
+    "order": 1,
+    "is_draft": false,
+    "is_premium": false,
+    "likes_count": 1,
+    "views_count": 0,
+    "created_at": "2026-09-12T10:45:50.162Z",
+    "updated_at": "2026-09-12T10:45:50.162Z"
+  }
+},
+{
+  "model": "works.chapter",
+  "pk": 6,
+  "fields": {
+    "work": "cb435485-a141-4120-a07e-6b9cdf38907b",
+    "title": "Prologue",
+    "content": "Sous une nuit de pleine lune, une sœur parcourait lentement les couloirs sombres de l’église, guidée par la lueur vacillante d’une lampe à huile qu’elle tenait entre ses mains. L’éclat tremblotant projetait sur les murs de hautes ombres mouvantes, comme si les pierres elles-mêmes retenaient leur souffle.\r\nElle pénétra dans la chapelle, s’arrêta devant la statue de la Vierge Marie, posa la lame qu’elle portait à ses côtés, s’agenouilla, puis joignit les mains pour prier.\r\nLe silence sacré des lieux n’était troublé que par la symphonie nocturne des cigales, des grillons et des chouettes. Une musique apaisante... jusqu’à ce qu’un bruit lointain, venu du couloir, ne vienne rompre cette quiétude.\r\nAlertée, la jeune sœur acheva rapidement sa prière et se releva, tournant son attention vers l’origine du son. Alors qu’elle approchait de la porte menant au couloir, elle s’arrêta brusquement.\r\n— Y a-t-il quelqu’un ? lança-t-elle d’une voix incertaine.\r\nEn guise de réponse, un nouveau bruit, plus net, se fit entendre. On aurait dit qu’on frappait un meuble à coups répétés. Hésitante, elle jeta un coup d’œil vers l’obscurité. Après tout, que risquait-elle dans une église ? Elle se rassura tant bien que mal, puis franchit le seuil.\r\nÀ peine avait-elle passé la porte qu’un autre bruit surgit, la faisant sursauter. La lampe trembla dans sa main. Le son provenait du fond du couloir, là où la lumière ne portait pas. Elle s’y engagea, pas à pas, les coups devenant de plus en plus réguliers.\r\nPeu à peu, une silhouette se dessina dans la pénombre : celle d’un homme de dos.\r\n— Est-ce que tout va bien, monsieur ? demanda-t-elle.\r\nL’individu s’immobilisa. Elle n’était plus qu’à trois mètres de lui.\r\n— Si je vous disais que non, m’aideriez-vous ? répondit-il d’une voix grave, presque élégante.\r\nIl ne se retourna pas. Sa main droite dissimulait toujours son visage. La sœur, croyant à un jeune touriste désorienté, ne s’en inquiéta pas. Ce genre d’incident n’était pas inédit.\r\n— Si cela est en mon pouvoir, bien sûr que oui, répondit-elle.\r\n— Parfait…\r\nIl esquissa un sourire et tourna lentement le visage vers elle.\r\n— … parce qu’il se trouve que tu feras parfaitement l’affaire.\r\nSa voix devenait plus grave, plus rauque à mesure qu’il parlait. Et lorsqu’il abaissa sa main, la sœur fut saisie d’horreur. Ses yeux étaient d’un rouge sanglant, sans pupille. Deux puits écarlates au fond desquels brillait une folie surnaturelle.\r\n— Monsieur… êtes-vous malade ? Vos yeux…\r\nSa voix tremblait. L’homme ricana doucement.\r\n— Oh, ce n’est qu’un détail. Voyons maintenant… comment tu pourrais bien m’aider.\r\nDes cornes noires jaillirent lentement de son crâne. Terrifiée, la sœur laissa tomber sa lampe, qui s’écrasa au sol. Elle porta instinctivement les mains à sa bouche.\r\n— Qui êtes-vous… ?\r\n— Cela aussi n’est qu’un détail, souffla la créature. Voyons voir…\r\nIl tendit lentement la main vers elle. C’en fut trop. Elle tourna les talons et s’enfuit.\r\nElle courait à perdre haleine, ses pas résonnant dans l’église comme les battements affolés de son cœur. Les couloirs semblaient s’étirer à l’infini. La lumière vacillante derrière elle ne suffisait plus à guider ses pas.\r\nSoudain, un mur. Elle avait atteint le bout d’un couloir sans issue.\r\n— Cela ne sert à rien de fuir, dit la voix derrière elle. Tu ne sortiras que lorsque je l’aurai décidé.\r\nÀ bout de souffle, anéantie, la sœur s’effondra contre le mur. Elle vit la silhouette se rapprocher lentement, implacable.\r\n— N’as-tu pas dit que tu allais m’aider ? ajouta la créature avec un sourire déformé.\r\nElle priait de toutes ses forces pour que ce cauchemar ne soit qu’un songe. Mais tout était bien réel. Comment cela avait-il pu si mal tourner ? Comment une telle abomination avait-elle pu pénétrer dans un lieu sacré ? Et surtout… comment avait-elle pu se retrouver face au diable en personne ?\r\nLa créature s’accroupit face à elle. Leurs regards se croisèrent. Ses yeux ruisselaient de larmes silencieuses. Ceux de la bête brillaient d’une lueur infernale.\r\n— À présent… commençons, murmura-t-il.\r\n\r\nLa nuit avait été un véritable cauchemar pour la jeune sœur. Elle hurlait, se débattait, mais aucun secours ne vint. C’était comme si elle avait été arrachée du monde réel, piégée dans une dimension parallèle où ses appels se perdaient dans le vide. La créature, une entité d’ombre et de terreur, accomplit son œuvre impie avant de disparaître dans un vortex noir apparu dans le mur. À peine avait-elle traversé que l'ouverture se referma, ne laissant derrière elle qu’un silence glacial… et une victime brisée.\r\n\r\nLa sœur gisait au sol, à demi dévêtue, sanglotante, le regard vide. C’est à ce moment qu’un prêtre, effectuant sa ronde de l’aurore, entra dans la pièce, la lampe tremblante à la main. Lorsqu’il aperçut la scène, il accourut, affolé.\r\n\r\n— Que s’est-il passé ici ?\r\n\r\nÀ cette voix, la sœur leva lentement la tête. Ses yeux baignés de larmes étaient remplis de honte et de douleur.\r\n— Mon père… je suis désolée. Je… je n’ai rien pu faire. Il… c’était le Diable. Il m’a… Je ne mérite plus d’être une sœur. Je ne mérite même pas le pardon du Seigneur…\r\n\r\nSa voix se brisait, ses mots tremblaient, hachés par le choc. Le prêtre, lui, comprit aussitôt qu’il ne s’agissait pas d’un événement ordinaire. Depuis quelque temps, il sentait une présence obscure rôder dans l’église, quelque chose d’insaisissable, dissimulé aux sens. C’était d’ailleurs ce malaise qui l’avait poussé à faire ces rondes matinales. Mais il n’aurait jamais imaginé tomber sur une telle horreur… sur une âme profanée par une entité démoniaque.\r\nIl se maudit intérieurement de n’avoir rien perçu, alors qu’il était passé non loin de là, plus tôt. Comme si l’agression s’était déroulée dans une poche invisible de réalité, à l’abri de toute lumière.\r\nAvec compassion et pudeur, il ôta son manteau et le posa doucement sur les épaules de la sœur, qui grelottait toujours.\r\n— Ne craignez plus rien… c’est fini maintenant. Venez.\r\n\r\nLe prêtre aida la sœur à se relever, doucement, comme si le moindre geste pouvait raviver sa douleur. Elle s’appuyait sur lui, chancelante, vidée de toute force. Ils marchèrent lentement jusqu’à la petite pièce attenante à la sacristie, là où il pourrait l’installer, la réchauffer, la rassurer. Le silence entre eux était lourd, mais nécessaire. Les mots étaient encore trop fragiles pour porter le poids du traumatisme.\r\nUne fois assise, la sœur serrait le manteau contre elle, comme une barrière entre son corps souillé et le monde. Le prêtre, après un instant d’hésitation, s’agenouilla face à elle.\r\n— Écoutez-moi bien, ma fille. Ce qui vous est arrivé n’est pas de ce monde. Vous n’êtes pas responsable. Et Dieu ne vous abandonne pas. Jamais.\r\n\r\nElle hocha la tête, mais son regard restait distant. Le père savait qu’il faudrait du temps. Il le lui donnerait. Mais il savait aussi qu’il devait agir.\r\nIl se releva et se dirigea vers la bibliothèque secrète de l’église. Parmi les grimoires anciens, les chroniques oubliées, se trouvaient peut-être des réponses. Cette entité… ce démon… il n’était pas le fruit du hasard. Il y avait un but, un schéma, une origine.\r\nEt il était temps de le découvrir.\r\n\r\nQuelques semaines plus tard, une vérité bouleversante éclata : la sœur Marie était enceinte. La douleur, la honte et l'amertume la rongeaient, mais malgré tout, elle ne pouvait se résoudre à rejeter l'enfant. Car, bien qu’il fût issu d’un acte monstrueux, d’une union forcée avec une entité démoniaque, ce bébé à naître était, lui, un innocent… un être humain.\r\nC’était aussi la conviction du père Caled. Ses recherches sur les intentions réelles du démon n’avaient guère progressé, mais une chose lui semblait de plus en plus certaine : cet enfant était au cœur du mystère. Sa venue n’était pas un hasard. Il représentait une clé peut-être celle de la damnation, ou celle de la rédemption.\r\nDans l’enceinte de l’église, seuls quelques fidèles de confiance furent mis au courant. Le père Caled décida que la sœur Marie devait rester au monastère jusqu’à l’accouchement. Le mal devait être affronté à sa source, et ce lieu, sanctifié, serait peut-être le seul rempart face à l’inconnu.\r\nMarie fut mise en quarantaine, non comme une punition, mais comme une mesure de protection — pour elle, pour l’enfant, et pour tous les autres. Durant cette période, elle assista à de nombreux cultes de purification, reçut des bénédictions régulières, et suivit des séminaires spirituels individuels. Ces moments, mêlant foi et silence, étaient à la fois un refuge et une épreuve.\r\nLe moment tant redouté finit par arriver. Sous une nuit d’orage, alors que le tonnerre grondait sur les vitraux de l’abbaye, sœur Marie entamait son travail. La douleur, profonde et déchirante, résonnait à travers les murs épais de sa cellule, transformée en chambre de fortune. Le père Caled, les mains jointes, priait sans relâche à quelques pas, impuissant mais présent.\r\nLorsque tout fut terminé, la sage-femme sortit précipitamment pour appeler le prêtre. Il accourut aussitôt. À peine eut-il franchi le seuil qu’il s’arrêta net, stupéfait.\r\nDeux bébés. Pas un… mais deux. De parfaits jumeaux, paisibles, blottis l’un contre l’autre dans un berceau improvisé. Leurs cheveux, d’un noir d’ébène éclatant, rappelaient ceux de leur mère. La surprise était totale : le père Caled, par précaution, avait interdit toute visite médicale moderne, préférant une approche antique, discrète. Même le sexe de l’enfant n’avait jamais été déterminé. Et voilà qu’ils étaient deux.\r\nSœur Marie, affaiblie, les paupières lourdes, appela doucement :\r\n— Mon père…\r\nIl s’approcha d’elle, s’agenouillant à ses côtés. Elle souriait, malgré la douleur, un sourire empreint d’amour et de résignation.\r\n— Ce sont mes enfants… mais ce sont aussi les vôtres, désormais. Protégez-les… guidez-les loin des ténèbres d’où ils viennent. Ne les laissez pas devenir ce que leur père voulait…\r\nDes larmes brillèrent dans les yeux du prêtre, mais il hocha lentement la tête, la gorge nouée.\r\n— Je vous le jure, Marie. Par la lumière du Seigneur, ils seront élevés dans la foi, dans la vérité… et dans l’amour.\r\nElle tourna un dernier regard vers les nouveau-nés, son souffle s’affaiblissant.\r\n— Merci… père…\r\nDans un soupir presque imperceptible, elle ferma les yeux. Son visage se figea dans une expression de paix que la souffrance ne parvint pas à effacer. Marie venait de rendre l’âme.\r\nLe silence s’installa. Seuls les pleurs doux des nourrissons brisaient l’air chargé d’encens et de chagrin.\r\nLe père Caled, le cœur lourd, se redressa. Il prit un moment pour observer les jumeaux, leurs visages paisibles et pourtant déjà empreints d’un mystère insondable. Il tendit les bras, en souleva un, puis l’autre, les tenant tour à tour contre lui comme un père le ferait avec ses propres fils.\r\n— Vous êtes venus au monde dans la douleur, mais vous n’y appartiendrez pas… Vous serez la lumière dans l’ombre, les sentinelles entre les mondes.\r\nIl posa à nouveau les deux bébés dans le berceau, puis, après un instant de silence, prononça avec solennité :\r\n— Toi, l’aîné, au regard déterminé… tu porteras le nom de Van.\r\nIl se tourna vers le second, plus calme, mais dont les yeux semblaient sonder les tréfonds de l’âme.\r\n— Et toi, le cadet, à la présence silencieuse… tu seras Vlad.\r\nIl traça un signe de croix au-dessus d’eux.\r\n— Que le Seigneur vous garde, mes fils… et que vous soyez forts, car le monde ne vous attend pas… mais il aura besoin de vous.\r\nEt c’est ainsi que débuta leur histoire celle de deux frères nés d’un cauchemar… mais porteurs d’un espoir oublié.",
+    "image": "chapters/covers/148c4b7b-5b4e-42d0-8eca-8059781f1936.jpg",
+    "order": 1,
+    "is_draft": false,
+    "is_premium": false,
+    "likes_count": 0,
+    "views_count": 0,
+    "created_at": "2026-09-12T11:00:56.570Z",
+    "updated_at": "2026-09-12T11:00:56.570Z"
+  }
+},
+{
+  "model": "works.comment",
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "work": "82307401-c7ee-4b7e-9c12-92fc98b72571",
+    "chapter": null,
+    "parent": null,
+    "content": "Très intéressant☺️",
+    "is_pinned": false,
+    "likes_count": 0,
+    "created_at": "2026-09-12T10:31:38.991Z",
+    "updated_at": "2026-09-12T10:31:38.992Z"
+  }
+},
+{
+  "model": "works.like",
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "work": "82307401-c7ee-4b7e-9c12-92fc98b72571",
+    "chapter": null,
+    "comment": null,
+    "created_at": "2026-09-11T14:42:34.936Z"
+  }
+},
+{
+  "model": "works.like",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "work": "82307401-c7ee-4b7e-9c12-92fc98b72571",
+    "chapter": null,
+    "comment": null,
+    "created_at": "2026-09-11T15:12:21.484Z"
+  }
+},
+{
+  "model": "works.like",
+  "pk": 3,
+  "fields": {
+    "user": 1,
+    "work": "84f582b7-5fd1-4d91-864f-126381021216",
+    "chapter": null,
+    "comment": null,
+    "created_at": "2026-09-12T10:23:21.719Z"
+  }
+},
+{
+  "model": "works.like",
+  "pk": 4,
+  "fields": {
+    "user": 1,
+    "work": null,
+    "chapter": 4,
+    "comment": null,
+    "created_at": "2026-09-12T10:23:54.246Z"
+  }
+},
+{
+  "model": "works.like",
+  "pk": 5,
+  "fields": {
+    "user": 2,
+    "work": null,
+    "chapter": 1,
+    "comment": null,
+    "created_at": "2026-09-12T10:30:38.803Z"
+  }
+},
+{
+  "model": "works.like",
+  "pk": 6,
+  "fields": {
+    "user": 1,
+    "work": "2a063390-3a6f-4b70-87d3-8285ee7dec04",
+    "chapter": null,
+    "comment": null,
+    "created_at": "2026-09-12T12:29:10.381Z"
+  }
+},
+{
+  "model": "works.like",
+  "pk": 8,
+  "fields": {
+    "user": 2,
+    "work": null,
+    "chapter": 5,
+    "comment": null,
+    "created_at": "2026-09-14T14:26:03.469Z"
+  }
+},
+{
+  "model": "works.library",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "work": "82307401-c7ee-4b7e-9c12-92fc98b72571",
+    "added_at": "2026-09-11T13:49:57.143Z"
+  }
+},
+{
+  "model": "works.library",
+  "pk": 4,
+  "fields": {
+    "user": 1,
+    "work": "84f582b7-5fd1-4d91-864f-126381021216",
+    "added_at": "2026-09-12T10:23:26.633Z"
+  }
+},
+{
+  "model": "works.library",
+  "pk": 5,
+  "fields": {
+    "user": 1,
+    "work": "2a063390-3a6f-4b70-87d3-8285ee7dec04",
+    "added_at": "2026-09-12T12:29:15.124Z"
+  }
+},
+{
+  "model": "works.library",
+  "pk": 6,
+  "fields": {
+    "user": 2,
+    "work": "84f582b7-5fd1-4d91-864f-126381021216",
+    "added_at": "2026-09-12T12:41:10.811Z"
+  }
+},
+{
+  "model": "works.library",
+  "pk": 8,
+  "fields": {
+    "user": 2,
+    "work": "82307401-c7ee-4b7e-9c12-92fc98b72571",
+    "added_at": "2026-09-14T15:20:48.172Z"
+  }
+},
+{
+  "model": "works.readingprogress",
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "work": "82307401-c7ee-4b7e-9c12-92fc98b72571",
+    "chapter": 1,
+    "progress_percent": 45,
+    "scroll_position": 6433,
+    "last_read_at": "2026-09-14T13:22:11.919Z"
+  }
+},
+{
+  "model": "works.readingprogress",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "work": "82307401-c7ee-4b7e-9c12-92fc98b72571",
+    "chapter": 2,
+    "progress_percent": 96,
+    "scroll_position": 18273,
+    "last_read_at": "2026-09-14T15:52:01.364Z"
+  }
+},
+{
+  "model": "works.readingprogress",
+  "pk": 4,
+  "fields": {
+    "user": 1,
+    "work": "84f582b7-5fd1-4d91-864f-126381021216",
+    "chapter": 4,
+    "progress_percent": 0,
+    "scroll_position": 0,
+    "last_read_at": "2026-09-12T15:25:34.087Z"
+  }
+}
+]
