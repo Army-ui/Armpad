@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
-import socket
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
 
-# ═══════════════════════════════════════════════════════════
-# FORCE IPv4 — Contourne le bug IPv6 de Python sous Windows
-# ═══════════════════════════════════════════════════════════
-_orig_getaddrinfo = socket.getaddrinfo
-def _ipv4_only(host, port, family=0, type=0, proto=0, flags=0):
-    return _orig_getaddrinfo(host, port, socket.AF_INET, type, proto, flags)
-socket.getaddrinfo = _ipv4_only
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# ═══════════════════════════════════════════════════════════
+# ⚠️ HACK IPv4 RETIRÉ — Incompatible avec Vercel serverless
+#    (le hack socket.getaddrinfo fonctionne seulement en local)
+# ═══════════════════════════════════════════════════════════
 
 # ── Sécurité ────────────────────────────────────────────────
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-key')
-DEBUG = config('DEBUG', default=True, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+DEBUG = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS',
+    default='localhost,127.0.0.1,.vercel.app'
+).split(',')
 
 # ── Applications ────────────────────────────────────────────
 INSTALLED_APPS = [
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ← AJOUT
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -76,7 +76,9 @@ TEMPLATES = [
     },
 ]
 
-# ── Base de données PostgreSQL (Local ou Supabase) ──────────
+# ═══════════════════════════════════════════════════════════
+#  BASE DE DONNÉES PostgreSQL (Supabase Session Pooler)
+# ═══════════════════════════════════════════════════════════
 DB_HOST = config('DB_HOST', default='localhost')
 
 DATABASES = {
@@ -89,7 +91,10 @@ DATABASES = {
         'PORT': config('DB_PORT', default='5432'),
         'OPTIONS': {
             'sslmode': 'require' if 'supabase' in DB_HOST else 'prefer',
+            'connect_timeout': 10,
         },
+        'CONN_MAX_AGE': 600,
+        'CONN_HEALTH_CHECKS': True,
     }
 }
 
@@ -141,48 +146,100 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-# ── CORS ────────────────────────────────────────────────────
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-]
+# ═══════════════════════════════════════════════════════════
+#  CORS — adapté pour Vercel
+# ═══════════════════════════════════════════════════════════
+CORS_ALLOWED_ORIGINS = config(
+    'CORS_ALLOWED_ORIGINS',
+    default='http://localhost:3000,http://localhost:8000,http://127.0.0.1:8000'
+).split(',')
 
-# ── Cache Redis ─────────────────────────────────────────────
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': config('REDIS_URL', default='redis://localhost:6379/0'),
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        },
+CORS_ALLOW_CREDENTIALS = True
+
+# ═══════════════════════════════════════════════════════════
+#  CACHE Redis — Upstash compatible
+# ═══════════════════════════════════════════════════════════
+REDIS_URL = config('REDIS_URL', default='')
+
+if REDIS_URL and REDIS_URL.startswith('redis'):
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': REDIS_URL,
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+                'SSL': REDIS_URL.startswith('rediss://'),
+            },
+        }
     }
-}
+else:
+    # Fallback local (LocMemCache) si Redis indisponible
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
+    }
 
 # ── Stripe ──────────────────────────────────────────────────
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY', default='')
 STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY', default='')
 STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET', default='')
 
-# ── Fichiers statiques ──────────────────────────────────────
+# ═══════════════════════════════════════════════════════════
+#  FICHIERS STATIQUES — WhiteNoise (Vercel ready)
+# ═══════════════════════════════════════════════════════════
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+
+# ═══ WhiteNoise pour compression + cache ═══
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",  # sera remplacé par Supabase Storage
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # ═══════════════════════════════════════════════════════════
-# EMAIL — Gmail SSL (port 465)
+#  MEDIA — Supabase Storage (Vercel ne peut pas écrire en local)
+# ═══════════════════════════════════════════════════════════
+SUPABASE_URL = config('SUPABASE_URL', default='')
+SUPABASE_SERVICE_KEY = config('SUPABASE_SERVICE_KEY', default='')
+SUPABASE_BUCKET = config('SUPABASE_BUCKET', default='armpad-media')
+
+if SUPABASE_URL and SUPABASE_SERVICE_KEY:
+    # Utilise Supabase Storage en production
+    STORAGES["default"] = {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "OPTIONS": {
+            "access_key": config('SUPABASE_S3_ACCESS_KEY', default=''),
+            "secret_key": config('SUPABASE_S3_SECRET_KEY', default=''),
+            "bucket_name": SUPABASE_BUCKET,
+            "endpoint_url": f"{SUPABASE_URL}/storage/v1/s3",
+            "region_name": config('SUPABASE_REGION', default='eu-west-1'),
+            "file_overwrite": False,
+            "querystring_auth": False,
+        },
+    }
+    MEDIA_URL = f'{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/'
+else:
+    # Local dev : stockage sur disque
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
+
+# ═══════════════════════════════════════════════════════════
+#  EMAIL — Gmail SSL (port 465)
 # ═══════════════════════════════════════════════════════════
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
-EMAIL_PORT = 465                    # ← 465 au lieu de 587
-EMAIL_USE_SSL = True                # ← SSL direct (pas TLS)
-EMAIL_USE_TLS = False               # ← TLS désactivé
+EMAIL_PORT = config('EMAIL_PORT', default=465, cast=int)
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=True, cast=bool)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
 
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='armyvanga@gmail.com')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='samuxysbwnmcvymr')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 
 DEFAULT_FROM_EMAIL = 'Armpad <' + EMAIL_HOST_USER + '>'
 SERVER_EMAIL = EMAIL_HOST_USER
@@ -202,16 +259,29 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # ── Sessions ────────────────────────────────────────────────
-SESSION_COOKIE_AGE = 86400 * 30  # 30 jours
+SESSION_COOKIE_AGE = 86400 * 30
 SESSION_SAVE_EVERY_REQUEST = True
 SESSION_COOKIE_HTTPONLY = True
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-]
+# ═══════════════════════════════════════════════════════════
+#  SÉCURITÉ PRODUCTION (Vercel = HTTPS)
+# ═══════════════════════════════════════════════════════════
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# ── URL du site (pour les emails de vérification) ───────────
+# ── CSRF Trusted Origins ────────────────────────────────────
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS',
+    default='http://localhost:8000,http://127.0.0.1:8000'
+).split(',')
+
+# ── URL du site ─────────────────────────────────────────────
 SITE_URL = config('SITE_URL', default='http://127.0.0.1:8000')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
