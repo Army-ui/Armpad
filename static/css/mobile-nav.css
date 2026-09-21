@@ -1,0 +1,154 @@
+/* ============================================================
+   NAVIGATION MOBILE STYLE META (Facebook/Instagram)
+   ============================================================ */
+
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border-top: 1.5px solid var(--border);
+  z-index: 150;
+  padding: 0 8px;
+  padding-bottom: env(safe-area-inset-bottom); /* Support iPhone */
+  box-shadow: 0 -2px 16px var(--shadow);
+}
+
+.bottom-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 8px 4px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 500;
+  position: relative;
+  transition: color var(--transition), transform var(--transition);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.bottom-nav-item i {
+  font-size: 20px;
+  transition: transform var(--transition);
+}
+
+.bottom-nav-item:active {
+  transform: scale(0.9);
+}
+
+.bottom-nav-item.active {
+  color: var(--primary);
+}
+
+.bottom-nav-item.active i {
+  transform: scale(1.1);
+}
+
+/* Bouton central (Écrire) mis en avant */
+.bottom-nav-item.center-btn {
+  position: relative;
+}
+
+.bottom-nav-item.center-btn i {
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  color: white !important;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-top: -22px;
+  box-shadow: 0 4px 14px var(--shadow-lg);
+  border: 3px solid var(--bg);
+}
+
+.bottom-nav-item.center-btn span {
+  margin-top: 2px;
+}
+
+/* Badge sur l'icône notification/chat */
+.bottom-nav-item .badge {
+  position: absolute;
+  top: 2px;
+  right: calc(50% - 14px);
+  background: var(--primary);
+  color: white;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border: 2px solid var(--bg);
+}
+
+/* Masquer le bottom-nav sur desktop */
+@media (min-width: 769px) {
+  .bottom-nav {
+    display: none !important;
+  }
+}
+
+/* Afficher uniquement sur mobile */
+@media (max-width: 768px) {
+  .bottom-nav {
+    display: flex;
+  }
+
+  /* Ajouter un espace en bas du body pour ne pas cacher le contenu */
+  body {
+    padding-bottom: 60px;
+  }
+
+  /* Masquer les boutons de navigation de la navbar sur mobile */
+  .navbar-actions .nav-desktop-only {
+    display: none !important;
+  }
+
+  /* Réduire la navbar */
+  .navbar {
+    height: 56px;
+    padding: 0 12px;
+  }
+
+  .navbar-brand {
+    font-size: 18px;
+  }
+
+  .navbar-brand img {
+    height: 32px;
+  }
+
+  /* Le bouton thème reste visible en haut à droite */
+  .navbar-actions {
+    gap: 6px;
+  }
+
+  .navbar-actions .theme-toggle,
+  .navbar-actions .notif-toggle {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+
+  /* Footer avec marge pour le bottom nav */
+  .footer {
+    padding-bottom: 80px;
+  }
+}
