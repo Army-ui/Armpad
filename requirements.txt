@@ -1,0 +1,42 @@
+# ═══════════════════════════════════════════════════════
+#  Armpad — Requirements
+#  Python 3.11+ recommandé
+# ═══════════════════════════════════════════════════════
+
+# ── Core ────────────────────────────────────────────────
+Django>=5.0,<5.2
+asgiref>=3.7
+sqlparse>=0.4
+
+# ── Base de données (Supabase / PostgreSQL) ─────────────
+psycopg[binary]>=3.1
+dj-database-url>=2.1
+
+# ── Variables d'environnement ───────────────────────────
+python-dotenv>=1.0
+
+# ── Images & fichiers ───────────────────────────────────
+Pillow>=10.2
+
+# ── Supabase (Storage + API) ────────────────────────────
+supabase>=2.4
+
+# ── Redis (cache / sessions / Celery optionnel) ─────────
+redis>=5.0
+django-redis>=5.4
+
+# ── Stripe (paiements premium) ──────────────────────────
+stripe>=8.0
+
+# ── Email ───────────────────────────────────────────────
+# (Django gère le SMTP nativement, rien à installer)
+
+# ── Internationalisation ────────────────────────────────
+# (Django i18n est intégré)
+
+# ── Serveur de production (optionnel) ───────────────────
+gunicorn>=21.2
+whitenoise>=6.6
+
+# ── Sécurité / Déploiement ──────────────────────────────
+django-cors-headers>=4.3
