@@ -6,7 +6,7 @@ from decouple import config
 
 # ═══════════════════════════════════════════════════════════
 # FORCE IPv4 — Uniquement en local (Windows)
-# Sur Vercel : FORCE_IPV4=False
+# Sur Vercel : FORCE_IPV4=False (variable d'env)
 # ═══════════════════════════════════════════════════════════
 if config('FORCE_IPV4', default=False, cast=bool):
     import socket
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'drf_spectacular',
-    'storages',                    # ← AJOUT : Supabase Storage (S3)
+    'storages',
     'users',
     'works',
     'subscriptions',
@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',   # ← AJOUT
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -192,7 +192,7 @@ STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY', default='')
 STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET', default='')
 
 # ═══════════════════════════════════════════════════════════
-#  FICHIERS STATIQUES — WhiteNoise
+#  FICHIERS STATIQUES — WhiteNoise (Vercel ready)
 # ═══════════════════════════════════════════════════════════
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
@@ -235,13 +235,13 @@ else:
     MEDIA_ROOT = BASE_DIR / 'media'
 
 # ═══════════════════════════════════════════════════════════
-#  EMAIL — Gmail SSL (port 465)
+#  EMAIL — Gmail SSL (port 465) ⚠️ CORRIGÉ
 # ═══════════════════════════════════════════════════════════
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
-EMAIL_PORT = config('EMAIL_PORT', default=465, cast=int)
-EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=True, cast=bool)
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
+EMAIL_PORT = config('EMAIL_PORT', default=465, cast=int)            # ← 465 pour SSL
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=True, cast=bool)    # ← SSL activé
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)   # ← TLS désactivé (⚠️)
 
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
