@@ -2,11 +2,12 @@
 import os
 from pathlib import Path
 from datetime import timedelta
+from urllib.parse import urlparse
 from decouple import config
 
 # ═══════════════════════════════════════════════════════════
-# FORCE IPv4 — Uniquement en local (Windows)
-# Sur Vercel : FORCE_IPV4=False (variable d'env)
+# FORCE IPv4 — Uniquement si activé (Windows local)
+# Sur Vercel : FORCE_IPV4=False
 # ═══════════════════════════════════════════════════════════
 if config('FORCE_IPV4', default=False, cast=bool):
     import socket
@@ -85,20 +86,30 @@ TEMPLATES = [
 ]
 
 # ═══════════════════════════════════════════════════════════
-#  BASE DE DONNÉES — Supabase (Session Pooler)
+#  BASE DE DONNÉES — Supabase (POSTGRES_URL uniquement)
+#  ⚠️ Aucune configuration locale
 # ═══════════════════════════════════════════════════════════
-DB_HOST = config('DB_HOST', default='localhost')
+POSTGRES_URL = config('POSTGRES_URL', default='')
+
+if not POSTGRES_URL:
+    raise ValueError(
+        "POSTGRES_URL manquant. "
+        "Vérifie que l'intégration Supabase est connectée à Vercel "
+        "ou que POSTGRES_URL est défini dans le .env local."
+    )
+
+_url = urlparse(POSTGRES_URL)
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default='armpad_db'),
-        'USER': config('DB_USER', default='postgres'),
-        'PASSWORD': config('DB_PASSWORD', default=''),
-        'HOST': DB_HOST,
-        'PORT': config('DB_PORT', default='5432'),
+        'NAME': _url.path[1:],
+        'USER': _url.username,
+        'PASSWORD': _url.password,
+        'HOST': _url.hostname,
+        'PORT': _url.port or 5432,
         'OPTIONS': {
-            'sslmode': 'require' if 'supabase' in DB_HOST else 'prefer',
+            'sslmode': 'require',
             'connect_timeout': 10,
         },
         'CONN_MAX_AGE': 600,
@@ -164,7 +175,7 @@ CORS_ALLOWED_ORIGINS = config(
 CORS_ALLOW_CREDENTIALS = True
 
 # ═══════════════════════════════════════════════════════════
-#  CACHE Redis (Upstash sur Vercel, local en dev)
+#  CACHE Redis (Upstash)
 # ═══════════════════════════════════════════════════════════
 REDIS_URL = config('REDIS_URL', default='')
 
@@ -192,7 +203,7 @@ STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY', default='')
 STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET', default='')
 
 # ═══════════════════════════════════════════════════════════
-#  FICHIERS STATIQUES — WhiteNoise (Vercel ready)
+#  FICHIERS STATIQUES — WhiteNoise
 # ═══════════════════════════════════════════════════════════
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
@@ -208,14 +219,13 @@ STORAGES = {
 }
 
 # ═══════════════════════════════════════════════════════════
-#  MEDIA — Supabase Storage (Vercel ne peut pas écrire en local)
+#  MEDIA — Supabase Storage
 # ═══════════════════════════════════════════════════════════
 SUPABASE_URL = config('SUPABASE_URL', default='')
 SUPABASE_SERVICE_KEY = config('SUPABASE_SERVICE_KEY', default='')
 SUPABASE_BUCKET = config('SUPABASE_BUCKET', default='armpad-media')
 
 if SUPABASE_URL and SUPABASE_SERVICE_KEY:
-    # ── Supabase Storage (S3 compatible) ──
     STORAGES["default"] = {
         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
         "OPTIONS": {
@@ -230,18 +240,17 @@ if SUPABASE_URL and SUPABASE_SERVICE_KEY:
     }
     MEDIA_URL = f'{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/'
 else:
-    # ── Fallback local (dev) ──
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
 
 # ═══════════════════════════════════════════════════════════
-#  EMAIL — Gmail SSL (port 465) ⚠️ CORRIGÉ
+#  EMAIL — Gmail SSL (port 465)
 # ═══════════════════════════════════════════════════════════
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
-EMAIL_PORT = config('EMAIL_PORT', default=465, cast=int)            # ← 465 pour SSL
-EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=True, cast=bool)    # ← SSL activé
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)   # ← TLS désactivé (⚠️)
+EMAIL_PORT = config('EMAIL_PORT', default=465, cast=int)
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=True, cast=bool)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
 
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
@@ -269,7 +278,7 @@ SESSION_SAVE_EVERY_REQUEST = True
 SESSION_COOKIE_HTTPONLY = True
 
 # ═══════════════════════════════════════════════════════════
-#  SÉCURITÉ PRODUCTION (Vercel = HTTPS)
+#  SÉCURITÉ PRODUCTION
 # ═══════════════════════════════════════════════════════════
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
