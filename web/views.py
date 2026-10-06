@@ -55,7 +55,6 @@ class CatalogueView(ListView):
         if genre:
             qs = qs.filter(genre__slug=genre)
 
-        # ═══ Recherche multi-critères : titre, auteur, tags ═══
         search = self.request.GET.get('search')
         if search:
             search = search.strip()
@@ -157,13 +156,11 @@ class ChapterReaderView(DetailView):
 
         context['chapter_comments'] = chapter.comments.filter(parent=None).order_by('-created_at')
 
-        # ═══ CRUCIAL : Vérifier si l'œuvre est dans la bibliothèque ═══
         context['is_in_library'] = (
             self.request.user.is_authenticated and
             self.request.user.library.filter(work=work).exists()
         )
 
-        # ═══ POSITION DE SCROLL SAUVEGARDÉE ═══
         saved_scroll = 0
         if self.request.user.is_authenticated:
             progress = ReadingProgress.objects.filter(
@@ -185,11 +182,21 @@ class WorkEditorView(LoginRequiredMixin, CreateView):
     form_class = WorkForm
     template_name = 'armpad/work_editor.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['genres'] = Genre.objects.all().order_by('name_fr')
+        context['is_editing'] = False
+        return context
+
     def form_valid(self, form):
         form.instance.author = self.request.user
-        self.object = form.save()
-        messages.success(self.request, "Œuvre créée ! Ajoutez maintenant des chapitres.")
-        return redirect('web:edit_work', pk=self.object.pk)
+        try:
+            self.object = form.save()
+            messages.success(self.request, "Œuvre créée ! Ajoutez maintenant des chapitres.")
+            return redirect('web:edit_work', pk=self.object.pk)
+        except Exception as e:
+            messages.error(self.request, f"Erreur lors de la création : {e}")
+            return self.form_invalid(form)
 
 
 class WorkEditView(LoginRequiredMixin, UpdateView):
@@ -203,12 +210,17 @@ class WorkEditView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['chapters'] = self.object.chapters.all().order_by('order')
+        context['genres'] = Genre.objects.all().order_by('name_fr')
         context['is_editing'] = True
         return context
 
     def form_valid(self, form):
-        messages.success(self.request, "Œuvre mise à jour.")
-        return super().form_valid(form)
+        try:
+            messages.success(self.request, "Œuvre mise à jour.")
+            return super().form_valid(form)
+        except Exception as e:
+            messages.error(self.request, f"Erreur lors de la mise à jour : {e}")
+            return self.form_invalid(form)
 
     def get_success_url(self):
         return reverse_lazy('web:edit_work', kwargs={'pk': self.object.pk})
@@ -239,14 +251,22 @@ class ChapterEditorView(LoginRequiredMixin, CreateView):
         image_formset = context['image_formset']
         work = get_object_or_404(Work, id=self.kwargs['work_id'], author=self.request.user)
         form.instance.work = work
-        last_order = work.chapters.aggregate(models.Max('order'))['order__max'] or 0
-        form.instance.order = last_order + 1
-        self.object = form.save()
-        if image_formset.is_valid():
+
+        if not image_formset.is_valid():
+            messages.error(self.request, "Erreur dans les images du chapitre.")
+            return self.form_invalid(form)
+
+        try:
+            last_order = work.chapters.aggregate(models.Max('order'))['order__max'] or 0
+            form.instance.order = last_order + 1
+            self.object = form.save()
             image_formset.instance = self.object
             image_formset.save()
-        messages.success(self.request, f"Chapitre {self.object.order} ajouté !")
-        return redirect('web:edit_work', pk=work.pk)
+            messages.success(self.request, f"Chapitre {self.object.order} ajouté !")
+            return redirect('web:edit_work', pk=work.pk)
+        except Exception as e:
+            messages.error(self.request, f"Erreur lors de la création du chapitre : {e}")
+            return self.form_invalid(form)
 
 
 class ChapterEditView(LoginRequiredMixin, UpdateView):
@@ -270,12 +290,20 @@ class ChapterEditView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         context = self.get_context_data()
         image_formset = context['image_formset']
-        self.object = form.save()
-        if image_formset.is_valid():
+
+        if not image_formset.is_valid():
+            messages.error(self.request, "Erreur dans les images du chapitre.")
+            return self.form_invalid(form)
+
+        try:
+            self.object = form.save()
             image_formset.instance = self.object
             image_formset.save()
-        messages.success(self.request, "Chapitre mis à jour.")
-        return redirect('web:edit_work', pk=self.object.work.pk)
+            messages.success(self.request, "Chapitre mis à jour.")
+            return redirect('web:edit_work', pk=self.object.work.pk)
+        except Exception as e:
+            messages.error(self.request, f"Erreur lors de la mise à jour : {e}")
+            return self.form_invalid(form)
 
 
 # ═══════════════════════════════════════════════════════════
@@ -397,9 +425,8 @@ class LibraryView(LoginRequiredMixin, ListView):
 # API : TOGGLE LIBRARY
 # ═══════════════════════════════════════════════════════════
 
-class ToggleLibraryView(View):   # ← retirez LoginRequiredMixin
+class ToggleLibraryView(View):
     def post(self, request, work_id):
-        # Si non connecté, on renvoie un JSON avec un flag
         if not request.user.is_authenticated:
             return JsonResponse({
                 'status': 'not_authenticated',
@@ -415,7 +442,8 @@ class ToggleLibraryView(View):   # ← retirez LoginRequiredMixin
             Library.objects.create(user=request.user, work=work)
             is_in = True
         return JsonResponse({'is_in_library': is_in, 'status': 'ok'})
-    
+
+
 # ═══════════════════════════════════════════════════════════
 # API : TOGGLE LIKE ŒUVRE
 # ═══════════════════════════════════════════════════════════
