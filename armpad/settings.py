@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import ssl
 from pathlib import Path
 from datetime import timedelta
 from urllib.parse import urlparse
@@ -87,7 +88,7 @@ TEMPLATES = [
 
 # ═══════════════════════════════════════════════════════════
 #  BASE DE DONNÉES — Supabase (POSTGRES_URL uniquement)
-#  ⚠️ Aucune configuration locale
+#  ⚠️ CONN_MAX_AGE=0 pour éviter les timeouts du Session Pooler
 # ═══════════════════════════════════════════════════════════
 POSTGRES_URL = config('POSTGRES_URL', default='')
 
@@ -112,7 +113,7 @@ DATABASES = {
             'sslmode': 'require',
             'connect_timeout': 10,
         },
-        'CONN_MAX_AGE': 600,
+        'CONN_MAX_AGE': 0,              # ← CORRIGÉ : 0 au lieu de 600
         'CONN_HEALTH_CHECKS': True,
     }
 }
@@ -134,7 +135,7 @@ LANGUAGES = [
 ]
 TIME_ZONE = 'Africa/Brazzaville'
 USE_I18N = True
-USE_L10N = True
+# USE_L10N supprimé (déprécié dans Django 5)
 USE_TZ = True
 LOCALE_PATHS = [BASE_DIR / 'locale']
 
