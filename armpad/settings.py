@@ -87,7 +87,7 @@ TEMPLATES = [
 
 # ═══════════════════════════════════════════════════════════
 #  BASE DE DONNÉES — Supabase (POSTGRES_URL)
-#  ⚠️ Compatible Session Pooler (5432) ET Transaction Pooler (6543)
+#  Compatible Session Pooler (5432) ET Transaction Pooler (6543)
 # ═══════════════════════════════════════════════════════════
 POSTGRES_URL = config('POSTGRES_URL', default='')
 
@@ -112,9 +112,9 @@ DATABASES = {
             'connect_timeout': 10,
         },
         # ═══ Configuration CRITIQUE pour Supabase Pooler ═══
-        'CONN_MAX_AGE': 0,                          # Ferme la connexion à chaque requête
-        'CONN_HEALTH_CHECKS': False,                # Désactivé (le pooler gère)
-        'DISABLE_SERVER_SIDE_CURSORS': True,        # ⚠️ OBLIGATOIRE pour PgBouncer
+        'CONN_MAX_AGE': 0,
+        'CONN_HEALTH_CHECKS': False,
+        'DISABLE_SERVER_SIDE_CURSORS': True,   # OBLIGATOIRE pour PgBouncer
         'ATOMIC_REQUESTS': False,
         'AUTOCOMMIT': True,
     }
@@ -221,7 +221,8 @@ STORAGES = {
 }
 
 # ═══════════════════════════════════════════════════════════
-#  MEDIA — Supabase Storage
+#  MEDIA — Supabase Storage (S3 compatible)
+#  ⚠️ Corrections critiques : signature v4 + path addressing
 # ═══════════════════════════════════════════════════════════
 SUPABASE_URL = config('SUPABASE_URL', default='')
 SUPABASE_SERVICE_KEY = config('SUPABASE_SERVICE_KEY', default='')
@@ -238,6 +239,10 @@ if SUPABASE_URL and SUPABASE_SERVICE_KEY:
             "region_name": config('SUPABASE_REGION', default='eu-west-1'),
             "file_overwrite": False,
             "querystring_auth": False,
+            # ═══ CORRECTIONS CRITIQUES POUR SUPABASE S3 ═══
+            "signature_version": "s3v4",
+            "addressing_style": "path",
+            "default_acl": "public-read",
         },
     }
     MEDIA_URL = f'{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/'
