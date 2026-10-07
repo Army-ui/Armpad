@@ -114,7 +114,7 @@ DATABASES = {
         # ═══ Configuration CRITIQUE pour Supabase Pooler ═══
         'CONN_MAX_AGE': 0,
         'CONN_HEALTH_CHECKS': False,
-        'DISABLE_SERVER_SIDE_CURSORS': True,   # OBLIGATOIRE pour PgBouncer
+        'DISABLE_SERVER_SIDE_CURSORS': True,
         'ATOMIC_REQUESTS': False,
         'AUTOCOMMIT': True,
     }
@@ -222,7 +222,7 @@ STORAGES = {
 
 # ═══════════════════════════════════════════════════════════
 #  MEDIA — Supabase Storage (S3 compatible)
-#  ⚠️ Corrections critiques : signature v4 + path addressing
+#  ⚠️ PAS de default_acl : Supabase ne supporte pas les ACLs
 # ═══════════════════════════════════════════════════════════
 SUPABASE_URL = config('SUPABASE_URL', default='')
 SUPABASE_SERVICE_KEY = config('SUPABASE_SERVICE_KEY', default='')
@@ -239,10 +239,8 @@ if SUPABASE_URL and SUPABASE_SERVICE_KEY:
             "region_name": config('SUPABASE_REGION', default='eu-west-1'),
             "file_overwrite": False,
             "querystring_auth": False,
-            # ═══ CORRECTIONS CRITIQUES POUR SUPABASE S3 ═══
             "signature_version": "s3v4",
             "addressing_style": "path",
-            "default_acl": "public-read",
         },
     }
     MEDIA_URL = f'{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/'
