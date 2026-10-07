@@ -61,9 +61,10 @@ class WorkForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Ne rendre le champ genre obligatoire que s'il y a des genres disponibles
-        if not Genre.objects.exists():
-            self.fields['genre'].required = False
+        # ═══ FIX : Force le queryset trié ═══
+        self.fields['genre'].queryset = Genre.objects.all().order_by('name_fr')
+        self.fields['genre'].empty_label = "-- Choisir un genre --"
+        self.fields['genre'].required = False
 
     def clean_tags(self):
         """Nettoie la liste des tags."""
