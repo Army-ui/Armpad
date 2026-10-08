@@ -9,6 +9,8 @@ urlpatterns = [
     # ═══ i18n — DOIT être en premier ═══
     path('i18n/', include('django.conf.urls.i18n')),
 
+     path('rosetta/', include('rosetta.urls')), 
+
     # ═══ Admin ═══
     path('admin/', admin.site.urls),
 
