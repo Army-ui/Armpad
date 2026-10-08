@@ -19,7 +19,7 @@
         </button>
         <div class="reader-title-info">
             <h2>{{ chapter.title }}</h2>
-            <small>{{ work.title }} Â· {% trans "Ch." %} {{ chapter.order }}</small>
+            <small>{{ work.title }} · {% trans "Ch." %} {{ chapter.order }}</small>
         </div>
         <button class="chapters-btn" id="chapters-btn" title="{% trans 'Chapitres' %}">
             <i class="fa-solid fa-list"></i>
@@ -31,7 +31,7 @@
         {% for ch in work.chapters.all %}
             {% if not ch.is_draft or ch.work.author == user %}
                 <a href="{% url 'web:reader' work.id ch.order %}" class="reader-chapter-item {% if ch.pk == chapter.pk %}current{% endif %}">
-                    <span>{% trans "Ch." %} {{ ch.order }} â€” {{ ch.title }}</span>
+                    <span>{% trans "Ch." %} {{ ch.order }} — {{ ch.title }}</span>
                     {% if ch.pk == chapter.pk %}<i class="fa-solid fa-check"></i>{% endif %}
                 </a>
             {% endif %}
@@ -41,7 +41,7 @@
     <!-- CONTENU -->
     <div class="reader-container" id="reader-content-wrap">
         <h1 class="reader-title" style="margin-top:16px;">{{ chapter.title }}</h1>
-        <p class="reader-meta">{{ work.title }} Â· {% trans "Chapitre" %} {{ chapter.order }}</p>
+        <p class="reader-meta">{{ work.title }} · {% trans "Chapitre" %} {{ chapter.order }}</p>
 
         {% if chapter.content %}
             <div class="reader-content" id="reader-content">{{ chapter.content|linebreaks }}</div>
@@ -61,13 +61,13 @@
         {% if next_chapter %}
             <div class="next-chapter-loader" id="next-chapter-loader">
                 <div class="loader-icon"><i class="fa-solid fa-circle-notch"></i></div>
-                <p class="text-muted" style="font-size:13px;">{% trans "Faites dÃ©filer pour le chapitre suivant" %}</p>
+                <p class="text-muted" style="font-size:13px;">{% trans "Faites défiler pour le chapitre suivant" %}</p>
             </div>
         {% else %}
             <div style="text-align:center;padding:60px 20px 120px;">
-                <p class="text-muted">{% trans "Vous avez atteint la fin de cette Å“uvre." %}</p>
+                <p class="text-muted">{% trans "Vous avez atteint la fin de cette œuvre." %}</p>
                 <a href="{% url 'web:work_detail' work.id %}" class="btn btn-primary" style="margin-top:16px;">
-                    <i class="fa-solid fa-arrow-left"></i> {% trans "Retour Ã  l'Å“uvre" %}
+                    <i class="fa-solid fa-arrow-left"></i> {% trans "Retour à l'œuvre" %}
                 </a>
             </div>
         {% endif %}
@@ -91,7 +91,7 @@
             </button>
             <button class="reader-action-btn" id="reader-theme-btn">
                 <i class="fa-solid fa-moon"></i>
-                <span>{% trans "ThÃ¨me" %}</span>
+                <span>{% trans "Thème" %}</span>
             </button>
             <button class="reader-action-btn" id="reader-font-btn">
                 <i class="fa-solid fa-font"></i>
@@ -168,11 +168,11 @@
         </div>
     </div>
 
-    <!-- MODALE AJOUT Ã€ LA BIBLIOTHÃˆQUE -->
+    <!-- MODALE AJOUT À LA BIBLIOTHÈQUE -->
     <div class="reader-exit-modal" id="exit-modal">
         <div class="modal-content">
-            <h3>{% trans "Ajouter Ã  votre bibliothÃ¨que ?" %}</h3>
-            <p>{% trans "Vous lisez cette Å“uvre mais elle n'est pas dans votre bibliothÃ¨que. Voulez-vous l'ajouter pour la retrouver plus facilement ?" %}</p>
+            <h3>{% trans "Ajouter à votre bibliothèque ?" %}</h3>
+            <p>{% trans "Vous lisez cette œuvre mais elle n'est pas dans votre bibliothèque. Voulez-vous l'ajouter pour la retrouver plus facilement ?" %}</p>
             <div class="modal-actions">
                 <button class="btn-yes" id="exit-add-lib">{% trans "Oui, ajouter" %}</button>
                 <button class="btn-no" id="exit-no-lib">{% trans "Non, quitter" %}</button>
@@ -186,7 +186,7 @@
     const root = document.getElementById('reader-root');
     if (!root) return;
 
-    console.log('âœ… Reader JS loaded');
+    console.log('✅ Reader JS loaded');
 
     const workId = root.dataset.workId;
     const chapterId = root.dataset.chapterId;
@@ -240,9 +240,9 @@
         }
     });
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     // COMMENTAIRES
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     const commentsModal = document.getElementById('comments-modal');
     const commentsBtn = document.getElementById('reader-comments-btn');
 
@@ -253,7 +253,7 @@
         if (!commentsModal) return;
         commentsModal.classList.add('open');
         document.body.style.overflow = 'hidden';
-        console.log('ðŸ“– Comments modal opened');
+        console.log('📖 Comments modal opened');
     }
 
     function closeCommentsModal() {
@@ -266,11 +266,11 @@
         commentsBtn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('ðŸ–±ï¸ Comments button clicked');
+            console.log('🖱️ Comments button clicked');
             openCommentsModal();
         });
     } else {
-        console.error('âŒ reader-comments-btn not found');
+        console.error('❌ reader-comments-btn not found');
     }
 
     const closeCommentsBtn = document.getElementById('comments-close-btn');
@@ -290,9 +290,9 @@
         setTimeout(openCommentsModal, 300);
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     // BOUTON RETOUR
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     const backBtn = document.getElementById('reader-back');
     if (backBtn) {
         backBtn.addEventListener('click', function(e) {
@@ -322,9 +322,9 @@
         });
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     // MENU CHAPITRES
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     const chaptersBtn = document.getElementById('chapters-btn');
     if (chaptersBtn) {
         chaptersBtn.addEventListener('click', function(e) {
@@ -333,9 +333,9 @@
         });
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     // LIKE
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     const likeBtn = document.getElementById('reader-like-btn');
     if (likeBtn) {
         likeBtn.addEventListener('click', function(e) {
@@ -358,9 +358,9 @@
         });
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-    // THÃˆME
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
+    // THÈME
+    // ═══════════════════════════════════════════════════════════
     const themeBtn = document.getElementById('reader-theme-btn');
     if (themeBtn) {
         themeBtn.addEventListener('click', function(e) {
@@ -373,9 +373,9 @@
         });
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     // POLICE
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     const fontBtn = document.getElementById('reader-font-btn');
     if (fontBtn) {
         fontBtn.addEventListener('click', function(e) {
@@ -399,9 +399,9 @@
         localStorage.setItem('reader_font_size', size);
     });
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     // PARTAGER
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     const shareBtn = document.getElementById('reader-share-btn');
     if (shareBtn) {
         shareBtn.addEventListener('click', function(e) {
@@ -410,14 +410,14 @@
             if (navigator.share) {
                 navigator.share({ title: '{{ chapter.title|escapejs }}', url: url });
             } else {
-                navigator.clipboard.writeText(url).then(() => alert('{% trans "Lien copiÃ© !" %}'));
+                navigator.clipboard.writeText(url).then(() => alert('{% trans "Lien copié !" %}'));
             }
         });
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     // BARRE DE PROGRESSION
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════════════════════
     const bar = document.getElementById('reading-progress-bar');
     const fill = document.getElementById('reading-progress-fill');
     const label = document.getElementById('reading-progress-label');
@@ -509,8 +509,7 @@
         }
     });
 
-    console.log('âœ… All readers initialized');
+    console.log('✅ All readers initialized');
 })();
 </script>
 {% endblock %}
-
