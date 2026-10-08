@@ -7,7 +7,6 @@ from decouple import config
 
 # ═══════════════════════════════════════════════════════════
 # FORCE IPv4 — Uniquement si activé (Windows local)
-# Sur Vercel : FORCE_IPV4=False
 # ═══════════════════════════════════════════════════════════
 if config('FORCE_IPV4', default=False, cast=bool):
     import socket
@@ -87,7 +86,6 @@ TEMPLATES = [
 
 # ═══════════════════════════════════════════════════════════
 #  BASE DE DONNÉES — Supabase (POSTGRES_URL)
-#  Compatible Session Pooler (5432) ET Transaction Pooler (6543)
 # ═══════════════════════════════════════════════════════════
 POSTGRES_URL = config('POSTGRES_URL', default='')
 
@@ -111,7 +109,6 @@ DATABASES = {
             'sslmode': 'require',
             'connect_timeout': 10,
         },
-        # ═══ Configuration CRITIQUE pour Supabase Pooler ═══
         'CONN_MAX_AGE': 0,
         'CONN_HEALTH_CHECKS': False,
         'DISABLE_SERVER_SIDE_CURSORS': True,
@@ -222,28 +219,44 @@ STORAGES = {
 
 # ═══════════════════════════════════════════════════════════
 #  MEDIA — Supabase Storage (S3 compatible)
-#  ⚠️ PAS de default_acl : Supabase ne supporte pas les ACLs
+#  ⚠️ custom_domain force l'URL PUBLIQUE (pas l'endpoint S3)
 # ═══════════════════════════════════════════════════════════
 SUPABASE_URL = config('SUPABASE_URL', default='')
 SUPABASE_SERVICE_KEY = config('SUPABASE_SERVICE_KEY', default='')
 SUPABASE_BUCKET = config('SUPABASE_BUCKET', default='armpad-media')
+SUPABASE_S3_ACCESS_KEY = config('SUPABASE_S3_ACCESS_KEY', default='')
+SUPABASE_S3_SECRET_KEY = config('SUPABASE_S3_SECRET_KEY', default='')
+SUPABASE_REGION = config('SUPABASE_REGION', default='eu-west-1')
 
-if SUPABASE_URL and SUPABASE_SERVICE_KEY:
+# ⚠️ Endpoint S3 (d'après ton dashboard Supabase)
+SUPABASE_S3_ENDPOINT = f"https://horeqrcibokzpkhwexow.storage.supabase.co/storage/v1/s3"
+
+# ⚠️ Hôte pour l'URL PUBLIQUE (sans schéma, sans slash final)
+# Le custom_domain doit être l'URL publique SANS "https://"
+SUPABASE_PUBLIC_DOMAIN = (
+    f"horeqrcibokzpkhwexow.storage.supabase.co"
+    f"/storage/v1/object/public/{SUPABASE_BUCKET}"
+)
+
+if SUPABASE_URL and SUPABASE_S3_ACCESS_KEY and SUPABASE_S3_SECRET_KEY:
     STORAGES["default"] = {
         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
         "OPTIONS": {
-            "access_key": config('SUPABASE_S3_ACCESS_KEY', default=''),
-            "secret_key": config('SUPABASE_S3_SECRET_KEY', default=''),
+            "access_key": SUPABASE_S3_ACCESS_KEY,
+            "secret_key": SUPABASE_S3_SECRET_KEY,
             "bucket_name": SUPABASE_BUCKET,
-            "endpoint_url": f"{SUPABASE_URL}/storage/v1/s3",
-            "region_name": config('SUPABASE_REGION', default='eu-west-1'),
+            "endpoint_url": SUPABASE_S3_ENDPOINT,
+            "region_name": SUPABASE_REGION,
             "file_overwrite": False,
             "querystring_auth": False,
             "signature_version": "s3v4",
             "addressing_style": "path",
+            # ═══ FIX : force l'URL publique au lieu de l'endpoint S3 ═══
+            "custom_domain": SUPABASE_PUBLIC_DOMAIN,
+            "url_protocol": "https:",
         },
     }
-    MEDIA_URL = f'{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/'
+    MEDIA_URL = f'https://{SUPABASE_PUBLIC_DOMAIN}/'
 else:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
