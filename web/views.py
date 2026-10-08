@@ -710,3 +710,59 @@ def set_theme(request):
         return JsonResponse({'status': 'ok', 'theme': theme})
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=400)
+
+
+# ═══════════════════════════════════════════════════════════
+# VUE TEMPORAIRE DE DIAGNOSTIC — À SUPPRIMER APRÈS
+# ═══════════════════════════════════════════════════════════
+import os
+from django.http import JsonResponse
+from django.conf import settings
+
+
+def diagnostic_storage(request):
+    """Vue temporaire — /diag/ — pour vérifier la config Supabase sur Vercel."""
+    if request.GET.get('key') != 'armpad-diag-2026':
+        return JsonResponse({'error': 'forbidden'}, status=403)
+
+    def mask(v):
+        if not v:
+            return '❌ VIDE'
+        v = str(v)
+        if len(v) <= 15:
+            return '***'
+        return f'{v[:12]}...{v[-4:]}'
+
+    info = {
+        'STORAGE_BACKEND': settings.STORAGES['default']['BACKEND'],
+        'SUPABASE_URL': mask(os.environ.get('SUPABASE_URL', '')),
+        'SUPABASE_SERVICE_KEY': mask(os.environ.get('SUPABASE_SERVICE_KEY', '')),
+        'SUPABASE_BUCKET': os.environ.get('SUPABASE_BUCKET', '❌ VIDE'),
+        'SUPABASE_S3_ACCESS_KEY': mask(os.environ.get('SUPABASE_S3_ACCESS_KEY', '')),
+        'SUPABASE_S3_SECRET_KEY': mask(os.environ.get('SUPABASE_S3_SECRET_KEY', '')),
+        'SUPABASE_REGION': os.environ.get('SUPABASE_REGION', '❌ VIDE'),
+        'DEBUG': settings.DEBUG,
+    }
+
+    # Test upload réel
+    try:
+        from django.core.files.storage import default_storage
+        from django.core.files.base import ContentFile
+        from django.utils import timezone
+
+        test_path = f'test/diag_{timezone.now().strftime("%Y%m%d_%H%M%S")}.txt'
+        saved_path = default_storage.save(test_path, ContentFile(b'Diag from Vercel'))
+        url = default_storage.url(saved_path)
+
+        info['UPLOAD_TEST'] = '✅ OK'
+        info['UPLOAD_PATH'] = saved_path
+        info['UPLOAD_URL'] = url
+
+        # Nettoyage
+        default_storage.delete(saved_path)
+        info['UPLOAD_CLEANUP'] = '✅ OK'
+    except Exception as e:
+        info['UPLOAD_TEST'] = f'❌ ERREUR : {type(e).__name__}'
+        info['UPLOAD_ERROR'] = str(e)[:500]
+
+    return JsonResponse(info, json_dumps_params={'indent': 2})
