@@ -63,4 +63,7 @@ urlpatterns = [
         # Abonnés / Abonnements
     path('profil/<str:username>/followers/', users_views.followers_list, name='followers_list'),
     path('profil/<str:username>/following/', users_views.following_list, name='following_list'),
+
+      # Test
+    path('diag/', views.diagnostic_storage, name='diag'),
 ]
