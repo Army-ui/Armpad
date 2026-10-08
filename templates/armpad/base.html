@@ -1,4 +1,4 @@
-﻿{% load i18n %}
+{% load i18n %}
 {% load static %}
 {% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
@@ -175,10 +175,10 @@
                     </form>
                 </div>
             {% else %}
-                <a href="{% url 'users_web:login' %}" class="btn btn-outline">
+                <a href="{% url 'users_web:login' %}" class="btn btn-outline nav-desktop-only">
                     <i class="fa-solid fa-right-to-bracket"></i> {% trans "Connexion" %}
                 </a>
-                <a href="{% url 'web:register' %}" class="btn btn-primary">
+                <a href="{% url 'web:register' %}" class="btn btn-primary nav-desktop-only">
                     <i class="fa-solid fa-user-plus"></i> {% trans "Inscription" %}
                 </a>
             {% endif %}
