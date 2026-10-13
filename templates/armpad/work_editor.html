@@ -14,6 +14,30 @@
         {% if is_editing %}{% trans "Gérez les informations et les chapitres de votre œuvre." %}{% else %}{% trans "Remplissez les informations de base, puis ajoutez vos chapitres." %}{% endif %}
     </p>
 
+    {# ═══════════ MESSAGES SYSTÈME ═══════════ #}
+    {% if messages %}
+        {% for message in messages %}
+            <div style="background:{% if message.tags == 'error' %}#FEE2E2{% elif message.tags == 'success' %}#D1FAE5{% else %}#DBEAFE{% endif %};
+                        color:{% if message.tags == 'error' %}#DC2626{% elif message.tags == 'success' %}#065F46{% else %}#1E40AF{% endif %};
+                        padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;">
+                <i class="fa-solid {% if message.tags == 'error' %}fa-circle-exclamation{% elif message.tags == 'success' %}fa-circle-check{% else %}fa-circle-info{% endif %}"></i>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {# ═══════════ ERREURS GLOBALES (non_field_errors) ═══════════ #}
+    {% if form.non_field_errors %}
+        <div style="background:#FEE2E2;color:#DC2626;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;">
+            <strong><i class="fa-solid fa-triangle-exclamation"></i> Erreur :</strong>
+            <ul style="margin:8px 0 0 20px;">
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
     <form method="post" enctype="multipart/form-data" class="card" style="padding:24px;">
         {% csrf_token %}
 
@@ -40,7 +64,11 @@
                 {% endif %}
 
                 {% if field.help_text %}<small class="text-muted" style="font-size:12px;display:block;margin-top:4px;">{{ field.help_text }}</small>{% endif %}
-                {% if field.errors %}<small style="color:#DC2626;display:block;margin-top:4px;">{{ field.errors.0 }}</small>{% endif %}
+                {% if field.errors %}
+                    <small style="color:#DC2626;display:block;margin-top:4px;">
+                        <i class="fa-solid fa-circle-exclamation"></i> {{ field.errors.0 }}
+                    </small>
+                {% endif %}
             </div>
         {% endfor %}
 
