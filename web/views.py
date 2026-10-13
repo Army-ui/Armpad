@@ -195,9 +195,8 @@ class WorkEditorView(LoginRequiredMixin, CreateView):
             messages.success(self.request, "Œuvre créée ! Ajoutez maintenant des chapitres.")
             return redirect('web:edit_work', pk=self.object.pk)
         except Exception as e:
-            # ═══ Ajoute l'erreur au formulaire pour qu'elle s'affiche ═══
-            form.add_error(None, f"Erreur technique : {type(e).__name__} — {e}")
-            messages.error(self.request, f"Erreur lors de la création : {e}")
+            # ═══ Uniquement add_error → erreur locale, ne persiste PAS au reload ═══
+            form.add_error(None, f"Erreur : {e}")
             return self.form_invalid(form)
 
 
@@ -221,9 +220,7 @@ class WorkEditView(LoginRequiredMixin, UpdateView):
             messages.success(self.request, "Œuvre mise à jour.")
             return super().form_valid(form)
         except Exception as e:
-            # ═══ Ajoute l'erreur au formulaire pour qu'elle s'affiche ═══
-            form.add_error(None, f"Erreur technique : {type(e).__name__} — {e}")
-            messages.error(self.request, f"Erreur lors de la mise à jour : {e}")
+            form.add_error(None, f"Erreur : {e}")
             return self.form_invalid(form)
 
     def get_success_url(self):
@@ -257,7 +254,7 @@ class ChapterEditorView(LoginRequiredMixin, CreateView):
         form.instance.work = work
 
         if not image_formset.is_valid():
-            messages.error(self.request, "Erreur dans les images du chapitre.")
+            form.add_error(None, "Erreur dans les images du chapitre.")
             return self.form_invalid(form)
 
         try:
@@ -269,8 +266,7 @@ class ChapterEditorView(LoginRequiredMixin, CreateView):
             messages.success(self.request, f"Chapitre {self.object.order} ajouté !")
             return redirect('web:edit_work', pk=work.pk)
         except Exception as e:
-            form.add_error(None, f"Erreur technique : {type(e).__name__} — {e}")
-            messages.error(self.request, f"Erreur lors de la création du chapitre : {e}")
+            form.add_error(None, f"Erreur : {e}")
             return self.form_invalid(form)
 
 
@@ -297,7 +293,7 @@ class ChapterEditView(LoginRequiredMixin, UpdateView):
         image_formset = context['image_formset']
 
         if not image_formset.is_valid():
-            messages.error(self.request, "Erreur dans les images du chapitre.")
+            form.add_error(None, "Erreur dans les images du chapitre.")
             return self.form_invalid(form)
 
         try:
@@ -307,8 +303,7 @@ class ChapterEditView(LoginRequiredMixin, UpdateView):
             messages.success(self.request, "Chapitre mis à jour.")
             return redirect('web:edit_work', pk=self.object.work.pk)
         except Exception as e:
-            form.add_error(None, f"Erreur technique : {type(e).__name__} — {e}")
-            messages.error(self.request, f"Erreur lors de la mise à jour : {e}")
+            form.add_error(None, f"Erreur : {e}")
             return self.form_invalid(form)
 
 
