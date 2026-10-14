@@ -8,7 +8,7 @@
 
     <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);margin-bottom:16px;">
         <a href="{% url 'web:chat' %}" class="btn btn-ghost" style="padding:6px;"><i class="fa-solid fa-arrow-left"></i></a>
-        <a href="{% url 'web:profile' other.username %}" style="display:flex;align-items:center;gap:12px;text-decoration:none;flex:1;">
+        <a href="{% url 'web:profile' other.slug %}" style="display:flex;align-items:center;gap:12px;text-decoration:none;flex:1;">
             {% if other.avatar and other.avatar.name %}
                 <img src="{{ other.avatar.url }}" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
             {% else %}
@@ -38,22 +38,22 @@
         </div>
 
         <div style="display:flex;gap:8px;margin-top:8px;">
-            <input type="text" id="chat-input" class="form-control" placeholder="{% trans 'Ã‰crire un message...' %}">
-            <button id="chat-send" class="btn btn-primary" data-chat-send-url="{% url 'users:api_chat' other.username %}">
+            <input type="text" id="chat-input" class="form-control" placeholder="{% trans 'Écrire un message...' %}">
+            <button id="chat-send" class="btn btn-primary" data-chat-send-url="{% url 'users:api_chat' other.slug %}">
                 <i class="fa-solid fa-paper-plane"></i>
             </button>
         </div>
 
         <div id="reaction-menu" style="display:none;position:fixed;z-index:999;background:var(--bg-card);border:1px solid var(--border);border-radius:24px;padding:6px 10px;box-shadow:0 4px 20px var(--shadow-lg);">
             <div style="display:flex;gap:4px;">
-                <button class="emoji-btn" data-emoji="â¤ï¸">â¤ï¸</button>
-                <button class="emoji-btn" data-emoji="ðŸ˜‚">ðŸ˜‚</button>
-                <button class="emoji-btn" data-emoji="ðŸ˜®">ðŸ˜®</button>
-                <button class="emoji-btn" data-emoji="ðŸ˜¢">ðŸ˜¢</button>
-                <button class="emoji-btn" data-emoji="ðŸ‘">ðŸ‘</button>
-                <button class="emoji-btn" data-emoji="ðŸ”¥">ðŸ”¥</button>
-                <button class="emoji-btn" data-emoji="ðŸ˜">ðŸ˜</button>
-                <button class="emoji-btn" data-emoji="ðŸŽ‰">ðŸŽ‰</button>
+                <button class="emoji-btn" data-emoji="❤️">❤️</button>
+                <button class="emoji-btn" data-emoji="😂">😂</button>
+                <button class="emoji-btn" data-emoji="😮">😮</button>
+                <button class="emoji-btn" data-emoji="😢">😢</button>
+                <button class="emoji-btn" data-emoji="👍">👍</button>
+                <button class="emoji-btn" data-emoji="🔥">🔥</button>
+                <button class="emoji-btn" data-emoji="😍">😍</button>
+                <button class="emoji-btn" data-emoji="🎉">🎉</button>
             </div>
         </div>
     {% endif %}
@@ -165,4 +165,3 @@
 })();
 </script>
 {% endblock %}
-
