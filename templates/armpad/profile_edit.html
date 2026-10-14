@@ -86,16 +86,18 @@ document.addEventListener('DOMContentLoaded', function() {
     input.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (!file) return;
+
         if (!file.type.startsWith('image/')) {
-            alert('{% trans "Veuillez sélectionner une image." %}');
+            alert("{% trans 'Veuillez sélectionner une image.' %}");
             input.value = '';
             return;
         }
         if (file.size > 5 * 1024 * 1024) {
-            alert('{% trans "L\'image ne doit pas dépasser 5 Mo." %}');
+            alert("{% trans 'Fichier trop volumineux. Limite : 5 Mo.' %}");
             input.value = '';
             return;
         }
+
         const reader = new FileReader();
         reader.onload = function(ev) {
             preview.src = ev.target.result;
