@@ -195,7 +195,6 @@ class WorkEditorView(LoginRequiredMixin, CreateView):
             messages.success(self.request, "Œuvre créée ! Ajoutez maintenant des chapitres.")
             return redirect('web:edit_work', pk=self.object.pk)
         except Exception as e:
-            # ═══ Uniquement add_error → erreur locale, ne persiste PAS au reload ═══
             form.add_error(None, f"Erreur : {e}")
             return self.form_invalid(form)
 
@@ -331,15 +330,15 @@ class DeleteChapterView(LoginRequiredMixin, View):
 
 
 # ═══════════════════════════════════════════════════════════
-# PROFIL
+# PROFIL — ✅ UTILISE LE SLUG (au lieu du username)
 # ═══════════════════════════════════════════════════════════
 
 class ProfileView(DetailView):
     model = User
     template_name = 'armpad/profile.html'
     context_object_name = 'profile_user'
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
+    slug_field = 'slug'           # ← CHANGÉ (était 'username')
+    slug_url_kwarg = 'slug'       # ← CHANGÉ (était 'username')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -371,7 +370,8 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
     def get_success_url(self):
-        return reverse_lazy('web:profile', kwargs={'username': self.request.user.username})
+        # ✅ Utilise le slug au lieu du username
+        return reverse_lazy('web:profile', kwargs={'slug': self.request.user.slug})
 
     def form_valid(self, form):
         messages.success(self.request, "Votre profil a été mis à jour.")
@@ -577,12 +577,13 @@ class UpdateReadingProgressView(LoginRequiredMixin, View):
 
 # ═══════════════════════════════════════════════════════════
 # CHAT — Conversation avec un utilisateur
+# ✅ UTILISE LE SLUG
 # ═══════════════════════════════════════════════════════════
 
 class ChatConversationView(LoginRequiredMixin, View):
-    def get(self, request, username):
+    def get(self, request, slug):
         from users.models import Message, Follow
-        other = get_object_or_404(User, username=username)
+        other = get_object_or_404(User, slug=slug)   # ← CHANGÉ (était username=username)
 
         are_friends = (
             Follow.objects.filter(follower=request.user, followed=other).exists() and
@@ -745,7 +746,6 @@ def diagnostic_storage(request):
         'DEBUG': settings.DEBUG,
     }
 
-    # Test upload réel
     try:
         from django.core.files.storage import default_storage
         from django.core.files.base import ContentFile
@@ -759,7 +759,6 @@ def diagnostic_storage(request):
         info['UPLOAD_PATH'] = saved_path
         info['UPLOAD_URL'] = url
 
-        # Nettoyage
         default_storage.delete(saved_path)
         info['UPLOAD_CLEANUP'] = '✅ OK'
     except Exception as e:
