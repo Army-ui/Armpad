@@ -25,7 +25,7 @@ urlpatterns = [
     path('oeuvre/<uuid:pk>/supprimer/', views.DeleteWorkView.as_view(), name='delete_work'),
     path('chapitre/<int:pk>/supprimer/', views.DeleteChapterView.as_view(), name='delete_chapter'),
 
-    # Profil (ORDRE IMPORTANT — modifier AVANT le slug générique)
+    # Profil (ORDRE IMPORTANT — modifier AVANT slug)
     path('profil/modifier/', views.ProfileEditView.as_view(), name='profile_edit'),
     path('profil/<slug:slug>/', views.ProfileView.as_view(), name='profile'),
 
@@ -54,13 +54,13 @@ urlpatterns = [
     path('oeuvre/<uuid:pk>/commenter/', views.AddCommentView.as_view(), name='add_comment'),
     path('api/reading-progress/', views.UpdateReadingProgressView.as_view(), name='update_progress'),
 
-    # Notifications (pages HTML)
+    # Notifications
     path('notifications/', users_views.notifications_page, name='notifications'),
     path('notifications/<int:pk>/read/', users_views.mark_notification_read, name='notification_read'),
     path('notifications/read-all/', users_views.mark_all_read, name='notifications_read_all'),
     path('notifications/unread-count/', users_views.unread_count, name='notifications_unread_count'),
 
-    # Abonnés / Abonnements (⚠️ voir note en bas)
+    # Abonnés / Abonnements
     path('profil/<slug:slug>/followers/', users_views.followers_list, name='followers_list'),
     path('profil/<slug:slug>/following/', users_views.following_list, name='following_list'),
 
