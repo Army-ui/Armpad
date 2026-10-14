@@ -44,17 +44,19 @@
                         </small>
                     </div>
                 </a>
-                <button class="btn {% if item.is_following %}btn-outline{% else %}btn-primary{% endif %} follow-list-btn"
-                        data-url="{% url 'users:toggle_follow' item.user.slug %}"
-                        style="flex-shrink:0;padding:6px 12px;font-size:13px;">
-                    {% if item.is_following %}
-                        <i class="fa-solid fa-check"></i> {% trans "Abonné" %}
-                    {% elif item.is_follower %}
-                        <i class="fa-solid fa-rotate-left"></i> {% trans "Suivre en retour" %}
-                    {% else %}
-                        <i class="fa-solid fa-plus"></i> {% trans "Suivre" %}
-                    {% endif %}
-                </button>
+                {% if user.is_authenticated and user != item.user %}
+                    <button class="btn {% if item.is_following %}btn-outline{% else %}btn-primary{% endif %} follow-list-btn"
+                            data-url="{% url 'users:toggle_follow' item.user.slug %}"
+                            style="flex-shrink:0;padding:6px 12px;font-size:13px;">
+                        {% if item.is_following %}
+                            <i class="fa-solid fa-check"></i> {% trans "Abonné" %}
+                        {% elif item.is_follower %}
+                            <i class="fa-solid fa-rotate-left"></i> {% trans "Suivre en retour" %}
+                        {% else %}
+                            <i class="fa-solid fa-plus"></i> {% trans "Suivre" %}
+                        {% endif %}
+                    </button>
+                {% endif %}
             </div>
         {% empty %}
             <div style="padding:60px 20px;text-align:center;color:var(--text-muted);">
