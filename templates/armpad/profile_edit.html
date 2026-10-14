@@ -12,34 +12,42 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        <!-- ═══ AVATAR CLIQUABLE ═══ -->
+        {# ═══ CHAMP AVATAR CACHÉ (form Django) ═══ #}
+        <div style="display:none;">
+            {{ form.avatar }}
+        </div>
+
+        {# ═══ AVATAR + BOUTON VISIBLE ═══ #}
         <div style="text-align:center;margin-bottom:24px;">
-            <div id="avatar-clickable" style="position:relative;display:inline-block;cursor:pointer;" title="{% trans 'Cliquez pour changer la photo' %}">
+            <div style="position:relative;display:inline-block;">
                 {% if user.avatar and user.avatar.name %}
                     <img id="avatar-preview" src="{{ user.avatar.url }}" alt="{{ user.username }}"
-                         style="width:120px;height:120px;border-radius:50%;object-fit:cover;display:block;box-shadow:0 4px 16px var(--shadow-md);transition:all 0.25s ease;">
+                         style="width:120px;height:120px;border-radius:50%;object-fit:cover;display:block;box-shadow:0 4px 16px var(--shadow-md);">
                 {% else %}
                     <div id="avatar-preview-placeholder"
-                         style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--primary-light),var(--primary));color:white;font-size:48px;font-weight:700;display:flex;align-items:center;justify-content:center;text-transform:uppercase;box-shadow:0 4px 16px var(--shadow-md);transition:all 0.25s ease;">
+                         style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--primary-light),var(--primary));color:white;font-size:48px;font-weight:700;display:flex;align-items:center;justify-content:center;text-transform:uppercase;box-shadow:0 4px 16px var(--shadow-md);">
                         {{ user.username|first|upper }}
                     </div>
                     <img id="avatar-preview" src="" alt=""
-                         style="display:none;width:120px;height:120px;border-radius:50%;object-fit:cover;box-shadow:0 4px 16px var(--shadow-md);transition:all 0.25s ease;">
+                         style="display:none;width:120px;height:120px;border-radius:50%;object-fit:cover;box-shadow:0 4px 16px var(--shadow-md);">
                 {% endif %}
-
-                <div id="avatar-overlay" style="position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,0.55);display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;opacity:0;transition:opacity 0.25s ease;pointer-events:none;">
-                    <i class="fa-solid fa-camera" style="font-size:28px;margin-bottom:6px;"></i>
-                    <span style="font-size:12px;font-weight:600;">{% trans "Changer" %}</span>
-                </div>
             </div>
 
-            <p class="text-muted" style="font-size:13px;margin-top:12px;">
-                <i class="fa-solid fa-hand-pointer"></i> {% trans "Cliquez sur la photo pour la changer" %}
-            </p>
+            {# ═══ BOUTON VISIBLE — toujours affiché ═══ #}
+            <div style="margin-top:14px;">
+                <button type="button" id="avatar-btn" class="btn btn-outline" style="padding:8px 18px;">
+                    <i class="fa-solid fa-camera"></i>
+                    {% trans "Changer la photo" %}
+                </button>
+            </div>
 
-            <input type="file" name="avatar" id="avatar-input" accept="image/*" style="display:none;">
+            <p class="text-muted" style="font-size:12px;margin-top:8px;">
+                <i class="fa-solid fa-circle-info"></i>
+                {% trans "JPG, PNG ou WEBP · 5 Mo max" %}
+            </p>
         </div>
 
+        {# ═══ AUTRES CHAMPS DU FORM ═══ #}
         {% for field in form %}
             {% if field.name != 'avatar' %}
                 <div class="form-group">
@@ -62,40 +70,39 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const clickable = document.getElementById('avatar-clickable');
-    const input = document.getElementById('avatar-input');
+    // Le vrai input file de Django (généré par {{ form.avatar }})
+    const djangoInput = document.querySelector('input[type="file"][name="avatar"]');
+    const btn = document.getElementById('avatar-btn');
     const preview = document.getElementById('avatar-preview');
     const placeholder = document.getElementById('avatar-preview-placeholder');
-    const overlay = document.getElementById('avatar-overlay');
 
-    if (!clickable || !input) return;
+    if (!djangoInput || !btn) {
+        console.error('❌ Bouton ou input avatar introuvable');
+        return;
+    }
 
-    clickable.addEventListener('click', function() { input.click(); });
-
-    clickable.addEventListener('mouseenter', function() {
-        overlay.style.opacity = '1';
-        preview.style.transform = 'scale(1.05)';
-        if (placeholder) placeholder.style.transform = 'scale(1.05)';
-    });
-    clickable.addEventListener('mouseleave', function() {
-        overlay.style.opacity = '0';
-        preview.style.transform = 'scale(1)';
-        if (placeholder) placeholder.style.transform = 'scale(1)';
+    // Clic sur le bouton → ouvre la popup de sélection
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        djangoInput.click();
     });
 
-    input.addEventListener('change', function(e) {
+    // Aperçu après sélection
+    djangoInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (!file) return;
+
         if (!file.type.startsWith('image/')) {
             alert('{% trans "Veuillez sélectionner une image." %}');
-            input.value = '';
+            djangoInput.value = '';
             return;
         }
         if (file.size > 5 * 1024 * 1024) {
             alert('{% trans "L\'image ne doit pas dépasser 5 Mo." %}');
-            input.value = '';
+            djangoInput.value = '';
             return;
         }
+
         const reader = new FileReader();
         reader.onload = function(ev) {
             preview.src = ev.target.result;
@@ -104,6 +111,8 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         reader.readAsDataURL(file);
     });
+
+    console.log('✅ Avatar upload prêt');
 });
 </script>
 {% endblock %}
