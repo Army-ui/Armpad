@@ -8,11 +8,11 @@
     <h1 class="section-title" style="margin-bottom:16px;">{{ title }}</h1>
 
     <div style="display:flex;gap:8px;margin-bottom:20px;">
-        <a href="{% url 'users:followers_list' profile_user.username %}"
+        <a href="{% url 'users:followers_list' profile_user.slug %}"
            class="btn {% if active_tab == 'followers' %}btn-primary{% else %}btn-ghost{% endif %}">
             <i class="fa-solid fa-users"></i> {% trans "Abonnés" %}
         </a>
-        <a href="{% url 'users:following_list' profile_user.username %}"
+        <a href="{% url 'users:following_list' profile_user.slug %}"
            class="btn {% if active_tab == 'following' %}btn-primary{% else %}btn-ghost{% endif %}">
             <i class="fa-solid fa-user-plus"></i> {% trans "Abonnements" %}
         </a>
@@ -21,7 +21,7 @@
     <div class="card" style="padding:0;overflow:hidden;">
         {% for item in users_data %}
             <div style="display:flex;gap:12px;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);">
-                <a href="{% url 'web:profile' item.user.username %}" style="display:flex;gap:12px;align-items:center;flex:1;min-width:0;text-decoration:none;">
+                <a href="{% url 'web:profile' item.user.slug %}" style="display:flex;gap:12px;align-items:center;flex:1;min-width:0;text-decoration:none;">
                     {% if item.user.avatar and item.user.avatar.name %}
                         <img src="{{ item.user.avatar.url }}" alt="" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;">
                     {% else %}
@@ -45,7 +45,7 @@
                     </div>
                 </a>
                 <button class="btn {% if item.is_following %}btn-outline{% else %}btn-primary{% endif %} follow-list-btn"
-                        data-url="{% url 'users:toggle_follow' item.user.username %}"
+                        data-url="{% url 'users:toggle_follow' item.user.slug %}"
                         style="flex-shrink:0;padding:6px 12px;font-size:13px;">
                     {% if item.is_following %}
                         <i class="fa-solid fa-check"></i> {% trans "Abonné" %}
@@ -65,4 +65,3 @@
     </div>
 </div>
 {% endblock %}
-
