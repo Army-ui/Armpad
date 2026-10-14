@@ -4,10 +4,71 @@
 {% block title %}{{ work.title }} - Armpad{% endblock %}
 
 {% block content %}
-<div style="max-width:1000px;margin:0 auto;padding:32px 20px;">
+<style>
+/* ═══ WORK HERO RESPONSIVE ═══ */
+.work-hero {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+.work-hero-cover {
+    width: 200px;
+    flex-shrink: 0;
+}
+.work-hero-info {
+    flex: 1;
+    min-width: 280px;
+}
 
-    <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;">
-        <div style="width:200px;flex-shrink:0;">
+/* Sur mobile : cover + texte à côté, texte plus petit */
+@media (max-width: 640px) {
+    .work-hero {
+        flex-wrap: nowrap;
+        gap: 12px;
+    }
+    .work-hero-cover {
+        width: 110px;
+    }
+    .work-hero-info h1 {
+        font-size: 18px !important;
+        line-height: 1.2;
+    }
+    .work-hero-info .work-meta {
+        font-size: 11px;
+    }
+    .work-hero-info .work-summary {
+        font-size: 11px;
+        line-height: 1.5;
+        margin-top: 10px;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .work-hero-info .work-actions {
+        gap: 6px;
+        margin-top: 12px;
+    }
+    .work-hero-info .work-actions .btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    .work-hero-info .work-tags {
+        margin-top: 8px;
+        gap: 4px;
+    }
+    .work-hero-info .work-tags .card-genre {
+        font-size: 9px;
+        padding: 1px 6px;
+    }
+}
+</style>
+
+<div style="max-width:1000px;margin:0 auto;padding:24px 16px;">
+
+    <div class="work-hero">
+        <div class="work-hero-cover">
             {% if work.cover and work.cover.name %}
                 <img src="{{ work.cover.url }}" alt="{{ work.title }}" style="width:100%;border-radius:var(--radius);box-shadow:0 8px 24px var(--shadow-md);">
             {% else %}
@@ -15,11 +76,11 @@
             {% endif %}
         </div>
 
-        <div style="flex:1;min-width:280px;">
+        <div class="work-hero-info">
             <h1 class="hero-title" style="font-size:32px;text-align:left;">{{ work.title }}</h1>
 
-            <p class="text-muted" style="margin-top:8px;">
-                {% trans "par" %} <a href="{% url 'web:profile' work.author.username %}" style="font-weight:600;">{{ work.author.username }}</a>
+            <p class="text-muted work-meta" style="margin-top:8px;">
+                {% trans "par" %} <a href="{% url 'web:profile' work.author.slug %}" style="font-weight:600;">{{ work.author.username }}</a>
                 {% if work.genre %} · <span class="card-genre">{{ work.genre.name }}</span>{% endif %}
                 {% if work.is_premium %} · <span class="card-badge premium">Premium</span>{% endif %}
                 {% if work.status == 'ongoing' %} · <span class="card-badge" style="background:#DBEAFE;color:#1E40AF;border-color:#93C5FD;">{% trans "En cours" %}</span>{% endif %}
@@ -27,13 +88,24 @@
                 {% if work.status == 'hiatus' %} · <span class="card-badge" style="background:#FEF3C7;color:#92400E;border-color:#FCD34D;">{% trans "En pause" %}</span>{% endif %}
             </p>
 
-            <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
+            {% if work.summary %}
+                <p class="work-summary" style="margin-top:24px;line-height:1.7;color:var(--text-secondary);">{{ work.summary }}</p>
+            {% endif %}
+
+            {% if work.tag_list %}
+                <div class="work-tags" style="margin-top:16px;display:flex;gap:6px;flex-wrap:wrap;">
+                    {% for tag in work.tag_list %}
+                        <span class="card-genre" style="font-size:11px;">#{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="work-actions" style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
                 <button class="btn btn-outline like-btn" data-like-url="{% url 'web:toggle_like' work.pk %}">
                     <i class="fa-{% if user_liked %}solid{% else %}regular{% endif %} fa-heart"></i>
                     <span class="like-count">{{ work.likes_count }}</span>
                 </button>
 
-                <!-- ═══ BOUTON BIBLIOTHÈQUE CONDITIONNEL ═══ -->
                 {% if user.is_authenticated %}
                     <button id="library-btn" class="btn btn-outline" data-library-url="{% url 'web:toggle_library' work.pk %}">
                         {% if is_in_library %}
@@ -54,18 +126,6 @@
                     </a>
                 {% endif %}
             </div>
-
-            {% if work.summary %}
-                <p style="margin-top:24px;line-height:1.7;color:var(--text-secondary);">{{ work.summary }}</p>
-            {% endif %}
-
-            {% if work.tag_list %}
-                <div style="margin-top:16px;display:flex;gap:6px;flex-wrap:wrap;">
-                    {% for tag in work.tag_list %}
-                        <span class="card-genre" style="font-size:11px;">#{{ tag }}</span>
-                    {% endfor %}
-                </div>
-            {% endif %}
         </div>
     </div>
 
@@ -146,8 +206,8 @@
                     {% endif %}
                     <div style="flex:1;">
                         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                            <a href="{% url 'web:profile' comment.user.username %}" style="font-weight:600;color:var(--text);">{{ comment.user.username }}</a>
-                            <small class="text-muted">{{ comment.created_at|timesince }} {% trans "ago" %}</small>
+                            <a href="{% url 'web:profile' comment.user.slug %}" style="font-weight:600;color:var(--text);">{{ comment.user.username }}</a>
+                            <small class="text-muted">{{ comment.created_at|timesince }}</small>
                         </div>
                         <p style="margin-top:4px;color:var(--text-secondary);line-height:1.6;">{{ comment.content }}</p>
                         <div style="display:flex;gap:12px;margin-top:6px;">
@@ -171,7 +231,7 @@
                                 {% endif %}
                                 <div style="flex:1;">
                                     <strong style="font-size:13px;">{{ reply.user.username }}</strong>
-                                    <small class="text-muted" style="font-size:11px;">{{ reply.created_at|timesince }} {% trans "ago" %}</small>
+                                    <small class="text-muted" style="font-size:11px;">{{ reply.created_at|timesince }}</small>
                                     <p style="font-size:14px;color:var(--text-secondary);margin-top:2px;">{{ reply.content }}</p>
                                     {% if user.is_authenticated %}
                                         <button class="comment-like-btn" data-url="{% url 'web:toggle_comment_like' reply.pk %}" style="margin-top:4px;">
