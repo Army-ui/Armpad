@@ -12,9 +12,9 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        <!-- â•â•â• AVATAR CLIQUABLE â•â•â• -->
+        <!-- ═══ AVATAR CLIQUABLE ═══ -->
         <div style="text-align:center;margin-bottom:24px;">
-            <div id="avatar-clickable" style="position:relative;display:inline-block;cursor:pointer;" title="Cliquez pour changer la photo">
+            <div id="avatar-clickable" style="position:relative;display:inline-block;cursor:pointer;" title="{% trans 'Cliquez pour changer la photo' %}">
                 {% if user.avatar and user.avatar.name %}
                     <img id="avatar-preview" src="{{ user.avatar.url }}" alt="{{ user.username }}"
                          style="width:120px;height:120px;border-radius:50%;object-fit:cover;display:block;box-shadow:0 4px 16px var(--shadow-md);transition:all 0.25s ease;">
@@ -55,7 +55,7 @@
             <button type="submit" class="btn btn-primary" style="flex:1;justify-content:center;padding:12px;">
                 <i class="fa-solid fa-check"></i> {% trans "Enregistrer" %}
             </button>
-            <a href="{% url 'web:profile' user.username %}" class="btn btn-ghost" style="padding:12px;">{% trans "Annuler" %}</a>
+            <a href="{% url 'web:profile' user.slug %}" class="btn btn-ghost" style="padding:12px;">{% trans "Annuler" %}</a>
         </div>
     </form>
 </div>
@@ -87,12 +87,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const file = e.target.files[0];
         if (!file) return;
         if (!file.type.startsWith('image/')) {
-            alert('Veuillez sÃ©lectionner une image.');
+            alert('{% trans "Veuillez sélectionner une image." %}');
             input.value = '';
             return;
         }
         if (file.size > 5 * 1024 * 1024) {
-            alert('L\'image ne doit pas dÃ©passer 5 Mo.');
+            alert('{% trans "L\'image ne doit pas dépasser 5 Mo." %}');
             input.value = '';
             return;
         }
@@ -107,4 +107,3 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 {% endblock %}
-
