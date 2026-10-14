@@ -1,7 +1,51 @@
+import uuid
+import unicodedata
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import MinLengthValidator
+from django.utils.text import slugify
 from .validators import PermissiveUsernameValidator, ReservedUsernameValidator
+
+
+# ═══════════════════════════════════════════════════════════
+# GÉNÉRATION DE SLUG URL-SAFE
+# ═══════════════════════════════════════════════════════════
+def _generate_slug_from_username(username, model_class, instance_pk=None):
+    """
+    Génère un slug URL-safe à partir du pseudo.
+    - Retire les emojis et caractères spéciaux
+    - Convertit les accents (é → e, ñ → n, etc.)
+    - Remplace les espaces par des tirets
+    - Garantit l'unicité
+    """
+    # Normaliser les accents : é → e, ñ → n, etc.
+    normalized = unicodedata.normalize('NFKD', username)
+    ascii_only = normalized.encode('ascii', 'ignore').decode('ascii')
+
+    # Slugifier (espaces → -, caractères spéciaux retirés)
+    base_slug = slugify(ascii_only)
+
+    # Si le résultat est vide (que des emojis / caractères spéciaux)
+    if not base_slug:
+        base_slug = f"user-{uuid.uuid4().hex[:8]}"
+
+    # Tronquer à 170 caractères (pour laisser de la place aux suffixes -1, -2...)
+    base_slug = base_slug[:170]
+
+    # Assurer l'unicité
+    slug = base_slug
+    counter = 1
+    qs = model_class.objects.filter(slug=slug)
+    if instance_pk:
+        qs = qs.exclude(pk=instance_pk)
+    while qs.exists():
+        slug = f"{base_slug}-{counter}"
+        counter += 1
+        qs = model_class.objects.filter(slug=slug)
+        if instance_pk:
+            qs = qs.exclude(pk=instance_pk)
+
+    return slug
 
 
 # ═══════════════════════════════════════════════════════════
@@ -11,7 +55,7 @@ class User(AbstractUser):
     """
     Modèle utilisateur d'Armpad.
     Étend AbstractUser avec : username permissif, avatar, bio, langue, thème,
-    et vérification d'email.
+    slug URL-safe, et vérification d'email.
     """
 
     # ─── Pseudo permissif (emojis, accents, caractères spéciaux) ───
@@ -28,6 +72,16 @@ class User(AbstractUser):
             'blank': "Le pseudo est obligatoire.",
         },
         verbose_name="Pseudo",
+    )
+
+    # ─── Slug URL-safe (généré automatiquement à partir du pseudo) ───
+    slug = models.SlugField(
+        max_length=180,
+        unique=True,
+        blank=True,
+        null=True,
+        verbose_name="Slug URL",
+        help_text="Généré automatiquement depuis le pseudo. Utilisé dans les URLs."
     )
 
     # ─── Profil ───
@@ -113,6 +167,29 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    # ═══════════════════════════════════════════════════════════
+    # SLUG AUTOMATIQUE
+    # ═══════════════════════════════════════════════════════════
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = _generate_slug_from_username(
+                self.username, self.__class__, self.pk
+            )
+        super().save(*args, **kwargs)
+
+    def regenerate_slug(self, save=True):
+        """Régénère le slug (utile si le pseudo a changé)."""
+        self.slug = _generate_slug_from_username(
+            self.username, self.__class__, self.pk
+        )
+        if save:
+            self.save(update_fields=['slug'])
+        return self.slug
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('web:profile', kwargs={'slug': self.slug})
 
     @property
     def avatar_url(self):
