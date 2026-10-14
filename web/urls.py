@@ -25,9 +25,9 @@ urlpatterns = [
     path('oeuvre/<uuid:pk>/supprimer/', views.DeleteWorkView.as_view(), name='delete_work'),
     path('chapitre/<int:pk>/supprimer/', views.DeleteChapterView.as_view(), name='delete_chapter'),
 
-    # Profil (ORDRE IMPORTANT)
+    # Profil (ORDRE IMPORTANT — modifier AVANT le slug générique)
     path('profil/modifier/', views.ProfileEditView.as_view(), name='profile_edit'),
-    path('profil/<str:username>/', views.ProfileView.as_view(), name='profile'),
+    path('profil/<slug:slug>/', views.ProfileView.as_view(), name='profile'),
 
     # Bibliothèque
     path('ma-bibliotheque/', views.LibraryView.as_view(), name='library'),
@@ -37,14 +37,14 @@ urlpatterns = [
 
     # Chat
     path('chat/', views.ChatView.as_view(), name='chat'),
-    path('chat/<str:username>/', views.ChatConversationView.as_view(), name='chat_conversation'),
+    path('chat/<slug:slug>/', views.ChatConversationView.as_view(), name='chat_conversation'),
 
     # Pages légales
     path('conditions/', views.ConditionsView.as_view(), name='conditions'),
     path('confidentialite/', views.ConfidentialiteView.as_view(), name='confidentialite'),
 
     path('register/', views.RegisterView.as_view(), name='register'),
-    
+
     # API interne (AJAX)
     path('api/set-theme/', views.set_theme, name='set_theme'),
     path('api/library/<uuid:work_id>/toggle/', views.ToggleLibraryView.as_view(), name='toggle_library'),
@@ -59,11 +59,11 @@ urlpatterns = [
     path('notifications/<int:pk>/read/', users_views.mark_notification_read, name='notification_read'),
     path('notifications/read-all/', users_views.mark_all_read, name='notifications_read_all'),
     path('notifications/unread-count/', users_views.unread_count, name='notifications_unread_count'),
-    
-        # Abonnés / Abonnements
-    path('profil/<str:username>/followers/', users_views.followers_list, name='followers_list'),
-    path('profil/<str:username>/following/', users_views.following_list, name='following_list'),
 
-      # Test
+    # Abonnés / Abonnements (⚠️ voir note en bas)
+    path('profil/<slug:slug>/followers/', users_views.followers_list, name='followers_list'),
+    path('profil/<slug:slug>/following/', users_views.following_list, name='following_list'),
+
+    # Test
     path('diag/', views.diagnostic_storage, name='diag'),
 ]
