@@ -4,24 +4,35 @@ from . import views
 app_name = 'users'
 
 urlpatterns = [
+    # ─── API Auth ───
     path('register/', views.RegisterView.as_view(), name='api_register'),
     path('me/', views.MeView.as_view(), name='api_me'),
     path('me/password/', views.ChangePasswordView.as_view(), name='api_change_password'),
-    path('profile/<str:username>/', views.UserProfileView.as_view(), name='api_profile'),
-    path('follow/<str:username>/', views.FollowToggleView.as_view(), name='api_follow_toggle'),
+
+    # ─── API Profil (slug) ───
+    path('profile/<slug:slug>/', views.UserProfileView.as_view(), name='api_profile'),
+
+    # ─── API Follow (slug) ───
+    path('follow/<slug:slug>/', views.FollowToggleView.as_view(), name='api_follow_toggle'),
+
+    # ─── API Préférences ───
     path('theme/', views.SetThemeView.as_view(), name='api_set_theme'),
     path('language/', views.SetLanguageView.as_view(), name='api_set_language'),
 
+    # ─── API Notifications ───
     path('notifications/', views.NotificationListView.as_view(), name='api_notifications'),
     path('notifications/unread-count/', views.NotificationUnreadCountView.as_view(), name='api_notifications_unread'),
     path('notifications/read-all/', views.NotificationReadAllView.as_view(), name='api_notifications_read_all'),
     path('notifications/<int:pk>/read/', views.NotificationReadView.as_view(), name='api_notification_read'),
 
-    path('chat/<str:username>/', views.ChatView.as_view(), name='api_chat'),
+    # ─── API Chat (slug) ───
+    path('chat/<slug:slug>/', views.ChatView.as_view(), name='api_chat'),
     path('react/<int:pk>/', views.ReactToMessageView.as_view(), name='api_react_message'),
 
-    path('follow/<str:username>/toggle/', views.toggle_follow, name='toggle_follow'),
+    # ─── Follow (fonction, slug) ───
+    path('follow/<slug:slug>/toggle/', views.toggle_follow, name='toggle_follow'),
 
-    path('<str:username>/followers/', views.followers_list, name='followers_list'),
-    path('<str:username>/following/', views.following_list, name='following_list'),
+    # ─── Followers / Following (slug) ───
+    path('<slug:slug>/followers/', views.followers_list, name='followers_list'),
+    path('<slug:slug>/following/', views.following_list, name='following_list'),
 ]
