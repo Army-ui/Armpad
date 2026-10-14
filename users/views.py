@@ -76,18 +76,26 @@ class ChangePasswordView(APIView):
         return Response({"message": _("Mot de passe mis à jour.")})
 
 
+# ═══════════════════════════════════════════════════════════
+# PROFIL API — utilise le slug
+# ═══════════════════════════════════════════════════════════
 class UserProfileView(generics.RetrieveAPIView):
     serializer_class = UserPublicSerializer
     permission_classes = [permissions.AllowAny]
-    lookup_field = 'username'
+    lookup_field = 'slug'
+    lookup_url_kwarg = 'slug'
     queryset = User.objects.all()
 
 
+# ═══════════════════════════════════════════════════════════
+# FOLLOW TOGGLE API — utilise le slug
+# ═══════════════════════════════════════════════════════════
 class FollowToggleView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
-    def post(self, request, username):
-        target = get_object_or_404(User, username=username)
+    def post(self, request, slug):
+        target = get_object_or_404(User, slug=slug)
+
         if target == request.user:
             return Response({"error": _("Vous ne pouvez pas vous suivre vous-même.")}, status=400)
 
@@ -95,12 +103,20 @@ class FollowToggleView(APIView):
 
         if not created:
             follow.delete()
-            User.objects.filter(pk=target.pk).update(followers_count=django_models.F('followers_count') - 1)
-            User.objects.filter(pk=request.user.pk).update(following_count=django_models.F('following_count') - 1)
+            User.objects.filter(pk=target.pk).update(
+                followers_count=django_models.F('followers_count') - 1
+            )
+            User.objects.filter(pk=request.user.pk).update(
+                following_count=django_models.F('following_count') - 1
+            )
             return Response({"following": False})
 
-        User.objects.filter(pk=target.pk).update(followers_count=django_models.F('followers_count') + 1)
-        User.objects.filter(pk=request.user.pk).update(following_count=django_models.F('following_count') + 1)
+        User.objects.filter(pk=target.pk).update(
+            followers_count=django_models.F('followers_count') + 1
+        )
+        User.objects.filter(pk=request.user.pk).update(
+            following_count=django_models.F('following_count') + 1
+        )
         return Response({"following": True}, status=201)
 
 
@@ -169,32 +185,36 @@ class NotificationUnreadCountView(APIView):
 
 
 # ═══════════════════════════════════════════════════════════
-# CHAT (API)
+# CHAT API — utilise le slug
 # ═══════════════════════════════════════════════════════════
 class ChatView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
-    def get_other(self, username):
-        return get_object_or_404(User, username=username)
+    def get_other(self, slug):
+        return get_object_or_404(User, slug=slug)
 
-    def get(self, request, username):
-        other = self.get_other(username)
+    def get(self, request, slug):
+        other = self.get_other(slug)
         msgs = Message.objects.filter(
             django_models.Q(sender=request.user, receiver=other) |
             django_models.Q(sender=other, receiver=request.user)
         ).order_by('created_at')[:200]
 
-        Message.objects.filter(sender=other, receiver=request.user, is_read=False).update(is_read=True)
+        Message.objects.filter(
+            sender=other, receiver=request.user, is_read=False
+        ).update(is_read=True)
 
         data = [{
             'id': m.id, 'content': m.content, 'is_mine': m.sender == request.user,
             'created_at': m.created_at.isoformat(),
-            'reactions': [{'emoji': r.emoji, 'user': r.user.username} for r in m.reactions.all()],
+            'reactions': [
+                {'emoji': r.emoji, 'user': r.user.username} for r in m.reactions.all()
+            ],
         } for m in msgs]
         return Response(data)
 
-    def post(self, request, username):
-        other = self.get_other(username)
+    def post(self, request, slug):
+        other = self.get_other(slug)
         content = request.data.get('content', '').strip()
         if not content:
             return Response({'error': 'Message vide.'}, status=400)
@@ -204,14 +224,20 @@ class ChatView(APIView):
             Follow.objects.filter(follower=other, followed=request.user).exists()
         )
         if not are_friends:
-            return Response({'error': 'Vous devez être amis pour envoyer des messages.'}, status=403)
+            return Response(
+                {'error': 'Vous devez être amis pour envoyer des messages.'},
+                status=403
+            )
 
         msg = Message.objects.create(sender=request.user, receiver=other, content=content)
 
+        # ⚠️ Le lien utilise le slug de l'expéditeur
         Notification.objects.create(
-            user=other, sender=request.user, type='message',
+            user=other,
+            sender=request.user,
+            type='message',
             message=f"{request.user.username} vous a envoyé un message",
-            link=f"/chat/{request.user.username}/"
+            link=f"/chat/{request.user.slug}/"
         )
         return Response({
             'id': msg.id, 'content': msg.content, 'is_mine': True,
@@ -236,11 +262,11 @@ class ReactToMessageView(APIView):
 
 
 # ═══════════════════════════════════════════════════════════
-# FOLLOWERS / FOLLOWING (pages HTML)
+# FOLLOWERS / FOLLOWING (pages HTML) — utilise le slug
 # ═══════════════════════════════════════════════════════════
 @login_required
-def followers_list(request, username):
-    profile_user = get_object_or_404(User, username=username)
+def followers_list(request, slug):
+    profile_user = get_object_or_404(User, slug=slug)
     follows = Follow.objects.filter(followed=profile_user).select_related('follower')
 
     users_data = []
@@ -267,8 +293,8 @@ def followers_list(request, username):
 
 
 @login_required
-def following_list(request, username):
-    profile_user = get_object_or_404(User, username=username)
+def following_list(request, slug):
+    profile_user = get_object_or_404(User, slug=slug)
     follows = Follow.objects.filter(follower=profile_user).select_related('followed')
 
     users_data = []
@@ -295,13 +321,13 @@ def following_list(request, username):
 
 
 # ═══════════════════════════════════════════════════════════
-# FOLLOW (AJAX)
+# FOLLOW (AJAX) — utilise le slug
 # ═══════════════════════════════════════════════════════════
 @login_required
 @require_POST
-def toggle_follow(request, username):
+def toggle_follow(request, slug):
     """Suivre / Ne plus suivre un utilisateur (AJAX)."""
-    target = get_object_or_404(User, username=username)
+    target = get_object_or_404(User, slug=slug)
 
     if target == request.user:
         return JsonResponse({'error': 'Impossible de se suivre soi-même.'}, status=400)
@@ -318,6 +344,15 @@ def toggle_follow(request, username):
         target.followers_count += 1
         request.user.following_count += 1
         is_following = True
+
+        # ⚠️ Le lien utilise le slug de l'utilisateur qui suit
+        Notification.objects.create(
+            user=target,
+            sender=request.user,
+            type='follow',
+            message=f"{request.user.username} a commencé à vous suivre.",
+            link=f"/profil/{request.user.slug}/"
+        )
 
     target.save(update_fields=['followers_count'])
     request.user.save(update_fields=['following_count'])
