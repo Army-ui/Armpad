@@ -231,7 +231,6 @@ class ChatView(APIView):
 
         msg = Message.objects.create(sender=request.user, receiver=other, content=content)
 
-        # ⚠️ Le lien utilise le slug de l'expéditeur
         Notification.objects.create(
             user=other,
             sender=request.user,
@@ -345,7 +344,6 @@ def toggle_follow(request, slug):
         request.user.following_count += 1
         is_following = True
 
-        # ⚠️ Le lien utilise le slug de l'utilisateur qui suit
         Notification.objects.create(
             user=target,
             sender=request.user,
@@ -433,14 +431,12 @@ def verify_email(request, token):
         messages.error(request, "Lien invalide ou déjà utilisé.")
         return redirect('users_web:login')
 
-    # Vérifier l'expiration (7 jours)
     if user.email_verification_sent_at:
         expiration = user.email_verification_sent_at + timedelta(days=7)
         if timezone.now() > expiration:
             messages.error(request, "Ce lien a expiré. Demandez-en un nouveau.")
             return redirect('users_web:login')
 
-    # Marquer comme vérifié
     user.email_verified = True
     user.email_verification_token = None
     user.save(update_fields=['email_verified', 'email_verification_token'])
