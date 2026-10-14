@@ -21,11 +21,11 @@
             <div class="profile-stat-number">{{ profile_user.works.count }}</div>
             <div class="profile-stat-label">{% trans "Œuvres" %}</div>
         </div>
-        <a href="{% url 'users:followers_list' profile_user.username %}" class="profile-stat" style="text-decoration:none;">
+        <a href="{% url 'users:followers_list' profile_user.slug %}" class="profile-stat" style="text-decoration:none;">
             <div class="profile-stat-number" id="followers-count">{{ profile_user.followers_count }}</div>
             <div class="profile-stat-label">{% trans "Abonnés" %}</div>
         </a>
-        <a href="{% url 'users:following_list' profile_user.username %}" class="profile-stat" style="text-decoration:none;">
+        <a href="{% url 'users:following_list' profile_user.slug %}" class="profile-stat" style="text-decoration:none;">
             <div class="profile-stat-number">{{ profile_user.following_count }}</div>
             <div class="profile-stat-label">{% trans "Abonnements" %}</div>
         </a>
@@ -45,7 +45,7 @@
                     <i class="fa-solid fa-user-group"></i> {% trans "Vous êtes amis" %}
                 </span>
             {% endif %}
-            <button class="btn {% if is_following %}btn-outline{% else %}btn-primary{% endif %}" id="follow-btn" data-url="{% url 'users:toggle_follow' profile_user.username %}">
+            <button class="btn {% if is_following %}btn-outline{% else %}btn-primary{% endif %}" id="follow-btn" data-url="{% url 'users:toggle_follow' profile_user.slug %}">
                 {% if is_following %}
                     <i class="fa-solid fa-check"></i> {% trans "Abonné" %}
                 {% elif is_follower %}
@@ -54,7 +54,7 @@
                     <i class="fa-solid fa-plus"></i> {% trans "Suivre" %}
                 {% endif %}
             </button>
-            <a href="{% url 'web:chat_conversation' profile_user.username %}" class="btn btn-outline">
+            <a href="{% url 'web:chat_conversation' profile_user.slug %}" class="btn btn-outline">
                 <i class="fa-solid fa-comment"></i> {% trans "Message" %}
             </a>
         {% else %}
@@ -91,5 +91,3 @@
     </div>
 </section>
 {% endblock %}
-
-
