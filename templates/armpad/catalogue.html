@@ -25,20 +25,6 @@
         </div>
     </form>
 
-    <!-- Filtres de genres (chips) -->
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;overflow-x:auto;padding-bottom:8px;">
-        <a href="{% url 'web:catalogue' %}{% if request.GET.search %}?search={{ request.GET.search }}{% endif %}"
-           class="genre-chip {% if not request.GET.genre %}active{% endif %}">
-            <i class="fa-solid fa-star"></i> {% trans "Tous" %}
-        </a>
-        {% for genre in genres %}
-            <a href="?genre={{ genre.slug }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
-               class="genre-chip {% if request.GET.genre == genre.slug %}active{% endif %}">
-                {{ genre.name }}
-            </a>
-        {% endfor %}
-    </div>
-
     <!-- Résultats -->
     {% if works %}
         <div class="works-grid" style="padding:0;">
@@ -71,6 +57,25 @@
             <p>{% trans "Essayez avec d'autres mots-clés ou changez de genre." %}</p>
         </div>
     {% endif %}
+
+    <!-- Filtres de genres (chips) — SOUS les œuvres -->
+    <div style="margin-top:40px;">
+        <h3 class="section-title" style="font-size:16px;margin-bottom:14px;">
+            <i class="fa-solid fa-tags"></i> {% trans "Filtrer par genre" %}
+        </h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="{% url 'web:catalogue' %}{% if request.GET.search %}?search={{ request.GET.search }}{% endif %}"
+               class="genre-chip {% if not request.GET.genre %}active{% endif %}">
+                <i class="fa-solid fa-star"></i> {% trans "Tous" %}
+            </a>
+            {% for genre in genres %}
+                <a href="?genre={{ genre.slug }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                   class="genre-chip {% if request.GET.genre == genre.slug %}active{% endif %}">
+                    {{ genre.name }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
 
     <!-- Pagination -->
     {% if is_paginated %}
@@ -120,4 +125,3 @@
 }
 </style>
 {% endblock %}
-
